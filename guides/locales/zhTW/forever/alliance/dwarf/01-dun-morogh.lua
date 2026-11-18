@@ -228,7 +228,7 @@ return {
 	-- {item:2894} Rhapsody Malt · {npc:1247} Innkeeper Belm
 	["{item:2894}, from {npc:1247}; upstairs"] = "{item:2894}，來自{npc:1247}；樓上",
 	-- {npc:1699} Gremlock Pilsnor
-	["{npc:1699}: Camping 101 asks you to learn it; below ground"] = "",
+	["{npc:1699}: Camping 101 asks you to learn it; below ground"] = "{npc:1699}位於地下，露營 101 要求你學習這項技能",
 	-- {npc:1226} Maxan Anvol · {item:16605} Friar's Robes of the Light
 	["{npc:1226}, upstairs: {item:16605}"] = "{npc:1226}，在樓上：{item:16605}",
 	["Upstairs"] = "樓上",
@@ -422,7 +422,7 @@ return {
 	-- Step 84: Stonesplinter troggs
 	["Stonesplinter troggs"] = "碎石穴居人",
 	-- {area:923} Stonesplinter Valley
-	["North of the post, west of the road: the Stonesplinter troggs and scouts camp in the hills. Both drop the Trogg Stone Teeth.\nCareful: Headsplitter, a level 15 trogg, walks {area:923} among the 11-12 troggs: work the camps at its north edge, near the post, and keep clear of him."] = "",
+	["North of the post, west of the road: the Stonesplinter troggs and scouts camp in the hills. Both drop the Trogg Stone Teeth.\nCareful: Headsplitter, a level 15 trogg, walks {area:923} among the 11-12 troggs: work the camps at its north edge, near the post, and keep clear of him."] = "哨所北邊、道路西側：碎石穴居人和碎石怪斥候在山間紮營。兩者都會掉落穴居人的石牙。\n小心：15級穴居人Headsplitter在{area:923}的11-12級穴居人之間走動：在靠近哨所的北緣營地打怪，遠離他。",
 
 	-- Step 85: Back to the tunnel post
 	["Back to the tunnel post"] = "回到隧道崗哨",

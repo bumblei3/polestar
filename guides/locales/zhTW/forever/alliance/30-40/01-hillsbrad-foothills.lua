@@ -68,13 +68,13 @@ return {
 	-- plural, as words: Dark Irons = {object:147516} Dark Iron
 	["{quest:303} is a group quest: 30 elite Dark Irons (27-31) in the ruins west of the camp. Skip it if you are alone."] = "",
 	-- {npc:1074} Motley Garmason
-	["{npc:1074}, in the camp"] = "",
+	["{npc:1074}, in the camp"] = "{npc:1074}，在營地裡",
 
 	-- Step 16: Ashlan Stonesmirk
 	-- {quest:88756} Bring Back a Bang · {item:280806} Stolen Explosives · {object:147516} Dark Iron · {area:1016} Direforge Hill · {area:205} Dun Modr
 	["{quest:88756} is a group quest: the {item:280806} lie in the {object:147516} camp on {area:1016}, south-east of {area:205}, among the same elite dwarves. Skip it if you are alone."] = "",
 	-- {npc:1073} Ashlan Stonesmirk
-	["{npc:1073}, in the camp"] = "",
+	["{npc:1073}, in the camp"] = "{npc:1073}，在營地裡",
 
 	-- Step 17: The Dark Iron War
 	-- {npc:1364} Balgaras the Foul
@@ -186,7 +186,7 @@ return {
 	-- {npc:1217} Glorin Steelbrow · {area:2104} Deepwater Tavern
 	["Back south to Menethil: {npc:1217} stands in the {area:2104}."] = "往南回到米奈希爾：{npc:1217}站在{area:2104}裡。",
 	-- {npc:1284} Archbishop Benedictus · {zone:1453} Stormwind
-	["For {npc:1284} in {zone:1453}, at the end of this guide"] = "",
+	["For {npc:1284} in {zone:1453}, at the end of this guide"] = "給{zone:1453}的{npc:1284}，在本指南結尾",
 
 	-- Step 41: Level 30.8
 	["Level 30.8"] = "30.8級",

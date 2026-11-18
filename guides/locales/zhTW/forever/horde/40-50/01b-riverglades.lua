@@ -36,7 +36,7 @@ return {
 
 	-- Step 5: Boat to Powderfuse Port
 	-- {area:16727} Powderfuse Port
-	["Boat to {area:16727}"] = "",
+	["Boat to {area:16727}"] = "搭船前往{area:16727}",
 	-- {area:977} Steamwheedle Port · {area:976} Gadgetzan · {area:16727} Powderfuse Port
 	["{area:977} is on the coast north-east of {area:976}: wait on the pier for the goblin boat to {area:16727}."] = "{area:977}在{area:976}東北方的海岸：在碼頭等候開往{area:16727}的哥布林船。",
 
@@ -260,7 +260,7 @@ return {
 	-- {npc:258048} Jom-jom · {npc:256728} Na'zok · {area:16726} Bolder'ok
 	["{npc:258048} waits by the Twilight ogres' camp north-east of {npc:256728}: take him home to {area:16726} and keep the cultists off him. If he falls, take the quest from him again."] = "{npc:258048}在{npc:256728}東北方的暮光食人魔營地旁等待：帶他回{area:16726}，別讓教徒傷到他。如果他倒下，再向他接受一次任務。",
 	-- {npc:258048} Jom-jom
-	["{npc:258048}, in the cave"] = "",
+	["{npc:258048}, in the cave"] = "{npc:258048}，在洞穴裡",
 	-- {npc:258048} Jom-jom · {area:16726} Bolder'ok
 	["help {npc:258048} reach {area:16726}"] = "幫助{npc:258048}抵達{area:16726}",
 

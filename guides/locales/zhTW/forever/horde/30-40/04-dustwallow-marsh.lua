@@ -166,7 +166,7 @@ return {
 	-- {area:599} Thunder Axe Fortress · {item:14523} Demon Pick · {object:176581} Hand of Iruxos Crystal · {npc:11876} Demon Spirit · {item:13542} Demon Box
 	["North up the road to {area:599}. Clear the middle of the largest building, then use the {item:14523} on the red {object:176581} there. A {npc:11876} (37) comes out: kill it for the {item:13542}. The Burning Blade around it are well under you now."] = "沿道路向北前往{area:599}。清掉最大建築物的中央，然後對那裡紅色的{object:176581}使用{item:14523}。會出現一隻{npc:11876}（37級）：殺掉它取得{item:13542}。周圍的燃刃現在等級遠低於你。",
 	-- {item:14523} Demon Pick · {object:176581} Hand of Iruxos Crystal
-	["{item:14523}, on the {object:176581}"] = "",
+	["{item:14523}, on the {object:176581}"] = "{item:14523}，對{object:176581}使用",
 
 	-- Step 33: Sar'theris Strand
 	-- {area:598} Sar'theris Strand

@@ -36,7 +36,7 @@ return {
 
 	-- Step 3: North to Nesingwary's Expedition
 	-- {area:100} Nesingwary's Expedition
-	["North to {area:100}"] = "",
+	["North to {area:100}"] = "向北前往{area:100}",
 	-- {object:3202} Grom'gol
 	["Follow the main road north the length of the jungle, past the {object:3202} turn-off, to the hunters' camp just west of the road."] = "",
 
@@ -169,7 +169,7 @@ return {
 	-- Step 25: Class training
 	["Class training"] = "職業訓練",
 	-- {object:2096} Trade District · {object:2100} Old Town · {object:2101} Mage Quarter · {npc:5504} Sheldras Moontree · {zone:1455} Ironforge
-	["Your level 34 ranks: the class trainers stand around the {object:2096}, {object:2100}, the Cathedral and the {object:2101}; {npc:5504}, the druid trainer, stands north-west of the {object:2101}. Shamans train in {zone:1455}, later in 30-40."] = "",
+	["Your level 34 ranks: the class trainers stand around the {object:2096}, {object:2100}, the Cathedral and the {object:2101}; {npc:5504}, the druid trainer, stands north-west of the {object:2101}. Shamans train in {zone:1455}, later in 30-40."] = "學習34級技能：職業訓練師分佈在{object:2096}、{object:2100}、大教堂和{object:2101}周圍；德魯伊訓練師{npc:5504}在{object:2101}西北邊。薩滿祭司在{zone:1455}訓練，在30-40級後段。",
 
 	-- Step 27: Fly to Stonetalon Peak
 	-- {area:467} Stonetalon Peak

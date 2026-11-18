@@ -8,7 +8,7 @@
 return {
 	-- Step 2: Far Watch Post
 	-- {zone:1454} Orgrimmar · {zone:1411} Durotar · {area:814} Southfury River · {area:379} Far Watch Post · {zone:1413} The Barrens · {npc:3337} Kargal Battlescar · {quest:809} Ak'Zeloth · {npc:5810} Uzzek
-	["Leave {zone:1454} by the main gate and follow the road south through {zone:1411}, then west over the {area:814} bridge: {area:379} sits just above it on the {zone:1413} side. {npc:3337}, {quest:809} and {npc:5810} stand together."] = "",
+	["Leave {zone:1454} by the main gate and follow the road south through {zone:1411}, then west over the {area:814} bridge: {area:379} sits just above it on the {zone:1413} side. {npc:3337}, {quest:809} and {npc:5810} stand together."] = "從正門離開{zone:1454}，沿路向南穿過{zone:1411}，再向西過{area:814}上的橋：{area:379}就在橋北側的{zone:1413}一邊。{npc:3337}、{quest:809}和{npc:5810}站在一起。",
 	-- {npc:3337} Kargal Battlescar · {quest:840} Conscript of the Horde · {zone:1411} Durotar
 	["{npc:3337}: {quest:840}, from {zone:1411}"] = "{npc:3337}：{quest:840}，來自{zone:1411}",
 	-- {quest:809} Ak'Zeloth · {npc:3337} Kargal Battlescar · {npc:3216} Neeru Fireblade · {zone:1454} Orgrimmar
@@ -443,11 +443,11 @@ return {
 
 	-- Step 92: Thunder Bluff
 	-- {npc:246344} Alodan the Hopeful · {area:1638} Thunder Bluff · {zone:1454} Orgrimmar · {area:378} Camp Taurajo · {zone:1412} Mulgore · {npc:2995} Tal
-	["Train your level 20 ranks: {npc:246344} teaches Paladins in {area:1638}; {zone:1454} has no Paladin trainer. You have no flight path there yet: fly to {area:378}, head west through {zone:1412} and up a lift, and take the flight path from {npc:2995} on the central rise."] = "",
+	["Train your level 20 ranks: {npc:246344} teaches Paladins in {area:1638}; {zone:1454} has no Paladin trainer. You have no flight path there yet: fly to {area:378}, head west through {zone:1412} and up a lift, and take the flight path from {npc:2995} on the central rise."] = "學習20級技能：{npc:246344}在{area:1638}訓練聖騎士；{zone:1454}沒有聖騎士訓練師。你尚未解鎖那裡的飛行路線：先飛到{area:378}，向西穿過{zone:1412}並乘升降梯上去，再向中央高地的{npc:2995}解鎖飛行路線。",
 
 	-- Step 94: The Great Cat Spirit
 	-- {area:1638} Thunder Bluff · {npc:3033} Turak Runetotem · {area:1639} Elder Rise · {spell:499} Cat Form · {spell:526} Cure Poison · {zone:1450} Moonglade · {npc:11798} Bunthen Plainswind · {area:392} Ratchet
-	["Fly from the Crossroads to {area:1638} and train your level 20 ranks: {npc:3033} is on {area:1639}. {spell:499} and {spell:526} follow in {zone:1450} on the same trip, then {npc:11798} flies you back here and on to {area:392}."] = "",
+	["Fly from the Crossroads to {area:1638} and train your level 20 ranks: {npc:3033} is on {area:1639}. {spell:499} and {spell:526} follow in {zone:1450} on the same trip, then {npc:11798} flies you back here and on to {area:392}."] = "從十字路口飛往{area:1638}，學習20級技能：{npc:3033}在{area:1639}。{spell:499}和{spell:526}隨後在同一趟行程中於{zone:1450}學習，然後{npc:11798}會載你飛回這裡，再飛往{area:392}。",
 
 	-- Step 95: Moonglade
 	-- {spell:18960} Teleport: Moonglade · {npc:11802} Dendrite Starblaze · {area:2361} Nighthaven
@@ -597,7 +597,7 @@ return {
 
 	-- Step 133: Camp Taurajo
 	-- {area:378} Camp Taurajo
-	["Back north into {area:378} on the way to the Crossroads: Jorn takes the thunderhawk wings."] = "",
+	["Back north into {area:378} on the way to the Crossroads: Jorn takes the thunderhawk wings."] = "向北回到{area:378}，在前往十字路口的路上：喬恩收取雷鷹翅膀。",
 
 	-- Step 134: The Crossroads
 	-- {area:458} Gold Road · {npc:3448} Tonga Runetotem · {npc:3432} Mankrik · {npc:3428} Korran

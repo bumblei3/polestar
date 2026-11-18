@@ -58,7 +58,7 @@ return {
 	-- {area:1537} Ironforge
 	["{area:1537} inn"] = "{area:1537}旅店",
 	-- {object:26486} Stonefire Tavern · {zone:1427} Searing Gorge · {area:144} Thelsamar
-	["Set your hearth at the {object:26486}: the {zone:1427} guide starts with the hearth back here and the gryphon to {area:144}."] = "",
+	["Set your hearth at the {object:26486}: the {zone:1427} guide starts with the hearth back here and the gryphon to {area:144}."] = "在{object:26486}繫結爐石：{zone:1427}指南一開始就用爐石回到這裡，再坐獅鷲去{area:144}。",
 
 	-- Step 10: Tram to Stormwind
 	-- {zone:1453} Stormwind
@@ -105,7 +105,7 @@ return {
 
 	-- Step 19: Wild Shore: kill these as you meet them
 	-- {area:43} Wild Shore
-	["{area:43}: kill these as you meet them"] = "",
+	["{area:43}: kill these as you meet them"] = "{area:43}：遇到就殺",
 	-- {area:43} Wild Shore · {area:35} Booty Bay
 	["The charts and orders lie in the pirate camp on the {area:43}, just south of {area:35}; its Swashbucklers walk the shore. The Warlocks and Swashbucklers (41-43) are under you now."] = "海圖和命令在{area:35}南邊不遠、{area:43}上的海盜營地裡；營地的劍客在海岸上走動。術士和劍客（41-43級）現在等級都比你低了。",
 
@@ -145,7 +145,7 @@ return {
 	-- {npc:1514} Mokk the Savage
 	["Hand in the fangs and stay: three waves of gorillas come, {npc:1514} last.\nCareful: three waves of gorillas come one after another with little rest between, then {npc:1514}. Start at full health and mana, and stay near Unbagwa. Some classes find it hard alone: a friend makes it easy."] = "繳交牙齒後留在原地：會來三波猩猩，最後是{npc:1514}。\n小心：三波猩猩接連而來，中間幾乎沒有喘息時間，最後是{npc:1514}。開始前補滿血和法力，並待在安巴格瓦附近。有些職業單人會很吃力：找個朋友就輕鬆了。",
 	-- {npc:1449} Witch Doctor Unbagwa · {area:1742} Spirit Den
-	["{npc:1449}, inside {area:1742}"] = "",
+	["{npc:1449}, inside {area:1742}"] = "{npc:1449}，在{area:1742}裡面",
 
 	-- Step 29: Booty Bay
 	["Ride back down to town."] = "騎回鎮上。",

@@ -35,7 +35,7 @@ return {
 	-- Step 7: Level 48.27
 	["Level 48.27"] = "48.27級",
 	-- {item:3985} Monogrammed Sash
-	["If you skipped The {item:3985} or Facing Negolash, grind here to level 48.27 to stay on the route's plan."] = "",
+	["If you skipped The {item:3985} or Facing Negolash, grind here to level 48.27 to stay on the route's plan."] = "如果跳過了{item:3985}或《挑戰奈古拉什》，在這裡刷怪補到48.27級，以跟上路線進度。",
 	-- {npc:5839} Dark Iron Geologist
 	["grind on {npc:5839}"] = "刷{npc:5839}",
 
@@ -73,7 +73,7 @@ return {
 	["Heavy War Golems patrol the floor of the Cauldron below {npc:8479}; Magma Elementals drift among them. Golems and elementals drop the oil, elementals the hearts."] = "重型作戰魔像在{npc:8479}下方的大熔爐底部巡邏；熔岩元素在牠們之間飄蕩。魔像和元素會掉落油，元素會掉落核心。",
 
 	-- Step 20: Dark Iron dwarves: kill these as you meet them
-	["Dark Iron dwarves: kill these as you meet them"] = "",
+	["Dark Iron dwarves: kill these as you meet them"] = "黑鐵矮人：沿途擊殺",
 	-- {item:10551} Thorium Plated Dagger · {item:18959} Smithing Tuyere · {object:147516} Dark Iron · {item:11818} Grimesilt Outhouse Key
 	-- plural, as words: Dark Iron Slavers = {npc:5844} Dark Iron Slaver
 	["Taskmasters and Slavers drive the slaves all over the Cauldron, and any of them can carry a {item:10551}. The Steamsmiths work at the furnaces in the middle (the {item:18959}), the Lookouts stand on the southern ridges (the Spyglass). Any {object:147516} may drop the {item:11818}: keep it.\nCareful: Dark Iron Slavers (level 45-46) call for help from allies within 15 yd when pulled, cast Net from up to 15 yd, and use Rend in melee."] = "黑鐵工頭和黑鐵奴隸販子在大熔爐各處驅趕奴隸，任何一個都可能帶著{item:10551}。黑鐵鍛造師在中央的熔爐工作（{item:18959}），黑鐵哨兵站在南邊的山脊上（偵查員的望遠鏡）。任何{object:147516}都可能掉落{item:11818}：留著它。\n小心：黑鐵奴隸販子（45-46級）被拉時會向15碼內的同伴求援，會在15碼內施放網，近戰時會使用撕裂。",
@@ -94,7 +94,7 @@ return {
 	-- Step 26: Level 48.66
 	["Level 48.66"] = "48.66級",
 	-- {quest:7701} WANTED: Overseer Maltorius
-	["If you skipped {quest:7701}, grind here to level 48.66 to stay on the route's plan."] = "",
+	["If you skipped {quest:7701}, grind here to level 48.66 to stay on the route's plan."] = "如果跳過了{quest:7701}，在這裡刷怪補到48.66級，以跟上路線進度。",
 	-- {npc:9318} Incendosaur
 	["grind on {npc:9318}"] = "刷{npc:9318}",
 
@@ -122,7 +122,7 @@ return {
 	-- Step 33: Level 48.98
 	["Level 48.98"] = "48.98級",
 	-- {quest:3452} The Flame's Casing
-	["If you skipped {quest:3452}, grind here to level 48.98 to stay on the route's plan."] = "",
+	["If you skipped {quest:3452}, grind here to level 48.98 to stay on the route's plan."] = "如果跳過了{quest:3452}，在這裡刷怪補到48.98級，以跟上路線進度。",
 	-- {npc:5844} Dark Iron Slaver
 	["grind on {npc:5844}"] = "刷{npc:5844}",
 

@@ -276,7 +276,7 @@ return {
 	-- {quest:7796} Additional Runecloth
 	["{quest:7796} to Revered"] = "{quest:7796}到崇敬",
 	-- {npc:384} Katie Hunter · {item:14047} Runecloth
-	["Honored: in Classic Stormwind's vendors take 10% off for you, {npc:384}'s horses (20g, the swift ones 200g) included; Forever has not settled it, and guide sites report 5% at Friendly rising to 20% at Exalted. Honored to Revered is 12,000 reputation: 240 turn-ins, 4,800 {item:14047}."] = "",
+	["Honored: in Classic Stormwind's vendors take 10% off for you, {npc:384}'s horses (20g, the swift ones 200g) included; Forever has not settled it, and guide sites report 5% at Friendly rising to 20% at Exalted. Honored to Revered is 12,000 reputation: 240 turn-ins, 4,800 {item:14047}."] = "尊敬：經典版中，暴風城商人會給你10%折扣，包括{npc:384}出售的馬（20金幣，迅捷馬200金幣）；無限服尚無定論，一些指南網站稱友善時5%，逐步升至崇拜時20%。尊敬到崇敬需要12,000聲望：交還240次、4,800塊{item:14047}。",
 
 	-- Step 48: Additional Runecloth to Exalted
 	-- {quest:7796} Additional Runecloth

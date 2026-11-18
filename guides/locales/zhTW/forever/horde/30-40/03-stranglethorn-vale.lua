@@ -181,7 +181,7 @@ return {
 	-- plural, as words: Bloodscalp Headhunters = {npc:671} Bloodscalp Headhunter · Elder Stranglethorn Tigers = {npc:1085} Elder Stranglethorn Tiger · Lashtail Raptors = {npc:686} Lashtail Raptor
 	["{quest:629}'s and Zul'Kunda's quests are next, with Bloodscalp Headhunters of 36-37. Still below 35 after {area:35}'s hand-ins? The Elder Stranglethorn Tigers (34-35) roam the hills north of {object:3202}, below Nesingwary's camp: kill them until level 35. The Lashtail Raptors (35-36) beside them are a level higher."] = "接下來是{quest:629}和祖昆達的任務，血頂獵頭者是36-37級。繳交完{area:35}的任務後還不到35級？老年荊棘谷猛虎（34-35級）在{object:3202}北邊、奈辛瓦里營地下方的山丘上遊蕩：擊殺牠們直到35級。旁邊的鞭尾迅猛龍（35-36級）高一級。",
 	-- {npc:1085} Elder Stranglethorn Tiger
-	["grind on {npc:1085}"] = "",
+	["grind on {npc:1085}"] = "刷{npc:1085}",
 
 	-- Step 28: The Vile Reef
 	-- {area:104} Vile Reef · {item:4094} Tablet Shard
@@ -223,7 +223,7 @@ return {
 	-- plural, as words: Snapjaw Crocolisks = {npc:1152} Snapjaw Crocolisk
 	["Snapjaw Crocolisks"] = "鉗嘴鱷魚",
 	-- {npc:1152} Snapjaw Crocolisk
-	["grind on {npc:1152}"] = "",
+	["grind on {npc:1152}"] = "刷{npc:1152}",
 
 	-- No longer in the guide (its English changed or it went away): reuse or delete.
 	-- ["Elder tigers and Lashtail raptors"] = "老虎與鞭尾迅猛龍",
