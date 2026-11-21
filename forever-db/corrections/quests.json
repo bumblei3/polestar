@@ -19805,4 +19805,107 @@
 		},
 		"note": "The Goddess Provides counts two casts, Elune's Light and Shadowmeld; the merged data had no objective, so the guide's accept and hand-in at Shanda stood with nothing between them. The game credits the casts by script, so they are event lines."
 	}
+,
+	"98903": {
+		"set": {
+			"objectives": [
+				{
+					"type": "kill",
+					"id": 275188,
+					"count": 1,
+					"text": "Win in Darkspear Islands"
+				}
+			]
+		},
+		"source": {
+			"kind": "wowhead",
+			"ref": "forever/quest=98903"
+		},
+		"note": "The Battle for Darkspear Islands! (98903): the quest log's words for the objective, \"Win in Darkspear Islands\", as the game's quest objectives give them. The merged data's objective text was the placeholder \"Credit\", which names the invisible marker NPC 275188 (Win in Darkspear Islands) whose name no player should read (#2614); without this record the data build stops on the placeholder gate."
+	},
+	"98904": {
+		"set": {
+			"objectives": [
+				{
+					"type": "kill",
+					"id": 275188,
+					"count": 1,
+					"text": "Win in Darkspear Islands"
+				}
+			]
+		},
+		"source": {
+			"kind": "wowhead",
+			"ref": "forever/quest=98904"
+		},
+		"note": "The Battle for Darkspear Islands! (98904): the quest log's words for the objective, \"Win in Darkspear Islands\", as the game's quest objectives give them. The merged data's objective text was the placeholder \"Credit\", which names the invisible marker NPC 275188 (Win in Darkspear Islands) whose name no player should read (#2614); without this record the data build stops on the placeholder gate."
+	},
+	"98905": {
+		"set": {
+			"objectives": [
+				{
+					"type": "kill",
+					"id": 275188,
+					"count": 1,
+					"text": "Win in Darkspear Islands"
+				}
+			]
+		},
+		"source": {
+			"kind": "wowhead",
+			"ref": "forever/quest=98905"
+		},
+		"note": "The Battle for Darkspear Islands! (98905): the quest log's words for the objective, \"Win in Darkspear Islands\", as the game's quest objectives give them. The merged data's objective text was the placeholder \"Credit\", which names the invisible marker NPC 275188 (Win in Darkspear Islands) whose name no player should read (#2614); without this record the data build stops on the placeholder gate."
+	},
+	"98906": {
+		"set": {
+			"objectives": [
+				{
+					"type": "kill",
+					"id": 275188,
+					"count": 1,
+					"text": "Win in Darkspear Islands"
+				}
+			]
+		},
+		"source": {
+			"kind": "wowhead",
+			"ref": "forever/quest=98906"
+		},
+		"note": "The Battle for Darkspear Islands! (98906): the quest log's words for the objective, \"Win in Darkspear Islands\", as the game's quest objectives give them. The merged data's objective text was the placeholder \"Credit\", which names the invisible marker NPC 275188 (Win in Darkspear Islands) whose name no player should read (#2614); without this record the data build stops on the placeholder gate."
+	},
+	"98907": {
+		"set": {
+			"objectives": [
+				{
+					"type": "kill",
+					"id": 275188,
+					"count": 1,
+					"text": "Win in Darkspear Islands"
+				}
+			]
+		},
+		"source": {
+			"kind": "wowhead",
+			"ref": "forever/quest=98907"
+		},
+		"note": "The Battle for Darkspear Islands! (98907): the quest log's words for the objective, \"Win in Darkspear Islands\", as the game's quest objectives give them. The merged data's objective text was the placeholder \"Credit\", which names the invisible marker NPC 275188 (Win in Darkspear Islands) whose name no player should read (#2614); without this record the data build stops on the placeholder gate."
+	},
+	"98908": {
+		"set": {
+			"objectives": [
+				{
+					"type": "kill",
+					"id": 275188,
+					"count": 1,
+					"text": "Win in Darkspear Islands"
+				}
+			]
+		},
+		"source": {
+			"kind": "wowhead",
+			"ref": "forever/quest=98908"
+		},
+		"note": "The Battle for Darkspear Islands! (98908): the quest log's words for the objective, \"Win in Darkspear Islands\", as the game's quest objectives give them. The merged data's objective text was the placeholder \"Credit\", which names the invisible marker NPC 275188 (Win in Darkspear Islands) whose name no player should read (#2614); without this record the data build stops on the placeholder gate."
+	}
 }
