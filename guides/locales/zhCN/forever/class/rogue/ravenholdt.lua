@@ -33,11 +33,11 @@ return {
 
 	-- Step 4: Myrokos Silentform
 	-- {npc:6766} Ravenholdt Guard
-	["{npc:6766}: one emblem each time, 100 reputation"] = "",
+	["{npc:6766}: one emblem each time, 100 reputation"] = "{npc:6766}：每次一枚徽记，100点声望",
 
 	-- Step 5: What's the Big Idea?
-	-- {npc:13085} Myrokos Silentform · {area:280} Strahnbrad · {zone:1416} Alterac Mountains · {spell:921} Pick Pocket
-	["In your mid 30s {npc:13085} has two more jobs; take both. Barton leads a Syndicate scouting party at {area:280}, in the east of the {zone:1416}, inside one of the houses with stealthed Syndicate around him. Pick his pocket for the report and do not kill him: he does not drop it. If you are lower than him he sees through stealth; Master of Deception helps, or Distract him, Vanish and come in from behind. {spell:921} can miss several times in a row."] = "35级左右时，{npc:13085} 还有两项任务，都接下。巴顿 带领一支辛迪加侦察队，位于 {zone:1416} 东部的 {area:280}，在其中一栋房屋内，周围有潜行的辛迪加成员。对他使用偷窃取得报告，不要杀他：他不会掉落报告。如果你等级比他低，他能识破潜行；欺诈高手天赋有帮助，也可以先扰乱他，再消失并绕到背后接近。{spell:921} 可能连续几次未命中。",
+	-- {npc:13085} Myrokos Silentform · {npc:266357} Barton · {area:280} Strahnbrad · {zone:1416} Alterac Mountains · {spell:921} Pick Pocket
+	["In your mid 30s {npc:13085} has two more jobs; take both. {npc:266357} leads a Syndicate scouting party at {area:280}, in the east of the {zone:1416}, inside one of the houses with stealthed Syndicate around him. Pick his pocket for the report and do not kill him: he does not drop it. If you are lower than him he sees through stealth; Master of Deception helps, or Distract him, Vanish and come in from behind. {spell:921} can miss several times in a row."] = "35级左右时，{npc:13085} 还有两项任务，都接下。{npc:266357} 带领一支辛迪加侦察队，位于 {zone:1416} 东部的 {area:280}，在其中一栋房屋内，周围有潜行的辛迪加成员。对他使用偷窃取得报告，不要杀他：他不会掉落报告。如果你等级比他低，他能识破潜行；欺诈高手天赋有帮助，也可以先扰乱他，再消失并绕到背后接近。{spell:921} 可能连续几次未命中。",
 	-- {item:275482} Barton's Scouting Report
 	["Pick Pocket Barton for {item:275482}"] = "对巴顿使用搜索，获得{item:275482}",
 
@@ -50,7 +50,7 @@ return {
 	["{item:275635}, in the southern tower"] = "{item:275635}，在南面的塔楼中",
 
 	-- Step 7: A Way In
-	-- {area:324} Stromgarde Keep · {area:313} Northfold Manor · {object:656157} Syndicate Footlocker (no name in this language: may be words) · {quest:96783} A Way In
+	-- {area:324} Stromgarde Keep · {area:313} Northfold Manor · {object:656157} Syndicate Footlocker · {quest:96783} A Way In
 	["{area:324} in western Arathi is a Syndicate stronghold; to get in you need a uniform. {area:313}, in north-western Arathi, is held by Syndicate Highwaymen, Pathstalkers and Mercenaries (level 30-32): find the {object:656157} there and take the uniform; that ends {quest:96783}."] = "阿拉希西部的 {area:324} 是辛迪加的据点；要进去，需要一套制服。阿拉希西北部的 {area:313} 被辛迪加路霸、巡路者和雇佣兵（30-32 级）占据：在那里找到 {object:656157}，取走制服，即可完成 {quest:96783}。",
 	-- {quest:96784} Master of Disguise · {item:275706} Syndicate Uniform
 	["{quest:96784}: the {item:275706}"] = "{quest:96784}：{item:275706}",
@@ -63,8 +63,6 @@ return {
 	-- Step 9: Ain't No Telling
 	-- {item:275709} Stolen Funds
 	["She will not talk without something to bargain with. Her stash is upstairs in a house close to the keep: take the {item:275709}. If it is already open, wait for it to come back."] = "没有可供交换的东西，她就不愿交谈。她藏的东西在城堡附近一座房子的楼上：拿走 {item:275709}。如果已经被打开，就等它刷新。",
-	-- {item:275709} Stolen Funds
-	["{item:275709}: Anastasia's Stash"] = "{item:275709}：她的藏匿处",
 
 	-- Step 10: The Syndicate Sting
 	-- {area:1057} Thoradin's Wall · {area:287} Hillsbrad · {item:275882} Intercepted Shipment · {item:275706} Syndicate Uniform · {npc:13085} Myrokos Silentform
@@ -84,6 +82,7 @@ return {
 	-- ["Rite of Cunning"] = "狡诈仪式",
 	-- ["one emblem each time, 100 reputation"] = "每次一枚徽记，100点声望",
 	-- ["{item:275482}: pickpocket Barton"] = "{item:275482}：对巴顿搜索",
+	-- ["{item:275709}: Anastasia's Stash"] = "{item:275709}：她的藏匿处",
 	-- ["{npc:266216} is inside {area:275}, the Syndicate fortress in eastern {area:287}, south of the manor. Quick and quiet, says {npc:13085}."] = "{npc:266216}在{area:275}内，即{area:287}东部、庄园南边的辛迪加要塞。{npc:13085}说：要快，要安静。",
 	-- ["{npc:6766}: {quest:6701}, repeatable"] = "{npc:6766}：{quest:6701}，可重复",
 }

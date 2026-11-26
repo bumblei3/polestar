@@ -26,4 +26,7 @@ return {
 	["Reputation · Cities"] = "声望 · 主城",
 	["Reputation · Raids and dungeons"] = "声望 · 团队与地下城",
 	["Reputation · World"] = "声望 · 世界",
+
+	-- No longer in the guide (its English changed or it went away): reuse or delete.
+	-- ["The Drowned City"] = "沉没之城",
 }

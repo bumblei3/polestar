@@ -1,6 +1,8 @@
 //! Port of tools/lib/dsl/candidates.js.
 //! Candidate sets for smart targets (`train <Profession>`, `train class`, `buy … nearest`, `vendor nearest`,
-//! `sethome nearest`): every matching NPC with a spawn point and a faction tag, one per town (hub).
+//! `sethome nearest`): every matching NPC with a spawn point and a faction tag, one per town (hub); on a capital
+//! city's map one per district (#2018: Stormwind's Alexandra Bolero in the Mage Quarter and Edna Mullby in the Trade
+//! District, 235 yards apart). Of one hub's NPCs, the one most players train with (trainers.json `visits`, #2992).
 
 use crate::data::Data;
 use crate::heights::candidate_height;
@@ -10,9 +12,34 @@ use std::cmp::Ordering;
 
 pub const CAP: f64 = 6.0;
 const HUB_YARDS: f64 = 250.0;
+const CITY_HUB_YARDS: f64 = 60.0;
+/// Stormwind, Orgrimmar, Ironforge, Thunder Bluff, Darnassus and the Undercity (uiMap ids).
+const CITY_MAPS: [f64; 6] = [1453.0, 1454.0, 1455.0, 1456.0, 1457.0, 1458.0];
 const MAX_PER_GROUP: f64 = 120.0;
 const SERVICE_ROLES: [&str; 3] = ["vendor", "innkeeper", "repair"];
 const SAME_SPOT_YARDS: f64 = 100.0;
+
+/// How near two candidates stand to be one hub: CITY_HUB_YARDS on the same city map, else HUB_YARDS.
+fn hub_yards(a: &V, b: &V) -> f64 {
+	let (am, bm) = (a.get("map"), b.get("map"));
+	if am.strict_eq(&bm) && am.as_num().is_some_and(|m| CITY_MAPS.contains(&m)) {
+		CITY_HUB_YARDS
+	} else {
+		HUB_YARDS
+	}
+}
+
+/// The players recorded training with a candidate's NPC (trainers.json `visits`, `forge data trainers`), 0 for
+/// one it does not list: opts `trainers` when given (the table `forge data trainers` is building), else the data's.
+fn visits(data: &Data, opts: &V, cand: &V) -> f64 {
+	let table = if opts.get("trainers").truthy() { opts.get("trainers") } else { data.trainers_raw.clone() };
+	let v = table.get(&cand.get("npc").to_js_string()).get("visits");
+	if v.num() > 0.0 {
+		v.num()
+	} else {
+		0.0
+	}
+}
 
 fn round2(n: f64) -> f64 {
 	let r = math_round(n * 100.0) / 100.0;
@@ -276,8 +303,14 @@ pub fn build_candidates(data: &Data, entries: &[V], opts: &V) -> V {
 			if hubs.len() as f64 >= cap {
 				break;
 			}
-			let same_hub = a.w.as_ref().is_some_and(|aw| hubs.iter().any(|h| h.w.as_ref().is_some_and(|hw| hw.c.strict_eq(&aw.c) && hypot(hw.wx - aw.wx, hw.wy - aw.wy) < HUB_YARDS)));
-			if same_hub {
+			let same_hub =
+				a.w.as_ref().and_then(|aw| hubs.iter().position(|h| h.w.as_ref().is_some_and(|hw| hw.c.strict_eq(&aw.c) && hypot(hw.wx - aw.wx, hw.wy - aw.wy) < hub_yards(&h.cand, &a.cand))));
+			if let Some(i) = same_hub {
+				// Of one hub's NPCs, the one most players train with (trainers.json `visits`, #2992: Jocaste on the
+				// Cenarion Enclave's floor, not Jeen'ra Nightrunner at the top of its tower, lower in id).
+				if visits(data, opts, &a.cand) > visits(data, opts, &hubs[i].cand) {
+					hubs[i] = a;
+				}
 				continue;
 			}
 			if a.w.is_none() && hubs.iter().any(|h| h.w.is_none() && h.cand.get("map").strict_eq(&a.cand.get("map"))) {

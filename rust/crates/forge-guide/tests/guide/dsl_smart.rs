@@ -318,6 +318,31 @@ fn a_live_frame_spawn_is_placed_in_the_maps_forever_frame_so_a_town_beside_it_is
 	assert_eq!(ids, [92000, 92001]);
 }
 
+/// #2018 (Mouchoir, Tailoring 75-150 in Stormwind): the vendor goods step sent a player standing beside Alexandra
+/// Bolero in the Mage Quarter to Edna Mullby in the Trade District, 235 yards away: one candidate per 250 yards kept
+/// one seller for the whole city. On a capital city's map each district keeps its own (one hub within 60 yards); a
+/// town in the open keeps one per 250 yards as before.
+#[test]
+fn in_a_capital_city_each_district_keeps_its_own_candidate_2018() {
+	let data = data_with("city-districts", |raw| {
+		let npcs = raw.get_mut("npcs.json").unwrap();
+		// Stormwind: the Mage Quarter's and the Trade District's sellers, and a second one in the same Trade
+		// District shop (5 yards on).
+		smith(npcs, 93000, "Mage Quarter Seller", 1453, 53.14, 81.76, true);
+		smith(npcs, 93001, "Trade District Seller", 1453, 64.73, 71.26, true);
+		smith(npcs, 93002, "Trade District Seller B", 1453, 65.0, 71.3, true);
+		// Elwynn Forest: two smiths 139 yards apart, one town.
+		smith(npcs, 93010, "Field Smith A", 1429, 70.0, 50.0, true);
+		smith(npcs, 93011, "Field Smith B", 1429, 74.0, 50.0, true);
+	});
+	let g = goals(&text(head(Some("Alliance"), &[]), &["step S", "  vendor nearest"]), Some(&data)).1;
+	let ids: Vec<u64> = cands(&g[0], |c| c["npc"].clone()).iter().map(|v| v.as_u64().unwrap()).collect();
+	let mut city: Vec<u64> = ids.iter().copied().filter(|i| (93000..=93002).contains(i)).collect();
+	city.sort();
+	assert_eq!(city, [93000, 93001], "each district's seller, one per shop: {ids:?}");
+	assert_eq!(ids.iter().filter(|&&i| (93010..=93011).contains(&i)).count(), 1, "one per town in the open: {ids:?}");
+}
+
 #[test]
 fn accept_goals_carry_the_quest_level_and_prerequisites_for_grey_quest_skipping() {
 	let g = goals(&text(head(Some("Alliance"), &[]), &["step S", "  accept 9500", "  accept 783 lvl 3"]), None).1;
@@ -391,4 +416,28 @@ fn smart_goals_emit_the_lua_the_engine_reads() {
 		r#"\{ t = "train", class = true, zone = 1429, candidates = \{ \{ npc = 911, npcName = "Llane Beshere", map = 1429, x = 50\.2, y = 42\.3, f = "e", faction = "A", classes = \{ "WARRIOR" \} \}"#,
 	);
 	assert_match(&lua, r#"\{ t = "accept", quest = 9500, title = "Either Way", npc = 823, npcName = "Deputy Willem", minLevel = 1, qlvl = 3, pre = \{ 9201, 783 \},"#);
+}
+
+// #2992 (nes): the three Darnassus hunter trainers stand within 60 yards, one city hub, and the hub kept the lowest
+// id: Jeen'ra Nightrunner at the top of the Cenarion Enclave's tower, not Jocaste on its floor. Of one hub's NPCs
+// the class trainers' smart target keeps the one most players train with (trainers.json `visits`); without visits
+// the lowest id, as before.
+#[test]
+fn of_one_city_hub_s_trainers_the_one_most_players_train_with_is_kept_2992() {
+	let frame = json!({ "c": 1, "left": 2938.363, "right": 1880.03, "top": 10238.316, "bottom": 9532.587 });
+	let npc = |id: u32, name: &str, x: f64, y: f64| json!({ "id": id, "name": name, "faction": "A", "spawns": { "1457": { "f": "l", "pts": [[x, y]] } } });
+	let kept = |visits: bool| -> Vec<f64> {
+		let mut t = Map::new();
+		t.insert("map-frames".into(), json!({ "forever": { "1457": frame.clone() } }));
+		t.insert("zones".into(), json!({ "1457": { "id": 1457, "name": "Darnassus", "type": 3 } }));
+		t.insert("npcs".into(), json!({ "4138": npc(4138, "Jeen'ra Nightrunner", 39.62, 5.89), "4146": npc(4146, "Jocaste", 40.09, 8.73), "4205": npc(4205, "Dorion", 41.78, 7.68) }));
+		let tr = |id: u32, n: u32| if visits { json!({ "id": id, "classes": ["HUNTER"], "visits": n }) } else { json!({ "id": id, "classes": ["HUNTER"] }) };
+		t.insert("trainers".into(), json!({ "4138": tr(4138, 3), "4146": tr(4146, 14), "4205": tr(4205, 5) }));
+		let data = data_from(&t, Value::Null, Value::Null);
+		let entries: Vec<forge_guide::js::V> = [4138, 4146, 4205].iter().map(|id| v(&json!({ "npc": id, "classes": ["HUNTER"] }))).collect();
+		let out = forge_guide::candidates::build_candidates(&data, &entries, &v(&json!({ "sides": ["Alliance"], "ref": null })));
+		out.get("candidates").items().iter().map(|c| c.get("npc").num()).collect()
+	};
+	assert_eq!(kept(true), vec![4146.0], "Jocaste, 14 players");
+	assert_eq!(kept(false), vec![4138.0], "without visits: the lowest id, as before");
 }

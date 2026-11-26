@@ -958,7 +958,7 @@ local function tellOnce()
 	local db = ns.DB()
 	if db.partySyncTold or not (ns.Get("party.share") and ns.Get("party.show")) then return end
 	db.partySyncTold = true
-	ns.Print(ns.L["Party sync is on: you and your party see each other's quest progress. Turn it off in Options."])
+	ns.Print(ns.L["Party sync is on: you and your party see each other's quest progress. Turn it off in Settings."])
 end
 
 -- The member under roster key `key`, whose progress the guide is about to
@@ -1230,7 +1230,8 @@ function Party.RequestSync()
 	end
 	local now = GetTime()
 	if sync.askedAt and now - sync.askedAt < SYNC_GAP then
-		ns.Print(L["You asked a moment ago: wait %d seconds."]:format(math.ceil(SYNC_GAP - (now - sync.askedAt))))
+		local wait = math.ceil(SYNC_GAP - (now - sync.askedAt))
+		ns.Print(wait == 1 and L["You asked a moment ago: wait 1 second."] or L["You asked a moment ago: wait %d seconds."]:format(wait))
 		return false
 	end
 	if send({ text }) ~= 1 then
@@ -1445,9 +1446,11 @@ function Party.Waiting(goal)
 	for _, m in ipairs(holders()) do
 		local counts = m.quests[goal.quest]
 		local c = counts and counts[line]
-		if c and c[1] < c[2] then
+		-- `upto`: the goal is part of the line's count, for a member as for the player.
+		local max = c and (goal.upto and goal.upto < c[2] and goal.upto or c[2])
+		if c and c[1] < max then
 			out = out or {}
-			out[#out + 1] = { name = m.name, cur = c[1], max = c[2] }
+			out[#out + 1] = { name = m.name, cur = c[1], max = max }
 		end
 	end
 	return out
@@ -1479,7 +1482,7 @@ end
 function Party.GoOn()
 	local E = ns.Engine
 	local s = E and E.GetLiveStep and E.GetLiveStep()
-	local view = s and E.GetStepView(s)
+	local view = s and E.GetStepView(s, true)
 	for _, goal in ipairs(view and view.goals or {}) do
 		if goal.quest then released[goal.quest] = true end
 	end
@@ -1493,7 +1496,7 @@ function Party.StepWait()
 	if not waits() then return nil end
 	local E = ns.Engine
 	local s = E.GetLiveStep and E.GetLiveStep()
-	local view = s and E.GetStepView(s)
+	local view = s and E.GetStepView(s, true)
 	if not view then return nil end
 	local names, seen, ready = {}, {}, false
 	local function add(n)
@@ -1924,34 +1927,69 @@ end
 -- Member m as Engine.StepHiddenFor takes them (memberWho).
 local function whoOf(m) return memberWho(m.key) end
 
+-- A goal's quest work as the step line compares it ("kill:7:1"), or nil.
+local function workOf(goal)
+	local q = type(goal) == "table" and goal.quest
+	return q and ((goal.t or "") .. ":" .. q .. ":" .. (goal.oi or "")) or nil
+end
+
+-- Whether member m's live step holds quest work your live step still has open
+-- (`open`: workOf -> true): their step in your guide g (`theirs`), else
+-- their "2P|" key in the guide they are on, when you have it.
+local function sameWork(m, g, theirs, open)
+	if not next(open) then return false end
+	local step = theirs and g.steps[theirs]
+	if not step then
+		local at, G = m.at, ns.Guides
+		local tg = at and at.guide and G and G.Get and G.Get(at.guide)
+		local i = tg and Party.StepAt(tg, at.key)
+		step = i and tg.steps[i]
+	end
+	for _, goal in ipairs(step and step.goals or {}) do
+		local w = workOf(goal)
+		if w and open[w] then return true end
+	end
+	return false
+end
+
 -- The guide window's party line for the live step, and whether the group
--- waits on it (the line then offers "Go on without them"), or nil. Where
--- members are on your guide: "Ana: 3 steps ahead", "Ben: 1 step behind",
--- "Cy: on this step", counting only the steps you both have (a step for one
--- of you alone never puts either ahead); "Dee: other guide" on another;
--- then the wait ("Waiting on Ana", "Everyone's ready"), or with nobody
--- holding the step, a soft hint when you are done with its objectives and
--- a member is not ("Still at it: Ben").
+-- waits on it (the line then offers "Go on without them"), or nil. Who is
+-- with you first: "With Ana, Cy", a member on your step, or on another step
+-- or guide whose live step holds quest work yours still has open (#2897:
+-- classes and races have steps of their own, so the step numbers of two
+-- players on one quest differ; the line says they are together). Then
+-- where the others are on your guide: "Ana: 3 steps ahead", "Ben: 1 step
+-- behind", counting only the steps you both have (a step for one of you
+-- alone never puts either ahead); "Dee: other guide" on another; then the
+-- wait ("Waiting on Ana", "Everyone's ready"), or with nobody holding the
+-- step, a soft hint when you are done with its objectives and a member is
+-- not ("Still at it: Ben").
 function Party.StepLine()
 	if not ns.Get("party.show") or not grouped() then return nil end
 	local mine = Party.MyPos()
 	local E = ns.Engine
 	local g = mine and mine.step and E.GetGuide and E.GetGuide()
-	local parts, list = {}, Party.Members()
+	local parts, list, with, open = {}, Party.Members(), {}, {}
+	local view = g and E.GetStepView(mine.step, true)
+	for _, goal in ipairs(view and view.goals or {}) do
+		local w = goal.status ~= "done" and goal.status ~= "skipped" and workOf(goal)
+		if w then open[w] = true end
+	end
 	for _, m in ipairs(list) do
 		local p = m.pos
 		local theirs = g and theirStep(m, g, mine)
-		if theirs then
-			local d = Party.SharedSteps(g, mine.step, theirs, whoOf(m))
-			if d == 1 then parts[#parts + 1] = L["%s: 1 step ahead"]:format(m.name)
-			elseif d > 1 then parts[#parts + 1] = L["%s: %d steps ahead"]:format(m.name, d)
-			elseif d == -1 then parts[#parts + 1] = L["%s: 1 step behind"]:format(m.name)
-			elseif d < -1 then parts[#parts + 1] = L["%s: %d steps behind"]:format(m.name, -d)
-			else parts[#parts + 1] = L["%s: on this step"]:format(m.name) end
+		local d = theirs and Party.SharedSteps(g, mine.step, theirs, whoOf(m))
+		if d == 0 or (g and sameWork(m, g, theirs, open)) then
+			with[#with + 1] = m.name
+		elseif d == 1 then parts[#parts + 1] = L["%s: 1 step ahead"]:format(m.name)
+		elseif d and d > 1 then parts[#parts + 1] = L["%s: %d steps ahead"]:format(m.name, d)
+		elseif d == -1 then parts[#parts + 1] = L["%s: 1 step behind"]:format(m.name)
+		elseif d and d < -1 then parts[#parts + 1] = L["%s: %d steps behind"]:format(m.name, -d)
 		elseif p and p.guide ~= (mine and mine.guide) then
 			parts[#parts + 1] = L["%s: other guide"]:format(m.name)
 		end
 	end
+	if #with > 0 then table.insert(parts, 1, L["With %s"]:format(concat(with, ", "))) end
 	local names, ready = Party.StepWait()
 	local holding = names ~= nil and #names > 0
 	if holding then
@@ -1959,7 +1997,7 @@ function Party.StepLine()
 	elseif ready then
 		parts[#parts + 1] = L["Everyone's ready"]
 	elseif mine and mine.step then
-		local view = ns.Engine.GetStepView(mine.step)
+		local view = ns.Engine.GetStepView(mine.step, true)
 		local still, seen = {}, {}
 		for _, goal in ipairs(view and view.goals or {}) do
 			local q = goal.quest
@@ -2008,7 +2046,7 @@ function Party.Roster()
 	local E = ns.Engine
 	local g = E and E.GetGuide and E.GetGuide()
 	local live = E and E.GetLiveStep and E.GetLiveStep()
-	local view = live and E.GetStepView(live)
+	local view = live and E.GetStepView(live, true)
 	local mine = Party.MyPos() or {}
 	local n = GetNumSubgroupMembers and GetNumSubgroupMembers() or 0
 	for i = 1, n do
@@ -2178,54 +2216,3 @@ function Party.NeedText(e)
 	return L["For %s: still needs %d"]:format(e.name, e.need)
 end
 
----------------------------------------------------------------------------
--- Options
----------------------------------------------------------------------------
-
--- The Group section of the Questing page (its Quests tab), after the quest
--- settings (Quests/Options.lua registers first: this file loads after it).
--- `search`: more words the settings search finds them by (English, as the
--- other controls' `search`).
-local SEARCH = "group, party, sync, friends, together"
-Party.OPTIONS = {
-	page = L["Questing"], tab = L["Quests"], section = L["Group"],
-	controls = {
-		{ kind = "toggle", key = "party.share", label = L["Share my quest progress with my party"], search = SEARCH,
-			help = L["Party members who run Polestar see your counts under their quest goals, your step and your level. Hidden addon messages to your party only; nothing goes to chat."] },
-		-- Core/Update.lua's version probe: off with sharing off too.
-		{ kind = "toggle", key = "update.probe", label = L["Ask other players' Polestar which version it is"], search = SEARCH .. ", update, version, new version",
-			child = true, disabled = function() return not ns.Get("party.share") end,
-			help = L["Up to 10 hidden addon whispers a session, to players of your faction you target or mouse over outside cities, combat and dungeons, and an answer to theirs: only the version number, so Polestar can tell you when a newer one is out. Off: none sent or answered."] },
-		{ kind = "toggle", key = "party.show", label = L["Show my party's progress in the guide"], search = SEARCH,
-			help = L["Their counts under your quest goals, and who lacks a quest you took, with a Share button."] },
-		{ kind = "toggle", key = "party.waitForGroup", label = L["Wait for the group"], search = SEARCH,
-			disabled = function() return not ns.Get("party.show") end,
-			help = L["When a party member on your quest still needs an objective you finished, the step and its turn-in wait and the arrow leads to what they need. Members in another zone or offline for 2 minutes don't hold you; the party line offers Go on without them."] },
-		{ kind = "toggle", key = "party.lootNeeds", label = L["Say who still needs quest loot"], search = SEARCH,
-			disabled = function() return not ns.Get("party.show") end,
-			help = L["On a loot window or roll, a line under a quest item a party member still needs and you don't. Nothing is passed or said for you."] },
-		{ kind = "toggle", key = "party.panel", label = L["Party panel"], search = SEARCH,
-			help = L["Opens by itself when someone in your party runs Polestar too: each member's level, step and what they still need of yours; click a name to point the arrow at them. Closed, it stays closed; /polestar party opens it again."] },
-		{ kind = "toggle", key = "party.chat", label = L["Tell my party about objectives and ready quests"], search = SEARCH .. ", chat, announce, objective, tell",
-			help = L["A party chat line with the quest's link when you finish its objectives, and one when the quest is ready to turn in. Everyone in the party sees it, Polestar or not. Never solo or in a raid."] },
-		{ kind = "toggle", key = "party.chatLoot", label = L["Tell my party when I loot an item that starts a quest"], search = SEARCH .. ", chat, announce, loot, item, tell",
-			help = L["A party chat line with the item's link and the quest it starts."] },
-		{ kind = "toggle", key = "party.chatEcho", label = L["Show my own lines in my chat too"], search = SEARCH .. ", chat, announce",
-			disabled = function() return not (ns.Get("party.chat") or ns.Get("party.chatLoot")) end,
-			help = L["Off: your party sees the lines Polestar says for you, and your chat stays clear of them."] },
-		{ kind = "toggle", key = "party.chatHideOthers", label = L["Hide other players' Polestar lines"], search = SEARCH .. ", chat, announce, hide",
-			help = L["Party members' Polestar lines leave your chat. Shown, they carry Polestar's star."] },
-		{ kind = "toggle", key = "party.chatOnlyNeeded", label = L["Only when someone in the party doesn't have Polestar"], search = SEARCH .. ", chat, announce",
-			disabled = function() return not (ns.Get("party.chat") or ns.Get("party.chatLoot")) end,
-			help = L["Nothing goes to chat while everyone in your party runs Polestar: they see your progress in their guide."] },
-	},
-}
-
-local registered = false
-local function register()
-	if registered or not ns.RegisterOptions then return end
-	registered = true
-	ns.RegisterOptions(Party.OPTIONS)
-end
-ns.OnInit(register)
-ns.OnLogin(register)

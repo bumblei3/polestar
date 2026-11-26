@@ -90,29 +90,34 @@ return {
 	-- Step 15: Adventure: Lord Valthalak
 	-- {npc:16042} Lord Valthalak
 	["Adventure: {npc:16042}"] = "冒险：{npc:16042}",
-	-- {npc:16042} Lord Valthalak · {quest:8999} Saving the Best for Last · {npc:16013} Deliana · {zone:1455} Ironforge · {npc:16012} Mokvar · {zone:1454} Orgrimmar · {npc:16033} Bodley · {area:254} Blackrock Mountain · {quest:8995} Mea Culpa, Lord Valthalak · {quest:8996} Return to Bodley · {quest:8997} Back to the Beginning
-	["The {npc:16042} questline is a point. It is the level 60 dungeon-set chain, from An Earnest Proposition to your class's {quest:8999}: {npc:16013} ({zone:1455}) or {npc:16012} ({zone:1454}) send you through In Search of Anthion and Anthion's Parting Words to {npc:16033} at {area:254}, whose Three Kings of Flame, the Left and Right Pieces of Lord Valthalak's Amulet, Final Preparations and {quest:8995} end with {quest:8996}. {quest:8997} then leads to {quest:8999}."] = "完成 {npc:16042} 任务线可获得一点。这是 60 级地下城套装任务链，从“热心的建议”一直到你所属职业的 {quest:8999}：{npc:16013}（{zone:1455}）或 {npc:16012}（{zone:1454}）会让你依次完成“寻找安泰恩”和“告别安泰恩”，前往 {area:254} 的 {npc:16033} 处；他提供的“烈焰之王”、瓦塔拉克饰品的左半部分和右半部分、“最后的准备”及 {quest:8995}，最终通向 {quest:8996}。随后 {quest:8997} 会引向 {quest:8999}。",
+	-- {npc:16042} Lord Valthalak · {quest:9001} Saving the Best for Last · {npc:16013} Deliana · {zone:1455} Ironforge · {npc:16012} Mokvar · {zone:1454} Orgrimmar · {npc:16033} Bodley · {area:254} Blackrock Mountain · {quest:8995} Mea Culpa, Lord Valthalak · {quest:8996} Return to Bodley · {quest:8997} Back to the Beginning
+	-- was: ["The {npc:16042} questline is a point. It is the level 60 dungeon-set chain, from An Earnest Proposition to your class's {quest:8999}: {npc:16013} ({zone:1455}) or {npc:16012} ({zone:1454}) send you through In Search of Anthion and Anthion's Parting Words to {npc:16033} at {area:254}, whose Three Kings of Flame, the Left and Right Pieces of Lord Valthalak's Amulet, Final Preparations and {quest:8995} end with {quest:8996}. {quest:8997} then leads to {quest:8999}."] = "完成 {npc:16042} 任务线可获得一点。这是 60 级地下城套装任务链，从“热心的建议”一直到你所属职业的 {quest:8999}：{npc:16013}（{zone:1455}）或 {npc:16012}（{zone:1454}）会让你依次完成“寻找安泰恩”和“告别安泰恩”，前往 {area:254} 的 {npc:16033} 处；他提供的“烈焰之王”、瓦塔拉克饰品的左半部分和右半部分、“最后的准备”及 {quest:8995}，最终通向 {quest:8996}。随后 {quest:8997} 会引向 {quest:8999}。"
+	["The {npc:16042} questline is a point. It is the level 60 dungeon-set chain, from An Earnest Proposition to your class's {quest:9001}: {npc:16013} ({zone:1455}) or {npc:16012} ({zone:1454}) send you through In Search of Anthion and Anthion's Parting Words to {npc:16033} at {area:254}, whose Three Kings of Flame, the Left and Right Pieces of Lord Valthalak's Amulet, Final Preparations and {quest:8995} end with {quest:8996}. {quest:8997} then leads to {quest:9001}."] = "",
 	-- {npc:16073} Spirit of Lord Valthalak · {npc:16033} Bodley · {area:254} Blackrock Mountain
 	["{npc:16073}, inside Upper Blackrock Spire after Mea Culpa (no spawn in the data: the arrow leads to {npc:16033}'s {area:254})"] = "{npc:16073}，在黑石塔上层完成“瓦塔拉克公爵”之后（数据中没有刷新点：箭头指向{npc:16033}所在的{area:254}）",
 	-- {npc:16033} Bodley · {quest:8996} Return to Bodley
 	["{npc:16033} offers it once {quest:8996} is turned in"] = "交还{quest:8996}后，{npc:16033}会提供此任务",
 
 	-- Step 16: Adventure: Saving the Best for Last (Alliance)
-	-- {quest:8999} Saving the Best for Last
-	["Adventure: {quest:8999} (Alliance)"] = "冒险：{quest:8999}（联盟）",
-	-- {npc:16013} Deliana · {quest:8999} Saving the Best for Last
-	["{npc:16013} then offers your class's {quest:8999}, the last quest of the challenge: it takes your class's dungeon-set helm and chest and upgrades them."] = "随后 {npc:16013} 会提供你职业对应的 {quest:8999}，这是挑战的最后一个任务：收取本职业地下城套装的头盔和胸甲，并将其升级。",
+	-- {quest:9001} Saving the Best for Last
+	-- was: ["Adventure: {quest:8999} (Alliance)"] = "冒险：{quest:8999}（联盟）"
+	["Adventure: {quest:9001} (Alliance)"] = "",
+	-- {npc:16013} Deliana · {quest:9001} Saving the Best for Last
+	-- was: ["{npc:16013} then offers your class's {quest:8999}, the last quest of the challenge: it takes your class's dungeon-set helm and chest and upgrades them."] = "随后 {npc:16013} 会提供你职业对应的 {quest:8999}，这是挑战的最后一个任务：收取本职业地下城套装的头盔和胸甲，并将其升级。"
+	["{npc:16013} then offers your class's {quest:9001}, the last quest of the challenge: it takes your class's dungeon-set helm and chest and upgrades them."] = "",
 
 	-- Step 17: Adventure: Saving the Best for Last (Horde)
-	-- {quest:9007} Saving the Best for Last
-	["Adventure: {quest:9007} (Horde)"] = "冒险：{quest:9007}（部落）",
-	-- {npc:16012} Mokvar · {quest:9007} Saving the Best for Last
-	["{npc:16012} then offers your class's {quest:9007}, the last quest of the challenge: it takes your class's dungeon-set helm and chest and upgrades them."] = "随后 {npc:16012} 会提供你职业对应的 {quest:9007}，这是挑战的最后一个任务：收取本职业地下城套装的头盔和胸甲，并将其升级。",
+	-- {quest:9008} Saving the Best for Last
+	-- was: ["Adventure: {quest:9007} (Horde)"] = "冒险：{quest:9007}（部落）"
+	["Adventure: {quest:9008} (Horde)"] = "",
+	-- {npc:16012} Mokvar · {quest:9008} Saving the Best for Last
+	-- was: ["{npc:16012} then offers your class's {quest:9007}, the last quest of the challenge: it takes your class's dungeon-set helm and chest and upgrades them."] = "随后 {npc:16012} 会提供你职业对应的 {quest:9007}，这是挑战的最后一个任务：收取本职业地下城套装的头盔和胸甲，并将其升级。"
+	["{npc:16012} then offers your class's {quest:9008}, the last quest of the challenge: it takes your class's dungeon-set helm and chest and upgrades them."] = "",
 
 	-- Step 18: Dungeons: level 15-25
 	["Dungeons: level 15-25"] = "地下城：15-25级",
-	-- {area:2437} Ragefire Chasm · {area:16919} Hall of Thanes · {zone:1455} Ironforge
-	["The final boss of every level 15-25 dungeon earns one point together. {area:2437} and Forever's {area:16919} (in {zone:1455}) count as one: either final boss does. Tick each boss off when you kill it, and check the in-game Legacy panel for the list."] = "击败所有 15-25 级地下城的最终首领，合计获得一点。{area:2437} 和无限的 {area:16919}（位于 {zone:1455}）算作同一个：击败任意一处的最终首领即可。每击杀一个首领就将其勾选，并在游戏内的传承面板查看列表。",
+	-- {area:2437} Ragefire Chasm · {area:16919} Hall of Thanes · {zone:1455} Ironforge · {area:153} Ruins of Lordaeron · {zone:1458} Undercity · {zone:1454} Orgrimmar
+	["The final boss of every level 15-25 dungeon earns one point together. {area:2437} and Forever's {area:16919} (in {zone:1455}) count as one: either final boss does. Tick each boss off when you kill it, and check the in-game Legacy panel for the list.\nAlliance: the {area:153}'s entrance is in the ruins beside the {zone:1458}, among Horde guards: go with a group. {area:2437} is inside {zone:1454}: the {area:16919} counts for it. Horde: the {area:16919} is inside {zone:1455}: {area:2437} counts for it."] = "击败所有 15-25 级地下城的最终首领，合计获得一点。{area:2437} 和无限的 {area:16919}（位于 {zone:1455}）算作同一个：击败任意一处的最终首领即可。每击杀一个首领就将其勾选，并在游戏内的传承面板查看列表。\n联盟：{area:153} 的入口在 {zone:1458} 旁的废墟里，周围有部落卫兵：请组队前往。{area:2437} 位于 {zone:1454} 城内：{area:16919} 可以代替它。部落：{area:16919} 位于 {zone:1455} 城内：{area:2437} 可以代替它。",
 	-- {area:2437} Ragefire Chasm · {npc:11519} Bazzalan · {area:16919} Hall of Thanes
 	["{area:2437}: {npc:11519} (or {area:16919})"] = "{area:2437}：{npc:11519}（或 {area:16919}）",
 	-- {area:16919} Hall of Thanes · {npc:261319} Durgen Dirgehammer · {area:2437} Ragefire Chasm
@@ -126,11 +131,12 @@ return {
 
 	-- Step 19: Dungeons: level 26-45
 	["Dungeons: level 26-45"] = "地下城：26-45级",
-	-- {area:17780} Krol'dok Stronghold · {zone:2548} Riverglades
-	["The final boss of every level 26-45 dungeon earns one point together. The Drowned City and {area:17780} (in the {zone:2548}) are new in Forever and not in our data: tick them off yourself."] = "所有26-45级地下城的最终首领全部击败后，共计一点。沉没之城和{area:17780}（位于{zone:2548}）是无限服新增内容，未收录在我们的数据中：请自行勾选完成。",
+	-- {area:16550} The Drowned City · {area:17780} Krol'dok Stronghold · {zone:2548} Riverglades
+	["The final boss of every level 26-45 dungeon earns one point together. {area:16550} and {area:17780} (in the {zone:2548}) are new in Forever and not in our data: tick them off yourself."] = "所有26-45级地下城的最终首领全部击败后，共计一点。{area:16550}和{area:17780}（位于{zone:2548}）是无限服新增内容，未收录在我们的数据中：请自行勾选完成。",
 	-- {zone:1416} Alterac Mountains · {npc:246020} Shade of the Archmage
 	["City of Dalaran (Forever's, {zone:1416}): {npc:246020}"] = "达拉然城（无限版本，{zone:1416}）：{npc:246020}",
-	["the final boss of the Drowned City"] = "沉没之城的最终首领",
+	-- {area:16550} The Drowned City
+	["the final boss of the {area:16550}"] = "{area:16550}的最终首领",
 	-- {area:796} Scarlet Monastery
 	["{area:796}: Graveyard"] = "{area:796}：墓地",
 	-- {area:796} Scarlet Monastery
@@ -144,9 +150,10 @@ return {
 
 	-- Step 20: Dungeons: level 46-60
 	["Dungeons: level 46-60"] = "地下城：46-60级",
-	-- {area:1216} Blackmaw Hold · {area:16985} Shaper's Terrace
-	["The final boss of every level 46-60 dungeon earns one point together. Alcaz Prison, {area:1216} and the {area:16985} are new in Forever and not in our data: tick them off yourself."] = "击败所有 46-60 级地下城的最终首领，合计获得一点。奥卡兹监狱、{area:1216} 和 {area:16985} 是无限新增内容，尚未收录在我们的数据中：请自行勾选。",
-	["the final boss of Alcaz Prison"] = "奥卡兹监狱 的最终首领",
+	-- {area:16620} Alcaz Prison · {area:1216} Blackmaw Hold · {area:16985} Shaper's Terrace
+	["The final boss of every level 46-60 dungeon earns one point together. {area:16620}, {area:1216} and the {area:16985} are new in Forever and not in our data: tick them off yourself."] = "击败所有 46-60 级地下城的最终首领，合计获得一点。{area:16620}、{area:1216} 和 {area:16985} 是无限新增内容，尚未收录在我们的数据中：请自行勾选。",
+	-- {area:16620} Alcaz Prison
+	["the final boss of {area:16620}"] = "{area:16620} 的最终首领",
 	-- {area:1216} Blackmaw Hold
 	["the final boss of {area:1216}"] = "{area:1216} 的最终首领",
 	-- {area:1583} Blackrock Spire
@@ -167,7 +174,7 @@ return {
 	-- {npc:10184} Onyxia
 	["Raids: {npc:10184}"] = "团队副本：{npc:10184}",
 	-- {npc:10184} Onyxia · {area:2159} Onyxia's Lair · {zone:1445} Dustwallow Marsh · {item:16309} Drakefire Amulet · {zone:1428} Burning Steppes · {area:340} Kargath · {zone:1418} Badlands · {npc:10363} General Drakkisath
-	["Killing {npc:10184} is a point. {area:2159} is a 40-player raid in {zone:1445}, open from 9 December. Every raider needs the {item:16309} in the bags: the Alliance chain starts with Dragonkin Menace in the {zone:1428}, the Horde chain with Blood and Thunder in {area:340} ({zone:1418}); both end in Upper Blackrock Spire with {npc:10363}."] = "击杀{npc:10184}可获得一点。{area:2159}是{zone:1445}的40人团队副本，12月9日起开放。每名团队成员背包中都必须有{item:16309}：联盟任务链从{zone:1428}的“黑龙的威胁”开始，部落任务链从{area:340}（{zone:1418}）的“Blood and Thunder”开始；两条任务链最终都要在黑石塔上层对付{npc:10363}。",
+	["Killing {npc:10184} is a point. {area:2159} is a 40-player raid in {zone:1445}, open from 9 December. Every raider needs the {item:16309} in the bags: the Alliance chain starts with Dragonkin Menace in the {zone:1428}, the Horde chain with Blood and Thunder in {area:340} ({zone:1418}); both end in Upper Blackrock Spire with {npc:10363}."] = "击杀{npc:10184}可获得一点。{area:2159}是{zone:1445}的40人团队副本，12月9日起开放。每名团队成员背包中都必须有{item:16309}：联盟任务链从{zone:1428}的“黑龙的威胁”开始，部落任务链从{area:340}（{zone:1418}）的“鲜血与雷鸣”开始；两条任务链最终都要在黑石塔上层对付{npc:10363}。",
 
 	-- Step 22: Raids: Hyjal Summit
 	["Raids: Hyjal Summit"] = "团队副本：海加尔峰",
@@ -184,6 +191,8 @@ return {
 	-- No longer in the guide (its English changed or it went away): reuse or delete.
 	-- ["Adventure: {quest:8997} (Alliance)"] = "冒险：{quest:8997}（联盟）",
 	-- ["Adventure: {quest:8998} (Horde)"] = "冒险：{quest:8998}（部落）",
+	-- ["Adventure: {quest:8999} (Alliance)"] = "冒险：{quest:8999}（联盟）",
+	-- ["Adventure: {quest:9007} (Horde)"] = "冒险：{quest:9007}（部落）",
 	-- ["All 13 Hyjal Summit bosses are a point. Hyjal Summit is a new Forever raid; its bosses are not in our data, so tick it off once all 13 are down."] = "击败 Hyjal Summit 全部13个首领计1点。Hyjal Summit 是 Forever 新增的团队副本；它的首领不在我们的数据中，所以全部13个都击败后请自行勾选。",
 	-- ["All 8 Barrow Deeps bosses are a point. Barrow Deeps is a new Forever raid; its bosses are not in our data, so tick it off once all 8 are down."] = "击败 Barrow Deeps 全部8个首领计1点。Barrow Deeps 是 Forever 新增的团队副本；它的首领不在我们的数据中，所以全部8个都击败后请自行勾选。",
 	-- ["Blizzard counts four battleground reputations, but our faction data has three per side ({zone:1460}, {zone:1461}, {zone:1459}). The fourth is likely tied to Forever's new PvP content; check the in-game Legacy panel."] = "暴雪计算了四个战场声望，但我们的阵营数据中每方只有三个（{zone:1460}、{zone:1461}、{zone:1459}）。第四个可能与 Forever 新的PvP内容有关；请查看游戏内的传承面板。",
@@ -196,6 +205,7 @@ return {
 	-- ["The final boss of every level 15-25 dungeon earns one point together. Tick each boss off when you kill it; the grouping follows the usual Classic level ranges, so check the in-game Legacy panel for the exact list."] = "每个15-25级地下城的最终首领合计1点。击杀每个首领后勾选；分组按照经典版常见的等级范围，具体名单请查看游戏内的传承面板。",
 	-- ["The final boss of every level 26-45 dungeon earns one point together."] = "每个26-45级地下城的最终首领合计1点。",
 	-- ["The final boss of every level 46-60 dungeon earns one point together."] = "每个46-60级地下城的最终首领合计1点。",
+	-- ["The {npc:16042} questline is a point. It is the level 60 dungeon-set chain, from An Earnest Proposition to your class's {quest:8999}: {npc:16013} ({zone:1455}) or {npc:16012} ({zone:1454}) send you through In Search of Anthion and Anthion's Parting Words to {npc:16033} at {area:254}, whose Three Kings of Flame, the Left and Right Pieces of Lord Valthalak's Amulet, Final Preparations and {quest:8995} end with {quest:8996}. {quest:8997} then leads to {quest:8999}."] = "完成 {npc:16042} 任务线可获得一点。这是 60 级地下城套装任务链，从“热心的建议”一直到你所属职业的 {quest:8999}：{npc:16013}（{zone:1455}）或 {npc:16012}（{zone:1454}）会让你依次完成“寻找安泰恩”和“告别安泰恩”，前往 {area:254} 的 {npc:16033} 处；他提供的“烈焰之王”、瓦塔拉克饰品的左半部分和右半部分、“最后的准备”及 {quest:8995}，最终通向 {quest:8996}。随后 {quest:8997} 会引向 {quest:8999}。",
 	-- ["The {npc:16042} questline is a point. It is the level 60 dungeon-set chain: {npc:16013} ({zone:1455}) or {npc:16012} ({zone:1454}) send you through In Search of Anthion and Anthion's Parting Words to {npc:16033} at {area:254}, whose Three Kings of Flame, the Left and Right Pieces of Lord Valthalak's Amulet, Final Preparations and Mea Culpa, {npc:16042} end with {quest:8996}. {quest:8997} then leads to the class Saving the Best for Last quests."] = "{npc:16042}任务线计1点。这是60级地下城套装任务链：{npc:16013}（{zone:1455}）或{npc:16012}（{zone:1454}）通过“寻找安泰恩”和“告别安泰恩”把你送到{area:254}的{npc:16033}处，他的“烈焰之王”、瓦塔拉克公爵的护符左瓣和右瓣、“最后的准备”和“{npc:16042}”，最终以{quest:8996}结束。之后{quest:8997}会引向各职业的最终套装升级任务。",
 	-- ["The {npc:16042} questline is a point. It is the level 60 dungeon-set chain: {npc:16013} ({zone:1455}) or {npc:16012} ({zone:1454}) send you through In Search of Anthion and Anthion's Parting Words to {npc:16033} at {area:254}, whose Three Kings of Flame, the Left and Right Pieces of Lord Valthalak's Amulet, Final Preparations and {quest:8995} end with {quest:8996}. {quest:8997} then leads to the class Saving the Best for Last quests."] = "{npc:16042}任务线计1点。这是60级地下城套装任务链：{npc:16013}（{zone:1455}）或{npc:16012}（{zone:1454}）通过“寻找安泰恩”和“告别安泰恩”把你送到{area:254}的{npc:16033}处，他的“烈焰之王”、瓦塔拉克饰品的左瓣和右瓣、“最后的准备”和{quest:8995}，最终以{quest:8996}结束。之后{quest:8997}会引向各职业的“最后的奖赏”任务。",
 	-- ["The {npc:16042} questline is a point. It is the level 60 dungeon-set chain: {npc:16013} ({zone:1455}) or {npc:16012} ({zone:1454}) send you through In Search of Anthion and Anthion's Parting Words to {npc:16033} at {area:254}, whose Three Kings of Flame, the Left and Right Pieces of {item:22048}, Final Preparations and Mea Culpa, {npc:16042} end with {quest:8996}. {quest:8997} then leads to the class Saving the Best for Last quests."] = "{npc:16042}任务线计1点。这是60级地下城套装任务链：{npc:16013}（{zone:1455}）或{npc:16012}（{zone:1454}）通过“寻找安泰恩”和“告别安泰恩”把你送到{area:254}的{npc:16033}处，他的“烈焰之王”、{item:22048}的左瓣和右瓣、“最后的准备”和“{npc:16042}”，最终以{quest:8996}结束。之后{quest:8997}会引向各职业的最终套装升级任务。",
@@ -206,5 +216,7 @@ return {
 	-- ["{area:16919} and {area:153} are new in Forever. Their bosses, levels and Legacy bracket are not in our data, so tick them off yourself."] = "{area:16919}和{area:153}是 Forever 新增的。它们的首领、等级和传承等级段不在我们的数据中，所以请自行勾选。",
 	-- ["{area:717}: the usual last kill; the {area:717} has no fixed final boss"] = "{area:717}：通常的最后一个击杀；{area:717}没有固定的最终首领",
 	-- ["{npc:16012} then offers your class's Saving the Best for Last, the final upgrade of the dungeon set."] = "随后{npc:16012}会提供你职业的最终升级任务，即地下城套装的最后一次升级。",
+	-- ["{npc:16012} then offers your class's {quest:9007}, the last quest of the challenge: it takes your class's dungeon-set helm and chest and upgrades them."] = "随后 {npc:16012} 会提供你职业对应的 {quest:9007}，这是挑战的最后一个任务：收取本职业地下城套装的头盔和胸甲，并将其升级。",
 	-- ["{npc:16013} then offers your class's Saving the Best for Last, the final upgrade of the dungeon set."] = "随后{npc:16013}会提供你职业的最终升级任务，即地下城套装的最后一次升级。",
+	-- ["{npc:16013} then offers your class's {quest:8999}, the last quest of the challenge: it takes your class's dungeon-set helm and chest and upgrades them."] = "随后 {npc:16013} 会提供你职业对应的 {quest:8999}，这是挑战的最后一个任务：收取本职业地下城套装的头盔和胸甲，并将其升级。",
 }

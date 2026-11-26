@@ -90,29 +90,34 @@ return {
 	-- Step 15: Adventure: Lord Valthalak
 	-- {npc:16042} Lord Valthalak
 	["Adventure: {npc:16042}"] = "Abenteuer: {npc:16042}",
-	-- {npc:16042} Lord Valthalak · {quest:8999} Saving the Best for Last · {npc:16013} Deliana · {zone:1455} Ironforge · {npc:16012} Mokvar · {zone:1454} Orgrimmar · {npc:16033} Bodley · {area:254} Blackrock Mountain · {quest:8995} Mea Culpa, Lord Valthalak · {quest:8996} Return to Bodley · {quest:8997} Back to the Beginning
-	["The {npc:16042} questline is a point. It is the level 60 dungeon-set chain, from An Earnest Proposition to your class's {quest:8999}: {npc:16013} ({zone:1455}) or {npc:16012} ({zone:1454}) send you through In Search of Anthion and Anthion's Parting Words to {npc:16033} at {area:254}, whose Three Kings of Flame, the Left and Right Pieces of Lord Valthalak's Amulet, Final Preparations and {quest:8995} end with {quest:8996}. {quest:8997} then leads to {quest:8999}."] = "Die Questreihe von {npc:16042} ist einen Punkt wert. Es ist die Kette zum Dungeon-Set der Stufe 60, von An Earnest Proposition bis zur {quest:8999} deiner Klasse: {npc:16013} ({zone:1455}) oder {npc:16012} ({zone:1454}) schicken dich über In Search of Anthion und Anthion's Parting Words zu {npc:16033} am {area:254}, dessen Aufträge Three Kings of Flame, die linke und rechte Hälfte von Lord Valthalak's Amulet, Final Preparations und {quest:8995} mit {quest:8996} enden. {quest:8997} führt dich dann zu {quest:8999}.",
+	-- {npc:16042} Lord Valthalak · {quest:9001} Saving the Best for Last · {npc:16013} Deliana · {zone:1455} Ironforge · {npc:16012} Mokvar · {zone:1454} Orgrimmar · {npc:16033} Bodley · {area:254} Blackrock Mountain · {quest:8995} Mea Culpa, Lord Valthalak · {quest:8996} Return to Bodley · {quest:8997} Back to the Beginning
+	-- was: ["The {npc:16042} questline is a point. It is the level 60 dungeon-set chain, from An Earnest Proposition to your class's {quest:8999}: {npc:16013} ({zone:1455}) or {npc:16012} ({zone:1454}) send you through In Search of Anthion and Anthion's Parting Words to {npc:16033} at {area:254}, whose Three Kings of Flame, the Left and Right Pieces of Lord Valthalak's Amulet, Final Preparations and {quest:8995} end with {quest:8996}. {quest:8997} then leads to {quest:8999}."] = "Die Questreihe von {npc:16042} ist einen Punkt wert. Es ist die Kette zum Dungeon-Set der Stufe 60, von An Earnest Proposition bis zur {quest:8999} deiner Klasse: {npc:16013} ({zone:1455}) oder {npc:16012} ({zone:1454}) schicken dich über In Search of Anthion und Anthion's Parting Words zu {npc:16033} am {area:254}, dessen Aufträge Three Kings of Flame, die linke und rechte Hälfte von Lord Valthalak's Amulet, Final Preparations und {quest:8995} mit {quest:8996} enden. {quest:8997} führt dich dann zu {quest:8999}."
+	["The {npc:16042} questline is a point. It is the level 60 dungeon-set chain, from An Earnest Proposition to your class's {quest:9001}: {npc:16013} ({zone:1455}) or {npc:16012} ({zone:1454}) send you through In Search of Anthion and Anthion's Parting Words to {npc:16033} at {area:254}, whose Three Kings of Flame, the Left and Right Pieces of Lord Valthalak's Amulet, Final Preparations and {quest:8995} end with {quest:8996}. {quest:8997} then leads to {quest:9001}."] = "",
 	-- {npc:16073} Spirit of Lord Valthalak · {npc:16033} Bodley · {area:254} Blackrock Mountain
 	["{npc:16073}, inside Upper Blackrock Spire after Mea Culpa (no spawn in the data: the arrow leads to {npc:16033}'s {area:254})"] = "{npc:16073}, in der Oberen Blackrockspitze nach Mea Culpa (kein Fundort in den Daten: Der Pfeil führt zu {npc:16033} am {area:254})",
 	-- {npc:16033} Bodley · {quest:8996} Return to Bodley
 	["{npc:16033} offers it once {quest:8996} is turned in"] = "{npc:16033} bietet sie an, sobald {quest:8996} abgegeben ist",
 
 	-- Step 16: Adventure: Saving the Best for Last (Alliance)
-	-- {quest:8999} Saving the Best for Last
-	["Adventure: {quest:8999} (Alliance)"] = "Abenteuer: {quest:8999} (Allianz)",
-	-- {npc:16013} Deliana · {quest:8999} Saving the Best for Last
-	["{npc:16013} then offers your class's {quest:8999}, the last quest of the challenge: it takes your class's dungeon-set helm and chest and upgrades them."] = "{npc:16013} bietet dir dann die {quest:8999} deiner Klasse an, die letzte Quest der Herausforderung: Sie nimmt den Dungeon-Set-Helm und die Brustplatte deiner Klasse und wertet sie auf.",
+	-- {quest:9001} Saving the Best for Last
+	-- was: ["Adventure: {quest:8999} (Alliance)"] = "Abenteuer: {quest:8999} (Allianz)"
+	["Adventure: {quest:9001} (Alliance)"] = "",
+	-- {npc:16013} Deliana · {quest:9001} Saving the Best for Last
+	-- was: ["{npc:16013} then offers your class's {quest:8999}, the last quest of the challenge: it takes your class's dungeon-set helm and chest and upgrades them."] = "{npc:16013} bietet dir dann die {quest:8999} deiner Klasse an, die letzte Quest der Herausforderung: Sie nimmt den Dungeon-Set-Helm und die Brustplatte deiner Klasse und wertet sie auf."
+	["{npc:16013} then offers your class's {quest:9001}, the last quest of the challenge: it takes your class's dungeon-set helm and chest and upgrades them."] = "",
 
 	-- Step 17: Adventure: Saving the Best for Last (Horde)
-	-- {quest:9007} Saving the Best for Last
-	["Adventure: {quest:9007} (Horde)"] = "Abenteuer: {quest:9007} (Horde)",
-	-- {npc:16012} Mokvar · {quest:9007} Saving the Best for Last
-	["{npc:16012} then offers your class's {quest:9007}, the last quest of the challenge: it takes your class's dungeon-set helm and chest and upgrades them."] = "{npc:16012} bietet dir dann die {quest:9007} deiner Klasse an, die letzte Quest der Herausforderung: Sie nimmt den Dungeon-Set-Helm und die Brustplatte deiner Klasse und wertet sie auf.",
+	-- {quest:9008} Saving the Best for Last
+	-- was: ["Adventure: {quest:9007} (Horde)"] = "Abenteuer: {quest:9007} (Horde)"
+	["Adventure: {quest:9008} (Horde)"] = "",
+	-- {npc:16012} Mokvar · {quest:9008} Saving the Best for Last
+	-- was: ["{npc:16012} then offers your class's {quest:9007}, the last quest of the challenge: it takes your class's dungeon-set helm and chest and upgrades them."] = "{npc:16012} bietet dir dann die {quest:9007} deiner Klasse an, die letzte Quest der Herausforderung: Sie nimmt den Dungeon-Set-Helm und die Brustplatte deiner Klasse und wertet sie auf."
+	["{npc:16012} then offers your class's {quest:9008}, the last quest of the challenge: it takes your class's dungeon-set helm and chest and upgrades them."] = "",
 
 	-- Step 18: Dungeons: level 15-25
 	["Dungeons: level 15-25"] = "Dungeons: Stufe 15-25",
-	-- {area:2437} Ragefire Chasm · {area:16919} Hall of Thanes · {zone:1455} Ironforge
-	["The final boss of every level 15-25 dungeon earns one point together. {area:2437} and Forever's {area:16919} (in {zone:1455}) count as one: either final boss does. Tick each boss off when you kill it, and check the in-game Legacy panel for the list."] = "Der letzte Boss jedes Dungeons der Stufen 15-25 bringt zusammen einen Punkt. {area:2437} und Forevers {area:16919} (in {zone:1455}) zählen als einer: Einer der beiden Endbosse genügt. Hake jeden Boss ab, wenn du ihn getötet hast, und sieh im Vermächtnis-Fenster im Spiel nach der Liste.",
+	-- {area:2437} Ragefire Chasm · {area:16919} Hall of Thanes · {zone:1455} Ironforge · {area:153} Ruins of Lordaeron · {zone:1458} Undercity · {zone:1454} Orgrimmar
+	["The final boss of every level 15-25 dungeon earns one point together. {area:2437} and Forever's {area:16919} (in {zone:1455}) count as one: either final boss does. Tick each boss off when you kill it, and check the in-game Legacy panel for the list.\nAlliance: the {area:153}'s entrance is in the ruins beside the {zone:1458}, among Horde guards: go with a group. {area:2437} is inside {zone:1454}: the {area:16919} counts for it. Horde: the {area:16919} is inside {zone:1455}: {area:2437} counts for it."] = "Der letzte Boss jedes Dungeons der Stufen 15-25 bringt zusammen einen Punkt. {area:2437} und Forevers {area:16919} (in {zone:1455}) zählen als einer: Einer der beiden Endbosse genügt. Hake jeden Boss ab, wenn du ihn getötet hast, und sieh im Vermächtnis-Fenster im Spiel nach der Liste.\nAllianz: Der Eingang von {area:153} liegt in den Ruinen neben {zone:1458}, zwischen Wachen der Horde: Geh mit einer Gruppe hin. {area:2437} liegt in {zone:1454}: {area:16919} zählt dafür. Horde: {area:16919} liegt in {zone:1455}: {area:2437} zählt dafür.",
 	-- {area:2437} Ragefire Chasm · {npc:11519} Bazzalan · {area:16919} Hall of Thanes
 	["{area:2437}: {npc:11519} (or {area:16919})"] = "{area:2437}: {npc:11519} (oder {area:16919})",
 	-- {area:16919} Hall of Thanes · {npc:261319} Durgen Dirgehammer · {area:2437} Ragefire Chasm
@@ -126,11 +131,12 @@ return {
 
 	-- Step 19: Dungeons: level 26-45
 	["Dungeons: level 26-45"] = "Dungeons: Stufe 26-45",
-	-- {area:17780} Krol'dok Stronghold · {zone:2548} Riverglades
-	["The final boss of every level 26-45 dungeon earns one point together. The Drowned City and {area:17780} (in the {zone:2548}) are new in Forever and not in our data: tick them off yourself."] = "Der letzte Boss jedes Dungeons der Stufen 26-45 bringt zusammen einen Punkt. Die Drowned City und {area:17780} (in den {zone:2548}) sind neu in Forever und nicht in unseren Daten: Hake sie selbst ab.",
+	-- {area:16550} The Drowned City · {area:17780} Krol'dok Stronghold · {zone:2548} Riverglades
+	["The final boss of every level 26-45 dungeon earns one point together. {area:16550} and {area:17780} (in the {zone:2548}) are new in Forever and not in our data: tick them off yourself."] = "Der letzte Boss jedes Dungeons der Stufen 26-45 bringt zusammen einen Punkt. {area:16550} und {area:17780} (in den {zone:2548}) sind neu in Forever und nicht in unseren Daten: Hake sie selbst ab.",
 	-- {zone:1416} Alterac Mountains · {npc:246020} Shade of the Archmage
 	["City of Dalaran (Forever's, {zone:1416}): {npc:246020}"] = "City of Dalaran (von Forever, {zone:1416}): {npc:246020}",
-	["the final boss of the Drowned City"] = "der letzte Boss der Drowned City",
+	-- {area:16550} The Drowned City
+	["the final boss of the {area:16550}"] = "der letzte Boss von {area:16550}",
 	-- {area:796} Scarlet Monastery
 	["{area:796}: Graveyard"] = "{area:796}: Friedhof",
 	-- {area:796} Scarlet Monastery
@@ -144,9 +150,10 @@ return {
 
 	-- Step 20: Dungeons: level 46-60
 	["Dungeons: level 46-60"] = "Dungeons: Stufe 46-60",
-	-- {area:1216} Blackmaw Hold · {area:16985} Shaper's Terrace
-	["The final boss of every level 46-60 dungeon earns one point together. Alcaz Prison, {area:1216} and the {area:16985} are new in Forever and not in our data: tick them off yourself."] = "Der letzte Boss jedes Dungeons der Stufen 46-60 bringt zusammen einen Punkt. Alcaz Prison, {area:1216} und die {area:16985} sind neu in Forever und nicht in unseren Daten: Hake sie selbst ab.",
-	["the final boss of Alcaz Prison"] = "der letzte Boss von Alcaz Prison",
+	-- {area:16620} Alcaz Prison · {area:1216} Blackmaw Hold · {area:16985} Shaper's Terrace
+	["The final boss of every level 46-60 dungeon earns one point together. {area:16620}, {area:1216} and the {area:16985} are new in Forever and not in our data: tick them off yourself."] = "Der letzte Boss jedes Dungeons der Stufen 46-60 bringt zusammen einen Punkt. {area:16620}, {area:1216} und die {area:16985} sind neu in Forever und nicht in unseren Daten: Hake sie selbst ab.",
+	-- {area:16620} Alcaz Prison
+	["the final boss of {area:16620}"] = "der letzte Boss von {area:16620}",
 	-- {area:1216} Blackmaw Hold
 	["the final boss of {area:1216}"] = "der letzte Boss von {area:1216}",
 	-- {area:1583} Blackrock Spire
@@ -184,6 +191,8 @@ return {
 	-- No longer in the guide (its English changed or it went away): reuse or delete.
 	-- ["Adventure: {quest:8997} (Alliance)"] = "Abenteuer: {quest:8997} (Allianz)",
 	-- ["Adventure: {quest:8998} (Horde)"] = "Abenteuer: {quest:8998} (Horde)",
+	-- ["Adventure: {quest:8999} (Alliance)"] = "Abenteuer: {quest:8999} (Allianz)",
+	-- ["Adventure: {quest:9007} (Horde)"] = "Abenteuer: {quest:9007} (Horde)",
 	-- ["All 13 Hyjal Summit bosses are a point. Hyjal Summit is a new Forever raid; its bosses are not in our data, so tick it off once all 13 are down."] = "Alle 13 Bosse des Hyjalgipfels sind einen Punkt wert. Der Hyjalgipfel ist ein neuer Forever-Schlachtzug; seine Bosse sind nicht in unseren Daten, hak ihn also ab, sobald alle 13 besiegt sind.",
 	-- ["All 8 Barrow Deeps bosses are a point. Barrow Deeps is a new Forever raid; its bosses are not in our data, so tick it off once all 8 are down."] = "Alle 8 Bosse der Barrow Deeps sind einen Punkt wert. Barrow Deeps ist ein neuer Forever-Schlachtzug; seine Bosse sind nicht in unseren Daten, hak ihn also ab, sobald alle 8 besiegt sind.",
 	-- ["Blizzard counts four battleground reputations, but our faction data has three per side ({zone:1460}, {zone:1461}, {zone:1459}). The fourth is likely tied to Forever's new PvP content; check the in-game Legacy panel."] = "Blizzard zählt vier Schlachtfeld-Rufe, aber unsere Fraktionsdaten haben drei pro Seite ({zone:1460}, {zone:1461}, {zone:1459}). Der vierte hängt wohl mit den neuen PvP-Inhalten von Forever zusammen; sieh im Vermächtnis-Fenster im Spiel nach.",
@@ -195,16 +204,23 @@ return {
 	-- ["Killing {npc:10184} is a point. In Classic her lair needs an attunement: {item:16309} for the Alliance, {item:16663} for the Horde."] = "{npc:10184} zu töten ist einen Punkt wert. In Classic braucht ihr Hort eine Zugangsquest: {item:16309} für die Allianz, {item:16663} für die Horde.",
 	-- ["The final boss of every level 15-25 dungeon earns one point together. Tick each boss off when you kill it; the grouping follows the usual Classic level ranges, so check the in-game Legacy panel for the exact list."] = "Der Endboss jedes Dungeons der Stufe 15-25 bringt zusammen einen Punkt. Hak jeden Boss ab, wenn du ihn tötest; die Einteilung folgt den üblichen Classic-Stufenbereichen, prüf also die genaue Liste im Vermächtnis-Fenster im Spiel.",
 	-- ["The final boss of every level 26-45 dungeon earns one point together."] = "Der Endboss jedes Dungeons der Stufe 26-45 bringt zusammen einen Punkt.",
+	-- ["The final boss of every level 26-45 dungeon earns one point together. {area:16550} and {area:17780} (in the {zone:2548}) are new in Forever and not in our data: tick them off yourself."] = "Der letzte Boss jedes Dungeons der Stufen 26-45 bringt zusammen einen Punkt. {area:16550} und {area:17780} (in den {zone:2548}) sind neu in Forever und nicht in unseren Daten: Hake sie selbst ab.",
 	-- ["The final boss of every level 46-60 dungeon earns one point together."] = "Der Endboss jedes Dungeons der Stufe 46-60 bringt zusammen einen Punkt.",
+	-- ["The final boss of every level 46-60 dungeon earns one point together. {area:16620}, {area:1216} and the {area:16985} are new in Forever and not in our data: tick them off yourself."] = "Der letzte Boss jedes Dungeons der Stufen 46-60 bringt zusammen einen Punkt. {area:16620}, {area:1216} und die {area:16985} sind neu in Forever und nicht in unseren Daten: Hake sie selbst ab.",
+	-- ["The {npc:16042} questline is a point. It is the level 60 dungeon-set chain, from An Earnest Proposition to your class's {quest:8999}: {npc:16013} ({zone:1455}) or {npc:16012} ({zone:1454}) send you through In Search of Anthion and Anthion's Parting Words to {npc:16033} at {area:254}, whose Three Kings of Flame, the Left and Right Pieces of Lord Valthalak's Amulet, Final Preparations and {quest:8995} end with {quest:8996}. {quest:8997} then leads to {quest:8999}."] = "Die Questreihe von {npc:16042} ist einen Punkt wert. Es ist die Kette zum Dungeon-Set der Stufe 60, von An Earnest Proposition bis zur {quest:8999} deiner Klasse: {npc:16013} ({zone:1455}) oder {npc:16012} ({zone:1454}) schicken dich über In Search of Anthion und Anthion's Parting Words zu {npc:16033} am {area:254}, dessen Aufträge Three Kings of Flame, die linke und rechte Hälfte von Lord Valthalak's Amulet, Final Preparations und {quest:8995} mit {quest:8996} enden. {quest:8997} führt dich dann zu {quest:8999}.",
 	-- ["The {npc:16042} questline is a point. It is the level 60 dungeon-set chain: {npc:16013} ({zone:1455}) or {npc:16012} ({zone:1454}) send you through In Search of Anthion and Anthion's Parting Words to {npc:16033} at {area:254}, whose Three Kings of Flame, the Left and Right Pieces of Lord Valthalak's Amulet, Final Preparations and Mea Culpa, {npc:16042} end with {quest:8996}. {quest:8997} then leads to the class Saving the Best for Last quests."] = "Die Questreihe um {npc:16042} ist einen Punkt wert. Es ist die Questreihe für das Dungeonset der Stufe 60: {npc:16013} ({zone:1455}) oder {npc:16012} ({zone:1454}) schicken dich über Suche nach Anthion und Anthions Abschiedsworte zu {npc:16033} am {area:254}, dessen Die drei Könige der Flammen, Das linke und Das rechte Stück von Lord Valthalaks Amulett, Letzte Vorbereitungen und Mea Culpa, {npc:16042} mit {quest:8996} enden. {quest:8997} führt dann zu den Klassenquests Das Beste gibt's zum Schluss.",
 	-- ["The {npc:16042} questline is a point. It is the level 60 dungeon-set chain: {npc:16013} ({zone:1455}) or {npc:16012} ({zone:1454}) send you through In Search of Anthion and Anthion's Parting Words to {npc:16033} at {area:254}, whose Three Kings of Flame, the Left and Right Pieces of Lord Valthalak's Amulet, Final Preparations and {quest:8995} end with {quest:8996}. {quest:8997} then leads to the class Saving the Best for Last quests."] = "Die Questreihe um {npc:16042} ist einen Punkt wert. Es ist die Questreihe für das Dungeonset der Stufe 60: {npc:16013} ({zone:1455}) oder {npc:16012} ({zone:1454}) schicken dich über Suche nach Anthion und Anthions Abschiedsworte zu {npc:16033} am {area:254}, dessen Die drei Könige der Flammen, Das linke und Das rechte Stück von Lord Valthalaks Amulett, Letzte Vorbereitungen und {quest:8995} mit {quest:8996} enden. {quest:8997} führt dann zu den Klassenquests Das Beste gibt's zum Schluss.",
 	-- ["The {npc:16042} questline is a point. It is the level 60 dungeon-set chain: {npc:16013} ({zone:1455}) or {npc:16012} ({zone:1454}) send you through In Search of Anthion and Anthion's Parting Words to {npc:16033} at {area:254}, whose Three Kings of Flame, the Left and Right Pieces of {item:22048}, Final Preparations and Mea Culpa, {npc:16042} end with {quest:8996}. {quest:8997} then leads to the class Saving the Best for Last quests."] = "Die Questreihe um {npc:16042} ist einen Punkt wert. Es ist die Questreihe für das Dungeonset der Stufe 60: {npc:16013} ({zone:1455}) oder {npc:16012} ({zone:1454}) schicken dich über Suche nach Anthion und Anthions Abschiedsworte zu {npc:16033} am {area:254}, dessen Die drei Könige der Flammen, das linke und rechte Stück von {item:22048}, Letzte Vorbereitungen und Mea Culpa, {npc:16042} mit {quest:8996} enden. {quest:8997} führt dann zu den Klassenquests Das Beste gibt's zum Schluss.",
 	-- ["Which quest Blizzard counts as the end of the questline ({quest:8996} or your class's Saving the Best for Last) is unconfirmed until the Legacy data is recorded."] = "Welche Quest Blizzard als Ende der Questreihe zählt ({quest:8996} oder Das Beste gibt's zum Schluss deiner Klasse), ist unbestätigt, bis die Vermächtnis-Daten erfasst sind.",
+	-- ["the final boss of the {area:16550}"] = "der letzte Boss von {area:16550}",
 	-- ["the final boss of {area:153}"] = "den Endboss von {area:153}",
+	-- ["the final boss of {area:16620}"] = "der letzte Boss von {area:16620}",
 	-- ["the final boss of {area:16919}"] = "den Endboss von {area:16919}",
 	-- ["{area:1517} (level 41-51; may count in the 46-60 bracket)"] = "{area:1517} (Stufe 41-51; zählt evtl. im Bereich 46-60)",
 	-- ["{area:16919} and {area:153} are new in Forever. Their bosses, levels and Legacy bracket are not in our data, so tick them off yourself."] = "{area:16919} und {area:153} sind neu in Forever. Ihre Bosse, Stufen und Vermächtnis-Bereiche sind nicht in unseren Daten, hak sie also selbst ab.",
 	-- ["{area:717}: the usual last kill; the {area:717} has no fixed final boss"] = "{area:717}: der übliche letzte Kill; das {area:717} hat keinen festen Endboss",
 	-- ["{npc:16012} then offers your class's Saving the Best for Last, the final upgrade of the dungeon set."] = "{npc:16012} bietet dann Das Beste gibt's zum Schluss deiner Klasse an, die letzte Aufwertung des Dungeonsets.",
+	-- ["{npc:16012} then offers your class's {quest:9007}, the last quest of the challenge: it takes your class's dungeon-set helm and chest and upgrades them."] = "{npc:16012} bietet dir dann die {quest:9007} deiner Klasse an, die letzte Quest der Herausforderung: Sie nimmt den Dungeon-Set-Helm und die Brustplatte deiner Klasse und wertet sie auf.",
 	-- ["{npc:16013} then offers your class's Saving the Best for Last, the final upgrade of the dungeon set."] = "{npc:16013} bietet dann Das Beste gibt's zum Schluss deiner Klasse an, die letzte Aufwertung des Dungeonsets.",
+	-- ["{npc:16013} then offers your class's {quest:8999}, the last quest of the challenge: it takes your class's dungeon-set helm and chest and upgrades them."] = "{npc:16013} bietet dir dann die {quest:8999} deiner Klasse an, die letzte Quest der Herausforderung: Sie nimmt den Dungeon-Set-Helm und die Brustplatte deiner Klasse und wertet sie auf.",
 }

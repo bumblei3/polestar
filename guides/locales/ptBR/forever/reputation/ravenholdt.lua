@@ -30,12 +30,10 @@ return {
 	["{npc:266216} is inside {area:275}, the Syndicate fortress east of {area:271}. Stealth past the guards in the courtyard."] = "{npc:266216} está dentro de {area:275}, a fortaleza da Camarilha a leste de {area:271}. Passe em furtividade pelos guardas no pátio.",
 
 	-- Step 4: Strahnbrad: Barton
-	-- {area:280} Strahnbrad
-	["{area:280}: Barton"] = "{area:280}: Barton",
-	-- {area:280} Strahnbrad
-	["Barton hides in a house in {area:280}, among stealthed Syndicate. Pick his pocket for the report; Distract turns him around if you are under his level."] = "Barton se esconde numa casa em {area:280}, entre membros da Camarilha em furtividade. Bata a carteira dele para pegar o relatório; Distrair o faz virar de costas se você estiver abaixo do nível dele.",
-	-- {item:275482} Barton's Scouting Report
-	["{item:275482}: pickpocket Barton"] = "{item:275482}: bata a carteira de Barton",
+	-- {npc:266357} Barton · {area:280} Strahnbrad
+	["{npc:266357} hides in a house in {area:280}, among stealthed Syndicate. Pick his pocket for the report; Distract turns him around if you are under his level."] = "{npc:266357} se esconde numa casa em {area:280}, entre membros da Camarilha em furtividade. Bata a carteira dele para pegar o relatório; Distrair o faz virar de costas se você estiver abaixo do nível dele.",
+	-- {item:275482} Barton's Scouting Report · {npc:266357} Barton
+	["{item:275482}: pickpocket {npc:266357}"] = "{item:275482}: bata a carteira de {npc:266357}",
 
 	-- Step 5: Northfold Manor: a uniform
 	-- {area:313} Northfold Manor
@@ -48,8 +46,8 @@ return {
 	["Stromgarde: {npc:266847}"] = "Stromgarde: {npc:266847}",
 	-- {item:275706} Syndicate Uniform · {npc:266847} Anastasia Miller
 	["Put on the {item:275706} and go into Stromgarde. {npc:266847} waits on a ledge just outside the castle; players reach her by jumping from the roof of the house beside the ledge. Her stash is upstairs in a house near the keep."] = "Vista o {item:275706} e entre em Stromgarde. {npc:266847} espera numa saliência logo fora do castelo; os jogadores chegam até ela pulando do telhado da casa ao lado da saliência. O esconderijo dela fica no andar de cima de uma casa perto da fortaleza.",
-	-- {item:275709} Stolen Funds
-	["{item:275709}, in Anastasia's Stash upstairs"] = "{item:275709}, no Esconderijo de Anastasia, no andar de cima",
+	-- {item:275709} Stolen Funds · {object:656405} Anastasia's Stash (no name in this language: may be words)
+	["{item:275709}, in {object:656405} upstairs"] = "{item:275709}, em {object:656405} no andar de cima",
 
 	-- Step 7: Thoradin's Wall: the shipment
 	-- {area:1057} Thoradin's Wall
@@ -122,5 +120,7 @@ return {
 
 	-- No longer in the guide (its English changed or it went away): reuse or delete.
 	-- ["a {npc:6766}: 100 per emblem"] = "um {npc:6766}: 100 por emblema",
+	-- ["{area:280}: Barton"] = "{area:280}: Barton",
+	-- ["{item:275709}, in Anastasia's Stash upstairs"] = "{item:275709}, no Esconderijo de Anastasia, no andar de cima",
 	-- ["{npc:6707}: 50 per five boxes"] = "{npc:6707}: 50 a cada cinco caixas",
 }

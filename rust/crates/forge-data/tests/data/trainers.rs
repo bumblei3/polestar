@@ -84,6 +84,25 @@ fn trainers_read_the_pack_guides_only_not_drafts_or_dist() {
 	assert!(t.get("3175").is_none());
 }
 
+/// #2477: the highest level a trainer teaches (`top`, which the data build's world database read writes into
+/// trainers.json) stays through the rebuild, and ClassTrainers.lua hands the engine those that stop short of
+/// the cap (Llane Beshere, a starting area's, teaches to 6; Khelden Bremen's 60 is every level).
+#[test]
+fn trainers_keep_the_level_their_training_stops_at_and_hand_the_short_ones_to_the_engine_2477() {
+	let data = dsl_data_copy("trainers-top-data");
+	std::fs::write(
+		data.join("trainers.json"),
+		r#"{"198":{"id":198,"name":"Khelden Bremen","classes":["MAGE"],"sources":["curated"],"top":60},"911":{"id":911,"name":"Llane Beshere","classes":["WARRIOR"],"sources":["curated"],"top":6}}"#,
+	)
+	.unwrap();
+	let guides = common::scratch("trainers-top-guides");
+	std::fs::write(guides.join("a.guide"), guide_text(&["step S", "  train 198 only Mage", "  train 911 only Warrior"])).unwrap();
+	let (json, lua, _) = forge_data::trainers::run(&data, Some(&guides), &common::scratch("trainers-top-recs")).unwrap();
+	let t: serde_json::Value = serde_json::from_str(&json).unwrap();
+	assert_eq!((&t["911"]["top"], &t["198"]["top"]), (&serde_json::json!(6), &serde_json::json!(60)));
+	assert!(lua.ends_with("ns.RegisterClassTrainerTops({\n\t[911] = 6,\n})\n"), "{lua}");
+}
+
 /// Recorded trainer visits from the recording server, under recordings.rs "Trust": a trainer another
 /// source lists takes a class only from three established players, each counted once however many
 /// installs it has; a trainer no source lists is filled by one; a new player counts for nothing.
@@ -114,10 +133,13 @@ fn recorded_trainers_from_the_server_follow_the_trust_rules() {
 	let t = run("trainers-trust-one", &[("a1", a, "i1", 30.0, "MAGE", 911), ("a2", a, "i2", 30.0, "MAGE", 911), ("a3", a, "i1", 30.0, "MAGE", 6928), ("c1", new, "i3", 1.0, "WARRIOR", 6928)]);
 	assert_eq!(t["911"]["classes"], serde_json::json!(["WARRIOR"]), "one player on two installs does not change a curated trainer");
 	assert_eq!((&t["6928"]["classes"], &t["6928"]["sources"]), (&serde_json::json!(["MAGE"]), &serde_json::json!(["record"])), "one player fills a gap; a new player's second class does not hide it");
+	// #2992: the counted players who trained there, each once however many installs; a new player is not counted.
+	assert_eq!((&t["911"]["visits"], &t["6928"]["visits"]), (&serde_json::json!(1), &serde_json::json!(1)), "visits: one player on two installs is one");
 	let t = run("trainers-trust-two", &[("a1", a, "i1", 30.0, "MAGE", 911), ("b1", b, "i2", 30.0, "MAGE", 911)]);
 	assert_eq!(t["911"]["classes"], serde_json::json!(["WARRIOR"]), "two players do not add a class");
 	let t = run("trainers-trust-three", &[("a1", a, "i1", 30.0, "MAGE", 911), ("b1", b, "i2", 30.0, "MAGE", 911), ("d1", d, "i3", 30.0, "MAGE", 911)]);
 	assert_eq!(t["911"]["classes"], serde_json::json!(["WARRIOR", "MAGE"]), "three established players add a class");
+	assert_eq!(t["911"]["visits"], serde_json::json!(3), "visits: three players");
 	let t = run("trainers-trust-new", &[("a1", a, "i1", 30.0, "MAGE", 911), ("b1", b, "i2", 30.0, "MAGE", 911), ("c1", new, "i3", 1.0, "MAGE", 911)]);
 	assert_eq!(t["911"]["classes"], serde_json::json!(["WARRIOR"]), "a new player does not make the third");
 }

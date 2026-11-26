@@ -232,6 +232,8 @@ const CURATED: &[(&str, &str, i64)] = &[
 ];
 
 const CLASS_FILES: [&str; 9] = ["WARRIOR", "PALADIN", "HUNTER", "ROGUE", "PRIEST", "SHAMAN", "MAGE", "WARLOCK", "DRUID"];
+/// The level cap: a trainer whose `top` reaches it teaches every level.
+const MAX_LEVEL: f64 = 60.0;
 
 struct Entry {
 	name: V,
@@ -401,6 +403,18 @@ pub fn build_trainers(data: &Data, guides: Option<&Path>, recordings: &Recording
 		o.set("name", if e.name.truthy() { e.name.clone() } else { V::Null });
 		o.set("classes", V::from(CLASS_FILES.iter().filter(|c| e.classes.contains(**c)).map(|c| V::str(c)).collect::<Vec<_>>()));
 		o.set("sources", V::from(["curated", "guide", "record"].iter().filter(|x| e.sources.contains(**x)).map(|c| V::str(c)).collect::<Vec<_>>()));
+		// The highest level its training goes to, as the data build's world database read gave it (kb.rs,
+		// #2477), kept through this rebuild.
+		let top = data.trainers_raw.get(&id.to_string()).get("top");
+		if top.num() > 0.0 {
+			o.set("top", top);
+		}
+		// The counted players recorded training with it, of any class: of a town's trainers of one class standing
+		// together, smart targets keep the one most of them use (forge-guide candidates.rs, #2992).
+		let n = seen.get(&id).map_or(0, |(_, by)| by.values().flatten().collect::<IndexSet<_>>().len());
+		if n > 0 {
+			o.set("visits", n as f64);
+		}
 		out.set(&id.to_string(), o);
 	}
 	(out, Report { curated, guide, record, unverified })
@@ -427,6 +441,8 @@ pub fn class_trainers_lua(data: &Data, trainers: &Obj) -> (String, usize, usize)
 	let opts = Obj::new();
 	opts.set("sides", V::from(vec![V::str("Alliance"), V::str("Horde")]));
 	opts.set("ref", V::Null);
+	// Their recorded visits pick each hub's trainer (#2992), from the table being built, not data/forever's last one.
+	opts.set("trainers", V::Obj(trainers.clone()));
 	let res = forge_guide::candidates::build_candidates(data, &entries, &V::Obj(opts));
 	let candidates = res.get("candidates").items();
 	let frames = Obj::new();
@@ -461,7 +477,16 @@ pub fn class_trainers_lua(data: &Data, trainers: &Obj) -> (String, usize, usize)
 		items.sort_by(|a, b| a.num().partial_cmp(&b.num()).unwrap());
 		by_class.set(&k, V::from(items));
 	}
-	let lua = forge_guide::emit::emit_class_trainers(&sorted, &V::Obj(frames), &V::Obj(by_class));
+	// The trainers whose training stops short of the level cap (#2477: the starting areas' stop at 6), with the
+	// highest level they teach: the engine passes them over once the character has outgrown them.
+	let tops = Obj::new();
+	for t in trainers.values() {
+		let top = t.get("top");
+		if top.num() > 0.0 && top.num() < MAX_LEVEL {
+			tops.set(&t.get("id").to_js_string(), top);
+		}
+	}
+	let lua = forge_guide::emit::emit_class_trainers(&sorted, &V::Obj(frames), &V::Obj(by_class), &V::Obj(tops));
 	(lua, sorted.len(), trainers.len())
 }
 

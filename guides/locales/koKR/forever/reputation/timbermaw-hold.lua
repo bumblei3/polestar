@@ -31,7 +31,7 @@ return {
 
 	-- Step 5: Felpaw Village
 	-- {npc:9462} Chieftain Bloodmaw
-	["The northern Deadwood (level 53-55) camp just south of the tunnel. They drop feathers about half the time: the best feather spot. {npc:9462} gives 15 until Exalted."] = "",
+	["The northern Deadwood (level 53-55) camp just south of the tunnel. They drop feathers about half the time: the best feather spot. {npc:9462} gives 15 until Exalted."] = "북쪽의 마른가지일족(레벨 53-55)이 동굴 바로 남쪽에 야영하고 있습니다. 약 절반의 확률로 깃털을 떨어뜨리며, 깃털을 모으기에 가장 좋은 곳입니다. {npc:9462}은(는) 확고한 동맹까지 15를 줍니다.",
 
 	-- Step 6: Back to Nafien
 	-- {npc:15395} Nafien
@@ -74,36 +74,134 @@ return {
 	-- plural, as words: Mana Potions = {item:3827} Mana Potion
 	["The northern Deadwood rarely drop a {quest:8470} (about 3%). From Neutral, {npc:11558} takes it in the tunnel, on the {zone:1448} side: 150 reputation and two Major Healing and Mana Potions."] = "",
 
-	-- Step 12: Winterfall Ritual Totem
+	-- Step 12: Kernda: the Deadwood totem
+	-- {npc:11558} Kernda
+	["{npc:11558}: the Deadwood totem"] = "",
+
+	-- Step 13: Winterfall Ritual Totem
 	-- {quest:8471} Winterfall Ritual Totem · {npc:11558} Kernda
 	-- plural, as words: Mana Potions = {item:3827} Mana Potion
 	["The Winterfall furbolgs rarely drop a {quest:8471} (3-4%). {npc:11558} takes it in the tunnel too: 150 reputation and three Major Healing and Mana Potions."] = "",
 
-	-- Step 13: Neutral to Friendly
-	["Neutral to Friendly"] = "",
+	-- Step 14: Kernda: the Winterfall totem
+	-- {npc:11558} Kernda
+	["{npc:11558}: the Winterfall totem"] = "",
+
+	-- Step 15: To Azshara
+	-- {zone:1447} Azshara
+	["To {zone:1447}"] = "",
+	-- {area:1225} Ursolan · {zone:1447} Azshara · {npc:11555} Gorn One Eye · {faction:576} Timbermaw Hold · {area:1237} Valormok · {area:3137} Talrendis Point · {npc:235903} Ekkal
+	["Neutral opens {area:1225}, the camp of the Blackmaw furbolgs in northern {zone:1447}: their quests and {npc:11555}'s in {faction:576} are levels 53-55, about 50,000 experience below level 60, all outdoors. Below Neutral the Blackmaw attack you. The nearest flight masters are {area:1237} (Horde) and {area:3137} (Alliance); {npc:235903} camps by the road between them and {area:1225}."] = "",
+	-- {npc:235903} Ekkal
+	["{npc:235903}'s camp"] = "",
+
+	-- Step 16: Ekkal
+	-- {npc:235903} Ekkal · {zone:1447} Azshara · {area:1219} Legashi Encampment
+	-- plural, as words: Legashi Satyrs = {npc:6200} Legashi Satyr
+	["{npc:235903} camps by the road in the middle of {zone:1447}. His satyrs come first: the Legashi Satyrs, Rogues and Hellcallers (51-53) of the {area:1219}, north-east of him."] = "",
+
+	-- Step 17: The Legashi Encampment
+	-- {area:1219} Legashi Encampment
+	["The {area:1219}"] = "",
+
+	-- Step 20: Ursolan
+	-- {area:1225} Ursolan · {npc:235909} Furze · {npc:236573} Gatekeeper Rageroar · {npc:235906} Elder Bramblesnap
+	["Ride north up the road to {area:1225}. {npc:235909} sits on the camp's south-east side; {npc:236573} and {npc:235906} stand together on its west side."] = "",
+
+	-- Step 21: The Legashi Cauldron
+	-- {object:506307} Legashi Cauldron (no name in this language: may be words)
+	["The {object:506307}"] = "",
+	-- {area:1219} Legashi Encampment
+	["Ride east to the {area:1219}: the satyrs' cauldron stands in the middle of their camp."] = "",
+
+	-- Step 22: The Legashi Encampment
+	["Any of the encampment's satyrs may carry the recipe."] = "",
+
+	-- Step 24: Satyrweed
+	-- plural, as words: Satyrweed Brambles = {object:507746} Satyrweed Bramble
+	["The Satyrweed Brambles grow all around the encampment."] = "",
+
+	-- Step 25: Korsa
+	-- {area:16234} Legashi Stronghold · {npc:236770} Korsa
+	["East to the {area:16234}: {npc:236770}, the missing Blackmaw scout, waits outside it."] = "",
+
+	-- Step 26: Graal
+	-- {npc:237007} Graal · {npc:235892} Prince Halanox
+	["{npc:237007} is held at the north end of the stronghold: free {npc:237007} and see the breakout through. Careful: {npc:235892} (55, elite) stands just south of there, around 67,19."] = "",
+
+	-- Step 27: The Legashi Stronghold: kill these as you meet them
+	-- {area:16234} Legashi Stronghold
+	["The {area:16234}: kill these as you meet them"] = "",
+	-- {npc:235892} Prince Halanox
+	["The Hellraisers, Soulstealers and Blackguards (53-54) hold the stronghold. Careful: {npc:235892} (55, elite) stands at its north-east end, around 67,19: leave him be."] = "",
+
+	-- Step 28: Master Feardred
+	-- {quest:86777} Master Feardred · {item:235471} Fel Mote
+	["{quest:86777} (53) walks the stronghold's south side; the {item:235471} floats nearby."] = "",
+
+	-- Step 30: The Legashi Cauldron
+	["Back west to the cauldron."] = "",
+
+	-- Step 31: Ursolan
+	-- {area:1225} Ursolan
+	["Back west to {area:1225}."] = "",
+	-- {npc:11555} Gorn One Eye · {faction:576} Timbermaw Hold
+	["For {npc:11555} in {faction:576}, at the end of this part"] = "",
+
+	-- Step 32: Mosshoof Coursers
+	-- plural, as words: Mosshoof Coursers = {npc:8761} Mosshoof Courser
+	["Mosshoof Coursers"] = "{npc:8761}",
+	-- {area:1225} Ursolan · {item:221199} Satyrweed Tincture
+	-- plural, as words: Mosshoof Coursers = {npc:8761} Mosshoof Courser · Thunderhead Skystormers = {npc:6378} Thunderhead Skystormer
+	["The Mosshoof Coursers (52-53) and Thunderhead Skystormers (50-52) graze just east of {area:1225}: bring one low, then use the {item:221199} on it. Three times."] = "",
+
+	-- Step 34: Furze
+	-- {npc:235909} Furze
+	["Give {npc:235909} the panacea."] = "",
+
+	-- Step 36: To Timbermaw Hold
+	-- {area:1769} Timbermaw Hold
+	["To {area:1769}"] = "",
+	-- {zone:1448} Felwood · {area:1997} Bloodvenom Post · {area:1998} Talonbranch Glade
+	["Back to {zone:1448}: fly to {area:1997} (Horde) or {area:1998} (Alliance) and ride north up the road to the {zone:1448} mouth of the tunnel."] = "",
+
+	-- Step 37: Gorn One Eye
+	-- {npc:11555} Gorn One Eye · {npc:11558} Kernda · {npc:11557} Meilosh
+	["{npc:11555} stands just inside the tunnel, by {npc:11558} and {npc:11557}."] = "",
+
+	-- Step 38: Chieftain Bloodmaw
+	-- {npc:9462} Chieftain Bloodmaw
+	["{npc:9462} (55-56) leads the Deadwood of Felpaw Village, just west of the tunnel."] = "",
+
+	-- Step 39: Gorn One Eye
+	-- {zone:1447} Azshara · {npc:235892} Prince Halanox
+	["His next task, Blackmaw Counter-Offensive, sends you back to {zone:1447} against {npc:235892}, a level 55 elite: bring a friend."] = "",
+
+	-- Step 40: Neutral to Friendly
+	["Neutral to Friendly"] = "중립에서 우호적",
 	["Neutral to Friendly is 3,000: 600 kills. Keep all feathers and beads."] = "",
 
-	-- Step 14: Meilosh
+	-- Step 41: Meilosh
 	-- {npc:11557} Meilosh · {zone:1448} Felwood · {item:13484} Recipe: Transmute Earth to Water · {item:22392} Formula: Enchant 2H Weapon - Agility · {item:20253} Pattern: Warbear Harness · {item:15065} Warbear Woolies · {quest:6031} Runecloth · {item:14342} Mooncloth · {item:15802} Mooncloth Boots
 	["{npc:11557} stands in the tunnel, near its {zone:1448} mouth. From Friendly he sells: {item:13484} (1 gold 50 silver), {item:22392} (2 gold 50 silver), {item:20253} (1 gold 60 silver) and {item:15065} (2 gold). He also takes 30 {quest:6031} once for 100 reputation and a choice of shoulders or gauntlets, and Tailors with skill 290 can bring him 2 {item:14342} for 100 more and the {item:15802} pattern."] = "",
 
-	-- Step 15: Runecloth for Meilosh
+	-- Step 42: Runecloth for Meilosh
 	-- {quest:6031} Runecloth · {npc:11557} Meilosh
 	["{quest:6031} for {npc:11557}"] = "",
 	-- {quest:6031} Runecloth
 	["{quest:6031} drops from the humanoids of the level 50-60 zones, the Deadwood and Winterfall furbolgs among them."] = "",
 
-	-- Step 16: Sacred Cloth
+	-- Step 43: Sacred Cloth
 	-- {npc:11557} Meilosh · {item:14342} Mooncloth · {item:15802} Mooncloth Boots
 	["Tailors with skill 290: {npc:11557} takes 2 {item:14342} once for 100 reputation and teaches the {item:15802}."] = "",
 
-	-- Step 17: Friendly to Honored
-	["Friendly to Honored"] = "",
+	-- Step 44: Friendly to Honored
+	["Friendly to Honored"] = "우호적에서 존경",
 	-- {npc:11557} Meilosh · {item:19445} Formula: Enchant Weapon - Agility · {item:19202} Pattern: Heavy Timbermaw Belt · {item:19044} Might of the Timbermaw · {skill:165} Leatherworking · {item:19047} Wisdom of the Timbermaw · {skill:197} Tailoring
 	["Friendly to Honored is 6,000: 1,200 kills. Keep all feathers and beads. Honored opens at {npc:11557}: {item:19445} (3 gold), and for 2 gold 20 silver each {item:19202} and {item:19044} ({skill:165}) and {item:19047} ({skill:197})."] = "",
 
-	-- Step 18: Honored to Revered
-	["Honored to Revered"] = "",
+	-- Step 45: Honored to Revered
+	["Honored to Revered"] = "존경에서 평판 우호",
 	["Honored to Revered is 12,000: 2,400 kills, the last ones that count. Kills stop at 11,999 of 12,000 Honored and never tip you into Revered: when they stop, hand in one set of 5 feathers or beads to cross over. Saving every feather and bead pays off now: about 4,800 kills from the start to the end of Honored leave you with about 2,100 feathers and beads, and that is all of Revered to Exalted. Turning them in early would cost you about 2,400 more kills."] = "",
 	-- {item:19445} Formula: Enchant Weapon - Agility · {skill:333} Enchanting
 	["{item:19445} ({skill:333}), 3 gold"] = "",
@@ -112,8 +210,8 @@ return {
 	-- {quest:8469} Beads for Salfa
 	["{quest:8469}: or 5 beads"] = "",
 
-	-- Step 19: Revered to Exalted
-	["Revered to Exalted"] = "",
+	-- Step 46: Revered to Exalted
+	["Revered to Exalted"] = "평판 우호에서 확고",
 	-- {npc:15395} Nafien · {npc:11554} Grazle · {npc:11556} Salfa · {npc:14342} Ragepaw · {npc:10199} Grizzle Snowpaw · {npc:10738} High Chief Winterfall · {npc:11557} Meilosh · {item:19204} Pattern: Heavy Timbermaw Boots · {item:19049} Timbermaw Brawlers · {skill:165} Leatherworking · {item:19050} Mantle of the Timbermaw · {skill:197} Tailoring
 	["Kills stopped at the end of Honored. Revered to Exalted is 21,000: 420 turn-ins, 2,100 feathers and beads. Hand in the feathers to {npc:15395} at the tunnel or {npc:11554} in the south, the beads to {npc:11556}, five at a time. The named furbolgs (Ror, Bloodmaw, {npc:14342}, {npc:10199}, {npc:10738}) still count. Revered opens at {npc:11557}, for 4 gold each: {item:19204} and {item:19049} ({skill:165}) and {item:19050} ({skill:197})."] = "",
 	-- {quest:8467} Feathers for Nafien
@@ -123,11 +221,11 @@ return {
 	-- {quest:8469} Beads for Salfa
 	["{quest:8469}: 5 beads, 50 reputation"] = "",
 
-	-- Step 20: The Root of All Evil
+	-- Step 47: The Root of All Evil
 	-- {npc:11555} Gorn One Eye · {npc:11557} Meilosh · {quest:8481} The Root of All Evil · {item:21144} Demon Summoning Torch · {npc:10738} High Chief Winterfall · {npc:15623} Xandivious · {item:21326} Defender of the Timbermaw
 	["At Exalted, {npc:11555}, in the tunnel by {npc:11557}, gives {quest:8481}: plant his {item:21144} in the mouth of {npc:10738}'s cave and defeat the demon {npc:15623} (level 62, elite: bring a group). The reward is {item:21326}, a trinket that calls a Timbermaw ally, and 200 reputation."] = "",
 
-	-- Step 21: Xandivious
+	-- Step 48: Xandivious
 	-- {area:2244} Winterfall Village · {npc:15623} Xandivious
 	["{area:2244}, the cave at the back. Clear the furbolgs around the mouth first, plant the torch, kill {npc:15623} and loot the Essence from his Demon Bag."] = "",
 	-- {npc:15623} Xandivious
@@ -141,7 +239,6 @@ return {
 	-- ["Feathers to Honored"] = "깃털로 우호적까지",
 	-- ["Go through {faction:576} to its {zone:1452} exit; {npc:11556} stands just outside. The quests and kills so far usually reach Unfriendly, and then the Timbermaw let you pass. If they still show red, kill more Deadwood by the tunnel first."] = "{faction:576}을(를) 지나 {zone:1452} 쪽 출구로 가세요. {npc:11556}은(는) 출구 바로 밖에 있습니다. 지금까지의 퀘스트와 처치로 보통 약간 적대적에 도달하며, 그러면 나무구렁일족이 지나가게 해 줍니다. 아직 빨간색이면 먼저 동굴 근처의 마른가지일족을 더 처치하세요.",
 	-- ["Keep turning in feathers and beads until Exalted."] = "확고한 동맹이 될 때까지 깃털과 구슬을 계속 제출하세요.",
-	-- ["The northern Deadwood (level 53-55) hold the camps just south of the tunnel. Keep their feathers too."] = "북쪽의 마른가지일족(레벨 53-55)이 동굴 바로 남쪽의 야영지를 차지하고 있습니다. 이들의 깃털도 챙기세요.",
 	-- ["The northern Deadwood camps by the tunnel are the densest feather spot (35% drop chance there). Hand feathers to {npc:15395} at the tunnel, or to {npc:11554} in the south."] = "동굴 옆 북쪽 마른가지일족 야영지가 깃털이 가장 많이 나오는 곳입니다(획득 확률 35%). 깃털은 동굴 입구의 {npc:15395}(이)나 남쪽의 {npc:11554}에게 건네세요.",
 	-- ["{area:2244} sits on the eastern side of {zone:1452}. Keep every {item:21383} you loot: {npc:11556} takes them."] = "{area:2244}은(는) {zone:1452} 동쪽에 있습니다. 획득한 {item:21383}은(는) 모두 챙기세요. {npc:11556}이(가) 받습니다.",
 	-- ["{faction:576} starts out Hostile, and its furbolgs in the tunnels attack until you reach Unfriendly. Every Deadwood and Winterfall furbolg you kill raises it, so the quests below pay twice. Forever's Legacy Diplomat perk increases reputation gains."] = "{faction:576} 평판은 적대적에서 시작하며, 약간 적대적이 될 때까지 동굴의 나무구렁일족 퍼볼그가 공격합니다. 마른가지일족과 눈사태일족 퍼볼그를 처치할 때마다 평판이 오르므로 아래 퀘스트는 두 배로 보상합니다. Forever의 외교관 유산 특전은 평판 획득량을 늘려 줍니다.",

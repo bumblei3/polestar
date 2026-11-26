@@ -10,7 +10,7 @@ in this repository.
 | Recording library | `rust/crates/polestar-recording/` | Reads the SavedVariables file, decodes and validates records, finds WoW installs, scrubs text, writes the ack file, summarises. Shared by the three below. |
 | Polestar Client | `apps/client/` (Tauri) | Desktop app for Windows, macOS and Linux: finds the game, installs the Recorder, uploads new chunks, shows exactly what was sent. |
 | Ingest server | `services/ingest/` | Receives uploads, validates them with the library, stores them, serves stats, deletion and the maintainer export. |
-| forge | `forge record import`, `forge record pull`, `forge record resession`, `forge record learn` | Turns local files or the server export into `data/recordings/<session>.json` for the data build (`resession` rewrites them all from the archived chunks after a forge update). `import` marks this PC's own installs' contributor `local`. A file someone sent in needs `import --vouch <name>` (contributor `sent-<name>`, a name the maintainer chooses; trusted like the maintainer's own) or `import --anonymize` (contributor `anon-<16 hex>`; never used for the data). `learn` turns the archive into the committed snapshot `data/recorded/` (counts of players only; [forge/learn.md](forge/learn.md)). |
+| forge | `forge record import`, `forge record pull`, `forge record resession`, `forge record learn` | Turns local files or the server export into `data/recordings/<session>.json` for the data build, one archive at a time per worker (`--jobs`, at most 12). `resession` rewrites them from the archived chunks after a forge update; an archive whose sessions this forge already made from the same chunks (the stamp in its `install.json`) is left as it is, and `--all` does every archive. `import` marks this PC's own installs' contributor `local`. A file someone sent in needs `import --vouch <name>` (contributor `sent-<name>`, a name the maintainer chooses; trusted like the maintainer's own) or `import --anonymize` (contributor `anon-<16 hex>`; never used for the data). `learn` turns the archive into the committed snapshot `data/recorded/` (counts of players only; [forge/learn.md](forge/learn.md)). |
 
 ## What is never collected
 
@@ -62,6 +62,20 @@ without its name.
   first and a `dropped` record counts them.
 - At login the addon deletes every chunk with
   `seq <= PolestarRecorderAck[PolestarRecorderDB.install]`.
+
+### Summary distance
+
+The summary estimates walking, mounted and swimming distance from position
+records on maps with known bounds. It excludes jumps faster than 40 yards
+per second and boat or flight travel with both a recorded start and end.
+Trips can span consecutive chunks for the same character. Missing chunks
+break both trip matching and the distance between surviving positions.
+
+An incomplete trip keeps the ordinary position-based estimate. Every chunk
+starts with a `session` record, so the format cannot distinguish normal
+chunk rotation from a recording restart that omitted a trip's end. Keeping
+that estimate avoids suppressing later walking after a restart; partial
+recordings can therefore still include some transport distance.
 
 ### Ack file (written by Polestar Client)
 
@@ -190,7 +204,7 @@ Context
 | `xp` | xp, xpMax, rested | every 5 minutes and at level up |
 | `dropped` | count | after chunks were dropped for size |
 | `group` | size, raid (1/0) | at session start and whenever it changes: `size` 0 solo, the other party members (1–4) in a party, the raid's size (the player included) in a raid. Readers carry it onto the `kill`, `xp`, `progress` and `turnin` records after it. Never who is in the group |
-| `mark` | P, text | `/psrec mark <text>` |
+| `mark` | P, text | `/psrec mark <text>`; the trail's `trail on: …`/`trail off: …`; once a session `height: <mode>`, what `UnitPosition` gives for the player's height after 10 one-second ticks walking on foot, each 5 yd or more from the last: `real` (it changed), `none` (none or secret every time), `zero` (exactly 0 every time), `fixed` (the same non-zero height every time) or `mixed`; a `real` height seen after another answer is marked once more |
 
 Movement
 
@@ -230,12 +244,12 @@ Fights and loot
 
 | Kind | Fields | When |
 |---|---|---|
-| `kill` | npcId, level, cls, P, xp, rested, tapped, q | a creature the player or pet killed (`PARTY_KILL`, `UNIT_DIED` when readable, else the XP line). `cls` `n` normal, `e` elite, `r` rare, `R` rare elite, `b` boss; `xp`/`rested` from the XP message (client format strings, any language); `tapped` 1 when another player had the tag; `q` = `questId:index` when an objective ticked within 3 s |
+| `kill` | npcId, level, cls, P, xp, rested, tapped, q | a creature the player or pet killed (`PARTY_KILL`, `UNIT_DIED` when readable, else the XP line), written 3 s after the death with the death's time, so it can come after the death's loot window and ticks. `cls` `n` normal, `e` elite, `r` rare, `R` rare elite, `b` boss; `xp`/`rested` from the XP message (client format strings, any language); `tapped` 1 when the kill gave no XP, its corpse opened no loot window before the record was written, and the creature read as another player's when last seen or its corpse as not the player's to loot a second after the death; 0 when it gave XP or opened a loot window (#4026: those two readings alone marked as many of the player's own kills, which gave them XP and a loot window, as any other, so the data build reads nothing from the flag in older recordings); `q` = `questId:index` when an objective ticked within 3 s |
 | `spawn` | npcId, spawnUid, P | right after a `kill`, when the creature's GUID has one: `spawnUid` is the GUID's last part only (`Creature-0-…-<npcId>-<spawnUid>`, 1–16 hex digits), never the server, instance or zone parts. The same spawn killed again tells how long it takes to come back |
-| `loot` | srcKind, srcId, P, gather, items, wanted | a loot window, one per source. `gather` `h` herb, `m` mine, `s` skin, `f` fish (a catch from a fishing pool has the pool as `o`/srcId; from open water the bobber is left out and `srcKind`/`srcId` are empty), empty corpse/chest; `items` = `itemId:count` (empty = nothing); `wanted` = `questId:index` of every item objective open at that moment (the drop-chance denominator) |
+| `loot` | srcKind, srcId, P, gather, items, wanted | a loot window, one per source. `gather` `h` herb, `m` mine, `s` skin, `f` fish (a catch from a fishing pool has the pool as `o`/srcId; from open water the bobber is left out and `srcKind`/`srcId` are empty), empty corpse/chest; `items` = `itemId:count` (empty = nothing); `wanted` = `questId:index` of every item objective open at that moment (when a quest drop's chance counts its kills and windows) |
 | `gather` | objectId, P, how, skillLineId, rank | a world object gathered with a skill, right after its `loot` (which has the items): `how` `h` herb (Herbalism 182), `m` ore (Mining 186), `f` fishing pool (Fishing 356), `l` lock picked (Lockpicking 633); `rank` = the player's rank in that skill then (the node needs at most that). Once per object per 5 minutes (a pool gives many catches), at most 20 a minute |
 | `unit` | npcId, level, cls, react, P, src | a creature seen on a nameplate, target or mouseover: once per (npcId, level) per session, and once per 100 yd per npcId per session. `react` `h` hostile, `n` neutral, `f` friendly; `src` `p` plate, `t` target, `m` mouseover |
-| `rare` | npcId, level, cls, P, src | a rare or rare elite sighted (`src` `v` vignette, `p` plate, `t` target, `m` mouseover) |
+| `rare` | npcId, level, cls, P, src | a rare or rare elite sighted (`src` `v` vignette, `p` plate, `t` target, `m` mouseover); P is the player's position for a plate, target or mouseover, the rare's own for a vignette |
 | `treasure` | objectId, P | a treasure vignette |
 | `enter` | instanceId, instanceType, difficulty, P | entering an instance (P = last outdoor position) |
 | `encounter` | encounterId, ok (1/0), difficulty, size | `ENCOUNTER_END` (its start is `engage`, in explorer mode) |
@@ -421,7 +435,19 @@ their own client, so nothing trusts a single upload.
   has (a quest's title, level, objectives, giver or ender, rewards, XP, an
   NPC's name, rank or level, a spawn, a learned path, a trainer's list, a
   drop chance) changes only on the evidence of 3 distinct counted voters
-  (for a drop chance, each with 10 kills of their own), or of `local` or
+  (for a drop chance, each with 10 loot windows of their own: a recorded
+  kill may be a death the player only saw; an item that drops only for a
+  quest counts only while its objective was open, and a creature's on the
+  kills the player could loot then, solo, not the windows, since a corpse
+  with nothing on it can't be opened and many are left; a kill dropped it
+  when its loot window held it or, with no window read, the objective
+  ticked; and since a player stops when the objective is done, so that the
+  players with many kills are the unlucky ones, a quest drop's chance pools
+  every voter's drops and kills, 3 voters with 30 kills between them
+  (#2747); the data build takes only those quest drops' chances, any other
+  drop keeps its sources', and an item's sources no player measured are
+  scaled by the median ratio of its measured chances to the sources' figures
+  for them, so the guide compares its droppers on one scale), or of `local` or
   `sent-*`; one counted voter fills only gaps no other source has. Nothing
   a recording says overrides one of Polestar's own corrections
   (`forever-db/corrections`): the build keeps the corrected value and lists

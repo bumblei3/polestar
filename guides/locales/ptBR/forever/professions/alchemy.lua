@@ -16,64 +16,92 @@ return {
 	-- Step 2: Alchemy 1-75: vendor goods
 	-- {skill:171} Alchemy
 	["{skill:171} 1-75: vendor goods"] = "{skill:171} 1-75: itens de vendedor",
-	-- {item:3371} Empty Vial · {zone:1453} Stormwind City · {npc:1286} Edna Mullby · {npc:1325} Jasper Fel · {zone:1454} Orgrimmar · {npc:3367} Felika · {npc:3348} Kor'geld · {npc:3334} Rekkul
-	["Buy the whole bracket's share in one go: 82 {item:3371} (3s 28c); about 3s 28c in all. The arrow picks the nearest seller of your faction ({zone:1453}: {npc:1286}, Eldraeith and {npc:1325}; {zone:1454}: {npc:3367}, {npc:3348} and {npc:3334})."] = "Compre a parte de toda a faixa de uma vez: 82 {item:3371} (3s 28c); cerca de 3s 28c no total. A seta escolhe o vendedor mais próximo da sua facção ({zone:1453}: {npc:1286}, Eldraeith e {npc:1325}; {zone:1454}: {npc:3367}, {npc:3348} e {npc:3334}).",
+	-- {item:3371} Empty Vial · {zone:1453} Stormwind City · {npc:1286} Edna Mullby · {npc:5503} Eldraeith · {npc:1325} Jasper Fel · {zone:1454} Orgrimmar · {npc:3367} Felika · {npc:3348} Kor'geld · {npc:3334} Rekkul
+	["Buy the whole bracket's share in one go: 82 {item:3371} (3s 28c); about 3s 28c in all. The arrow picks the nearest seller of your faction ({zone:1453}: {npc:1286}, {npc:5503} and {npc:1325}; {zone:1454}: {npc:3367}, {npc:3348} and {npc:3334})."] = "Compre a parte de toda a faixa de uma vez: 82 {item:3371} (3s 28c); cerca de 3s 28c no total. A seta escolhe o vendedor mais próximo da sua facção ({zone:1453}: {npc:1286}, {npc:5503} e {npc:1325}; {zone:1454}: {npc:3367}, {npc:3348} e {npc:3334}).",
 
-	-- Step 3: Silverleaf (Elwynn Forest)
-	-- {item:765} Silverleaf · {item:5997} Elixir of Minor Defense · {skill:182} Herbalism · {zone:1429} Elwynn Forest
-	["82 {item:765} for {item:5997}: {skill:182}: {item:765} (skill 1); or the Auction House. The densest patch of {item:765} in {zone:1429} is marked."] = "82 {item:765} para {item:5997}: {skill:182}: {item:765} (perícia 1); ou a Casa de Leilões. O maior aglomerado de {item:765} em {zone:1429} está marcado.",
+	-- Step 3: Get Silverleaf (Elwynn Forest)
+	-- {item:765} Silverleaf · {zone:1429} Elwynn Forest
+	["Get {item:765} ({zone:1429})"] = "",
+	-- {item:765} Silverleaf · {skill:171} Alchemy · {item:5997} Elixir of Minor Defense · {skill:182} Herbalism · {zone:1429} Elwynn Forest
+	["You need 82 {item:765} for {skill:171} 1-75: {item:5997}. {skill:182}: {item:765} (skill 1). The densest patch of {item:765} in {zone:1429} is marked. Or buy them at the Auction House."] = "",
 
-	-- Step 4: Silverleaf (Dun Morogh)
-	-- {item:765} Silverleaf · {item:5997} Elixir of Minor Defense · {skill:182} Herbalism · {zone:1426} Dun Morogh
-	["82 {item:765} for {item:5997}: {skill:182}: {item:765} (skill 1); or the Auction House. The densest patch of {item:765} in {zone:1426} is marked."] = "82 {item:765} para {item:5997}: {skill:182}: {item:765} (perícia 1); ou a Casa de Leilões. O maior aglomerado de {item:765} em {zone:1426} está marcado.",
+	-- Step 4: Get Silverleaf (Dun Morogh)
+	-- {item:765} Silverleaf · {zone:1426} Dun Morogh
+	["Get {item:765} ({zone:1426})"] = "",
+	-- {item:765} Silverleaf · {skill:171} Alchemy · {item:5997} Elixir of Minor Defense · {skill:182} Herbalism · {zone:1426} Dun Morogh
+	["You need 82 {item:765} for {skill:171} 1-75: {item:5997}. {skill:182}: {item:765} (skill 1). The densest patch of {item:765} in {zone:1426} is marked. Or buy them at the Auction House."] = "",
 
-	-- Step 5: Silverleaf (Teldrassil)
-	-- {item:765} Silverleaf · {item:5997} Elixir of Minor Defense · {skill:182} Herbalism · {zone:1438} Teldrassil
-	["82 {item:765} for {item:5997}: {skill:182}: {item:765} (skill 1); or the Auction House. The densest patch of {item:765} in {zone:1438} is marked."] = "82 {item:765} para {item:5997}: {skill:182}: {item:765} (perícia 1); ou a Casa de Leilões. O maior aglomerado de {item:765} em {zone:1438} está marcado.",
+	-- Step 5: Get Silverleaf (Teldrassil)
+	-- {item:765} Silverleaf · {zone:1438} Teldrassil
+	["Get {item:765} ({zone:1438})"] = "",
+	-- {item:765} Silverleaf · {skill:171} Alchemy · {item:5997} Elixir of Minor Defense · {skill:182} Herbalism · {zone:1438} Teldrassil
+	["You need 82 {item:765} for {skill:171} 1-75: {item:5997}. {skill:182}: {item:765} (skill 1). The densest patch of {item:765} in {zone:1438} is marked. Or buy them at the Auction House."] = "",
 
-	-- Step 6: Silverleaf (Zephras Isle)
-	-- {item:765} Silverleaf · {item:5997} Elixir of Minor Defense · {skill:182} Herbalism · {zone:2521} Zephras Isle
-	["82 {item:765} for {item:5997}: {skill:182}: {item:765} (skill 1); or the Auction House. The densest patch of {item:765} in {zone:2521} is marked."] = "82 {item:765} para {item:5997}: {skill:182}: {item:765} (perícia 1); ou a Casa de Leilões. O maior aglomerado de {item:765} em {zone:2521} está marcado.",
+	-- Step 6: Get Silverleaf (Zephras Isle)
+	-- {item:765} Silverleaf · {zone:2521} Zephras Isle
+	["Get {item:765} ({zone:2521})"] = "",
+	-- {item:765} Silverleaf · {skill:171} Alchemy · {item:5997} Elixir of Minor Defense · {skill:182} Herbalism · {zone:2521} Zephras Isle
+	["You need 82 {item:765} for {skill:171} 1-75: {item:5997}. {skill:182}: {item:765} (skill 1). The densest patch of {item:765} in {zone:2521} is marked. Or buy them at the Auction House."] = "",
 
-	-- Step 7: Silverleaf (Durotar)
-	-- {item:765} Silverleaf · {item:5997} Elixir of Minor Defense · {skill:182} Herbalism · {zone:1411} Durotar
-	["82 {item:765} for {item:5997}: {skill:182}: {item:765} (skill 1); or the Auction House. The densest patch of {item:765} in {zone:1411} is marked."] = "82 {item:765} para {item:5997}: {skill:182}: {item:765} (perícia 1); ou a Casa de Leilões. O maior aglomerado de {item:765} em {zone:1411} está marcado.",
+	-- Step 7: Get Silverleaf (Durotar)
+	-- {item:765} Silverleaf · {zone:1411} Durotar
+	["Get {item:765} ({zone:1411})"] = "",
+	-- {item:765} Silverleaf · {skill:171} Alchemy · {item:5997} Elixir of Minor Defense · {skill:182} Herbalism · {zone:1411} Durotar
+	["You need 82 {item:765} for {skill:171} 1-75: {item:5997}. {skill:182}: {item:765} (skill 1). The densest patch of {item:765} in {zone:1411} is marked. Or buy them at the Auction House."] = "",
 
-	-- Step 8: Silverleaf (Mulgore)
-	-- {item:765} Silverleaf · {item:5997} Elixir of Minor Defense · {skill:182} Herbalism · {zone:1412} Mulgore
-	["82 {item:765} for {item:5997}: {skill:182}: {item:765} (skill 1); or the Auction House. The densest patch of {item:765} in {zone:1412} is marked."] = "82 {item:765} para {item:5997}: {skill:182}: {item:765} (perícia 1); ou a Casa de Leilões. O maior aglomerado de {item:765} em {zone:1412} está marcado.",
+	-- Step 8: Get Silverleaf (Mulgore)
+	-- {item:765} Silverleaf · {zone:1412} Mulgore
+	["Get {item:765} ({zone:1412})"] = "",
+	-- {item:765} Silverleaf · {skill:171} Alchemy · {item:5997} Elixir of Minor Defense · {skill:182} Herbalism · {zone:1412} Mulgore
+	["You need 82 {item:765} for {skill:171} 1-75: {item:5997}. {skill:182}: {item:765} (skill 1). The densest patch of {item:765} in {zone:1412} is marked. Or buy them at the Auction House."] = "",
 
-	-- Step 9: Silverleaf (Tirisfal Glades)
-	-- {item:765} Silverleaf · {item:5997} Elixir of Minor Defense · {skill:182} Herbalism · {zone:1420} Tirisfal Glades
-	["82 {item:765} for {item:5997}: {skill:182}: {item:765} (skill 1); or the Auction House. The densest patch of {item:765} in {zone:1420} is marked."] = "82 {item:765} para {item:5997}: {skill:182}: {item:765} (perícia 1); ou a Casa de Leilões. O maior aglomerado de {item:765} em {zone:1420} está marcado.",
+	-- Step 9: Get Silverleaf (Tirisfal Glades)
+	-- {item:765} Silverleaf · {zone:1420} Tirisfal Glades
+	["Get {item:765} ({zone:1420})"] = "",
+	-- {item:765} Silverleaf · {skill:171} Alchemy · {item:5997} Elixir of Minor Defense · {skill:182} Herbalism · {zone:1420} Tirisfal Glades
+	["You need 82 {item:765} for {skill:171} 1-75: {item:5997}. {skill:182}: {item:765} (skill 1). The densest patch of {item:765} in {zone:1420} is marked. Or buy them at the Auction House."] = "",
 
-	-- Step 10: Peacebloom (Elwynn Forest)
-	-- {item:2447} Peacebloom · {item:5997} Elixir of Minor Defense · {spell:2331} Minor Mana Potion · {skill:182} Herbalism · {zone:1429} Elwynn Forest
-	["110 {item:2447} for {item:5997} and {spell:2331} (28 of them for 75-150: pick them all now): {skill:182}: {item:2447} (skill 1); or the Auction House. The densest patch of {item:2447} in {zone:1429} is marked."] = "110 {item:2447} para {item:5997} e {spell:2331} (28 deles para 75-150: colete todos agora): {skill:182}: {item:2447} (perícia 1); ou a Casa de Leilões. O maior aglomerado de {item:2447} em {zone:1429} está marcado.",
+	-- Step 10: Get Peacebloom (Elwynn Forest)
+	-- {item:2447} Peacebloom · {zone:1429} Elwynn Forest
+	["Get {item:2447} ({zone:1429})"] = "",
+	-- {item:2447} Peacebloom · {skill:171} Alchemy · {item:5997} Elixir of Minor Defense · {spell:2331} Minor Mana Potion · {skill:182} Herbalism · {zone:1429} Elwynn Forest
+	["You need 110 {item:2447} for {skill:171} 1-75: {item:5997} and {spell:2331} (28 of them for 75-150: get them all now). {skill:182}: {item:2447} (skill 1). The densest patch of {item:2447} in {zone:1429} is marked. Or buy them at the Auction House."] = "",
 
-	-- Step 11: Peacebloom (Dun Morogh)
-	-- {item:2447} Peacebloom · {item:5997} Elixir of Minor Defense · {spell:2331} Minor Mana Potion · {skill:182} Herbalism · {zone:1426} Dun Morogh
-	["110 {item:2447} for {item:5997} and {spell:2331} (28 of them for 75-150: pick them all now): {skill:182}: {item:2447} (skill 1); or the Auction House. The densest patch of {item:2447} in {zone:1426} is marked."] = "110 {item:2447} para {item:5997} e {spell:2331} (28 deles para 75-150: colete todos agora): {skill:182}: {item:2447} (perícia 1); ou a Casa de Leilões. O maior aglomerado de {item:2447} em {zone:1426} está marcado.",
+	-- Step 11: Get Peacebloom (Dun Morogh)
+	-- {item:2447} Peacebloom · {zone:1426} Dun Morogh
+	["Get {item:2447} ({zone:1426})"] = "",
+	-- {item:2447} Peacebloom · {skill:171} Alchemy · {item:5997} Elixir of Minor Defense · {spell:2331} Minor Mana Potion · {skill:182} Herbalism · {zone:1426} Dun Morogh
+	["You need 110 {item:2447} for {skill:171} 1-75: {item:5997} and {spell:2331} (28 of them for 75-150: get them all now). {skill:182}: {item:2447} (skill 1). The densest patch of {item:2447} in {zone:1426} is marked. Or buy them at the Auction House."] = "",
 
-	-- Step 12: Peacebloom (Teldrassil)
-	-- {item:2447} Peacebloom · {item:5997} Elixir of Minor Defense · {spell:2331} Minor Mana Potion · {skill:182} Herbalism · {zone:1438} Teldrassil
-	["110 {item:2447} for {item:5997} and {spell:2331} (28 of them for 75-150: pick them all now): {skill:182}: {item:2447} (skill 1); or the Auction House. The densest patch of {item:2447} in {zone:1438} is marked."] = "110 {item:2447} para {item:5997} e {spell:2331} (28 deles para 75-150: colete todos agora): {skill:182}: {item:2447} (perícia 1); ou a Casa de Leilões. O maior aglomerado de {item:2447} em {zone:1438} está marcado.",
+	-- Step 12: Get Peacebloom (Teldrassil)
+	-- {item:2447} Peacebloom · {zone:1438} Teldrassil
+	["Get {item:2447} ({zone:1438})"] = "",
+	-- {item:2447} Peacebloom · {skill:171} Alchemy · {item:5997} Elixir of Minor Defense · {spell:2331} Minor Mana Potion · {skill:182} Herbalism · {zone:1438} Teldrassil
+	["You need 110 {item:2447} for {skill:171} 1-75: {item:5997} and {spell:2331} (28 of them for 75-150: get them all now). {skill:182}: {item:2447} (skill 1). The densest patch of {item:2447} in {zone:1438} is marked. Or buy them at the Auction House."] = "",
 
-	-- Step 13: Peacebloom (Zephras Isle)
-	-- {item:2447} Peacebloom · {item:5997} Elixir of Minor Defense · {spell:2331} Minor Mana Potion · {skill:182} Herbalism · {zone:2521} Zephras Isle
-	["110 {item:2447} for {item:5997} and {spell:2331} (28 of them for 75-150: pick them all now): {skill:182}: {item:2447} (skill 1); or the Auction House. The densest patch of {item:2447} in {zone:2521} is marked."] = "110 {item:2447} para {item:5997} e {spell:2331} (28 deles para 75-150: colete todos agora): {skill:182}: {item:2447} (perícia 1); ou a Casa de Leilões. O maior aglomerado de {item:2447} em {zone:2521} está marcado.",
+	-- Step 13: Get Peacebloom (Zephras Isle)
+	-- {item:2447} Peacebloom · {zone:2521} Zephras Isle
+	["Get {item:2447} ({zone:2521})"] = "",
+	-- {item:2447} Peacebloom · {skill:171} Alchemy · {item:5997} Elixir of Minor Defense · {spell:2331} Minor Mana Potion · {skill:182} Herbalism · {zone:2521} Zephras Isle
+	["You need 110 {item:2447} for {skill:171} 1-75: {item:5997} and {spell:2331} (28 of them for 75-150: get them all now). {skill:182}: {item:2447} (skill 1). The densest patch of {item:2447} in {zone:2521} is marked. Or buy them at the Auction House."] = "",
 
-	-- Step 14: Peacebloom (Durotar)
-	-- {item:2447} Peacebloom · {item:5997} Elixir of Minor Defense · {spell:2331} Minor Mana Potion · {skill:182} Herbalism · {zone:1411} Durotar
-	["110 {item:2447} for {item:5997} and {spell:2331} (28 of them for 75-150: pick them all now): {skill:182}: {item:2447} (skill 1); or the Auction House. The densest patch of {item:2447} in {zone:1411} is marked."] = "110 {item:2447} para {item:5997} e {spell:2331} (28 deles para 75-150: colete todos agora): {skill:182}: {item:2447} (perícia 1); ou a Casa de Leilões. O maior aglomerado de {item:2447} em {zone:1411} está marcado.",
+	-- Step 14: Get Peacebloom (Durotar)
+	-- {item:2447} Peacebloom · {zone:1411} Durotar
+	["Get {item:2447} ({zone:1411})"] = "",
+	-- {item:2447} Peacebloom · {skill:171} Alchemy · {item:5997} Elixir of Minor Defense · {spell:2331} Minor Mana Potion · {skill:182} Herbalism · {zone:1411} Durotar
+	["You need 110 {item:2447} for {skill:171} 1-75: {item:5997} and {spell:2331} (28 of them for 75-150: get them all now). {skill:182}: {item:2447} (skill 1). The densest patch of {item:2447} in {zone:1411} is marked. Or buy them at the Auction House."] = "",
 
-	-- Step 15: Peacebloom (Mulgore)
-	-- {item:2447} Peacebloom · {item:5997} Elixir of Minor Defense · {spell:2331} Minor Mana Potion · {skill:182} Herbalism · {zone:1412} Mulgore
-	["110 {item:2447} for {item:5997} and {spell:2331} (28 of them for 75-150: pick them all now): {skill:182}: {item:2447} (skill 1); or the Auction House. The densest patch of {item:2447} in {zone:1412} is marked."] = "110 {item:2447} para {item:5997} e {spell:2331} (28 deles para 75-150: colete todos agora): {skill:182}: {item:2447} (perícia 1); ou a Casa de Leilões. O maior aglomerado de {item:2447} em {zone:1412} está marcado.",
+	-- Step 15: Get Peacebloom (Mulgore)
+	-- {item:2447} Peacebloom · {zone:1412} Mulgore
+	["Get {item:2447} ({zone:1412})"] = "",
+	-- {item:2447} Peacebloom · {skill:171} Alchemy · {item:5997} Elixir of Minor Defense · {spell:2331} Minor Mana Potion · {skill:182} Herbalism · {zone:1412} Mulgore
+	["You need 110 {item:2447} for {skill:171} 1-75: {item:5997} and {spell:2331} (28 of them for 75-150: get them all now). {skill:182}: {item:2447} (skill 1). The densest patch of {item:2447} in {zone:1412} is marked. Or buy them at the Auction House."] = "",
 
-	-- Step 16: Peacebloom (Tirisfal Glades)
-	-- {item:2447} Peacebloom · {item:5997} Elixir of Minor Defense · {spell:2331} Minor Mana Potion · {skill:182} Herbalism · {zone:1420} Tirisfal Glades
-	["110 {item:2447} for {item:5997} and {spell:2331} (28 of them for 75-150: pick them all now): {skill:182}: {item:2447} (skill 1); or the Auction House. The densest patch of {item:2447} in {zone:1420} is marked."] = "110 {item:2447} para {item:5997} e {spell:2331} (28 deles para 75-150: colete todos agora): {skill:182}: {item:2447} (perícia 1); ou a Casa de Leilões. O maior aglomerado de {item:2447} em {zone:1420} está marcado.",
+	-- Step 16: Get Peacebloom (Tirisfal Glades)
+	-- {item:2447} Peacebloom · {zone:1420} Tirisfal Glades
+	["Get {item:2447} ({zone:1420})"] = "",
+	-- {item:2447} Peacebloom · {skill:171} Alchemy · {item:5997} Elixir of Minor Defense · {spell:2331} Minor Mana Potion · {skill:182} Herbalism · {zone:1420} Tirisfal Glades
+	["You need 110 {item:2447} for {skill:171} 1-75: {item:5997} and {spell:2331} (28 of them for 75-150: get them all now). {skill:182}: {item:2447} (skill 1). The densest patch of {item:2447} in {zone:1420} is marked. Or buy them at the Auction House."] = "",
 
 	-- Step 17: Elixir of Minor Defense to 75
 	-- {item:5997} Elixir of Minor Defense
@@ -90,72 +118,104 @@ return {
 	-- Step 19: Alchemy 75-150: vendor goods
 	-- {skill:171} Alchemy
 	["{skill:171} 75-150: vendor goods"] = "{skill:171} 75-150: itens de vendedor",
-	-- {item:3371} Empty Vial · {item:3372} Leaded Vial · {zone:1453} Stormwind City · {npc:1286} Edna Mullby · {npc:1325} Jasper Fel · {zone:1454} Orgrimmar · {npc:3367} Felika · {npc:3348} Kor'geld · {npc:3334} Rekkul
-	["Buy the whole bracket's share in one go: 77 {item:3371} (3s 8c) and 15 {item:3372} (6s); about 9s 8c in all. The arrow picks the nearest seller of your faction ({zone:1453}: {npc:1286}, Eldraeith and {npc:1325}; {zone:1454}: {npc:3367}, {npc:3348} and {npc:3334})."] = "Compre a parte de toda a faixa de uma vez: 77 {item:3371} (3s 8c) e 15 {item:3372} (6s); cerca de 9s 8c no total. A seta escolhe o vendedor mais próximo da sua facção ({zone:1453}: {npc:1286}, Eldraeith e {npc:1325}; {zone:1454}: {npc:3367}, {npc:3348} e {npc:3334}).",
+	-- {item:3371} Empty Vial · {item:3372} Leaded Vial · {zone:1453} Stormwind City · {npc:1286} Edna Mullby · {npc:5503} Eldraeith · {npc:1325} Jasper Fel · {zone:1454} Orgrimmar · {npc:3367} Felika · {npc:3348} Kor'geld · {npc:3334} Rekkul
+	["Buy the whole bracket's share in one go: 77 {item:3371} (3s 8c) and 15 {item:3372} (6s); about 9s 8c in all. The arrow picks the nearest seller of your faction ({zone:1453}: {npc:1286}, {npc:5503} and {npc:1325}; {zone:1454}: {npc:3367}, {npc:3348} and {npc:3334})."] = "Compre a parte de toda a faixa de uma vez: 77 {item:3371} (3s 8c) e 15 {item:3372} (6s); cerca de 9s 8c no total. A seta escolhe o vendedor mais próximo da sua facção ({zone:1453}: {npc:1286}, {npc:5503} e {npc:1325}; {zone:1454}: {npc:3367}, {npc:3348} e {npc:3334}).",
 
-	-- Step 20: Mageroyal (Westfall)
-	-- {item:785} Mageroyal · {spell:2331} Minor Mana Potion · {spell:3171} Elixir of Wisdom · {skill:182} Herbalism · {zone:1436} Westfall
-	["77 {item:785} for {spell:2331} and {spell:3171}: {skill:182}: {item:785} (skill 50); or the Auction House. The densest patch of {item:785} in {zone:1436} is marked."] = "77 {item:785} para {spell:2331} e {spell:3171}: {skill:182}: {item:785} (perícia 50); ou a Casa de Leilões. O maior aglomerado de {item:785} em {zone:1436} está marcado.",
+	-- Step 20: Get Mageroyal (Westfall)
+	-- {item:785} Mageroyal · {zone:1436} Westfall
+	["Get {item:785} ({zone:1436})"] = "",
+	-- {item:785} Mageroyal · {skill:171} Alchemy · {spell:2331} Minor Mana Potion · {spell:3171} Elixir of Wisdom · {skill:182} Herbalism · {zone:1436} Westfall
+	["You need 77 {item:785} for {skill:171} 75-150: {spell:2331} and {spell:3171}. {skill:182}: {item:785} (skill 50). The densest patch of {item:785} in {zone:1436} is marked. Or buy them at the Auction House."] = "",
 
-	-- Step 21: Mageroyal (Loch Modan)
-	-- {item:785} Mageroyal · {spell:2331} Minor Mana Potion · {spell:3171} Elixir of Wisdom · {skill:182} Herbalism · {zone:1432} Loch Modan
-	["77 {item:785} for {spell:2331} and {spell:3171}: {skill:182}: {item:785} (skill 50); or the Auction House. The densest patch of {item:785} in {zone:1432} is marked."] = "77 {item:785} para {spell:2331} e {spell:3171}: {skill:182}: {item:785} (perícia 50); ou a Casa de Leilões. O maior aglomerado de {item:785} em {zone:1432} está marcado.",
+	-- Step 21: Get Mageroyal (Loch Modan)
+	-- {item:785} Mageroyal · {zone:1432} Loch Modan
+	["Get {item:785} ({zone:1432})"] = "",
+	-- {item:785} Mageroyal · {skill:171} Alchemy · {spell:2331} Minor Mana Potion · {spell:3171} Elixir of Wisdom · {skill:182} Herbalism · {zone:1432} Loch Modan
+	["You need 77 {item:785} for {skill:171} 75-150: {spell:2331} and {spell:3171}. {skill:182}: {item:785} (skill 50). The densest patch of {item:785} in {zone:1432} is marked. Or buy them at the Auction House."] = "",
 
-	-- Step 22: Mageroyal (Teldrassil)
-	-- {item:785} Mageroyal · {spell:2331} Minor Mana Potion · {spell:3171} Elixir of Wisdom · {skill:182} Herbalism · {zone:1438} Teldrassil
-	["77 {item:785} for {spell:2331} and {spell:3171}: {skill:182}: {item:785} (skill 50); or the Auction House. The densest patch of {item:785} in {zone:1438} is marked."] = "77 {item:785} para {spell:2331} e {spell:3171}: {skill:182}: {item:785} (perícia 50); ou a Casa de Leilões. O maior aglomerado de {item:785} em {zone:1438} está marcado.",
+	-- Step 22: Get Mageroyal (Teldrassil)
+	-- {item:785} Mageroyal · {zone:1438} Teldrassil
+	["Get {item:785} ({zone:1438})"] = "",
+	-- {item:785} Mageroyal · {skill:171} Alchemy · {spell:2331} Minor Mana Potion · {spell:3171} Elixir of Wisdom · {skill:182} Herbalism · {zone:1438} Teldrassil
+	["You need 77 {item:785} for {skill:171} 75-150: {spell:2331} and {spell:3171}. {skill:182}: {item:785} (skill 50). The densest patch of {item:785} in {zone:1438} is marked. Or buy them at the Auction House."] = "",
 
-	-- Step 23: Mageroyal (Zephras Isle)
-	-- {item:785} Mageroyal · {spell:2331} Minor Mana Potion · {spell:3171} Elixir of Wisdom · {skill:182} Herbalism · {zone:2521} Zephras Isle
-	["77 {item:785} for {spell:2331} and {spell:3171}: {skill:182}: {item:785} (skill 50); or the Auction House. The densest patch of {item:785} in {zone:2521} is marked."] = "77 {item:785} para {spell:2331} e {spell:3171}: {skill:182}: {item:785} (perícia 50); ou a Casa de Leilões. O maior aglomerado de {item:785} em {zone:2521} está marcado.",
+	-- Step 23: Get Mageroyal (Zephras Isle)
+	-- {item:785} Mageroyal · {zone:2521} Zephras Isle
+	["Get {item:785} ({zone:2521})"] = "",
+	-- {item:785} Mageroyal · {skill:171} Alchemy · {spell:2331} Minor Mana Potion · {spell:3171} Elixir of Wisdom · {skill:182} Herbalism · {zone:2521} Zephras Isle
+	["You need 77 {item:785} for {skill:171} 75-150: {spell:2331} and {spell:3171}. {skill:182}: {item:785} (skill 50). The densest patch of {item:785} in {zone:2521} is marked. Or buy them at the Auction House."] = "",
 
-	-- Step 24: Mageroyal (The Barrens)
-	-- {item:785} Mageroyal · {spell:2331} Minor Mana Potion · {spell:3171} Elixir of Wisdom · {skill:182} Herbalism · {zone:1413} The Barrens
-	["77 {item:785} for {spell:2331} and {spell:3171}: {skill:182}: {item:785} (skill 50); or the Auction House. The densest patch of {item:785} in {zone:1413} is marked."] = "77 {item:785} para {spell:2331} e {spell:3171}: {skill:182}: {item:785} (perícia 50); ou a Casa de Leilões. O maior aglomerado de {item:785} em {zone:1413} está marcado.",
+	-- Step 24: Get Mageroyal (The Barrens)
+	-- {item:785} Mageroyal · {zone:1413} The Barrens
+	["Get {item:785} ({zone:1413})"] = "",
+	-- {item:785} Mageroyal · {skill:171} Alchemy · {spell:2331} Minor Mana Potion · {spell:3171} Elixir of Wisdom · {skill:182} Herbalism · {zone:1413} The Barrens
+	["You need 77 {item:785} for {skill:171} 75-150: {spell:2331} and {spell:3171}. {skill:182}: {item:785} (skill 50). The densest patch of {item:785} in {zone:1413} is marked. Or buy them at the Auction House."] = "",
 
-	-- Step 25: Mageroyal (Silverpine Forest)
-	-- {item:785} Mageroyal · {spell:2331} Minor Mana Potion · {spell:3171} Elixir of Wisdom · {skill:182} Herbalism · {zone:1421} Silverpine Forest
-	["77 {item:785} for {spell:2331} and {spell:3171}: {skill:182}: {item:785} (skill 50); or the Auction House. The densest patch of {item:785} in {zone:1421} is marked."] = "77 {item:785} para {spell:2331} e {spell:3171}: {skill:182}: {item:785} (perícia 50); ou a Casa de Leilões. O maior aglomerado de {item:785} em {zone:1421} está marcado.",
+	-- Step 25: Get Mageroyal (Silverpine Forest)
+	-- {item:785} Mageroyal · {zone:1421} Silverpine Forest
+	["Get {item:785} ({zone:1421})"] = "",
+	-- {item:785} Mageroyal · {skill:171} Alchemy · {spell:2331} Minor Mana Potion · {spell:3171} Elixir of Wisdom · {skill:182} Herbalism · {zone:1421} Silverpine Forest
+	["You need 77 {item:785} for {skill:171} 75-150: {spell:2331} and {spell:3171}. {skill:182}: {item:785} (skill 50). The densest patch of {item:785} in {zone:1421} is marked. Or buy them at the Auction House."] = "",
 
-	-- Step 26: Briarthorn (Westfall)
-	-- {item:2450} Briarthorn · {spell:3171} Elixir of Wisdom · {spell:3176} Lesser Troll's Blood Elixir · {skill:182} Herbalism · {zone:1436} Westfall
-	["152 {item:2450} for {spell:3171} and {spell:3176} (24 of them for 150-225: pick them all now): {skill:182}: {item:2450} (skill 70); or the Auction House. The densest patch of {item:2450} in {zone:1436} is marked."] = "152 {item:2450} para {spell:3171} e {spell:3176} (24 deles para 150-225: colete todos agora): {skill:182}: {item:2450} (perícia 70); ou a Casa de Leilões. O maior aglomerado de {item:2450} em {zone:1436} está marcado.",
+	-- Step 26: Get Briarthorn (Westfall)
+	-- {item:2450} Briarthorn · {zone:1436} Westfall
+	["Get {item:2450} ({zone:1436})"] = "",
+	-- {item:2450} Briarthorn · {skill:171} Alchemy · {spell:3171} Elixir of Wisdom · {spell:3176} Lesser Troll's Blood Elixir · {skill:182} Herbalism · {zone:1436} Westfall
+	["You need 152 {item:2450} for {skill:171} 75-150: {spell:3171} and {spell:3176} (24 of them for 150-225: get them all now). {skill:182}: {item:2450} (skill 70). The densest patch of {item:2450} in {zone:1436} is marked. Or buy them at the Auction House."] = "",
 
-	-- Step 27: Briarthorn (Loch Modan)
-	-- {item:2450} Briarthorn · {spell:3171} Elixir of Wisdom · {spell:3176} Lesser Troll's Blood Elixir · {skill:182} Herbalism · {zone:1432} Loch Modan
-	["152 {item:2450} for {spell:3171} and {spell:3176} (24 of them for 150-225: pick them all now): {skill:182}: {item:2450} (skill 70); or the Auction House. The densest patch of {item:2450} in {zone:1432} is marked."] = "152 {item:2450} para {spell:3171} e {spell:3176} (24 deles para 150-225: colete todos agora): {skill:182}: {item:2450} (perícia 70); ou a Casa de Leilões. O maior aglomerado de {item:2450} em {zone:1432} está marcado.",
+	-- Step 27: Get Briarthorn (Loch Modan)
+	-- {item:2450} Briarthorn · {zone:1432} Loch Modan
+	["Get {item:2450} ({zone:1432})"] = "",
+	-- {item:2450} Briarthorn · {skill:171} Alchemy · {spell:3171} Elixir of Wisdom · {spell:3176} Lesser Troll's Blood Elixir · {skill:182} Herbalism · {zone:1432} Loch Modan
+	["You need 152 {item:2450} for {skill:171} 75-150: {spell:3171} and {spell:3176} (24 of them for 150-225: get them all now). {skill:182}: {item:2450} (skill 70). The densest patch of {item:2450} in {zone:1432} is marked. Or buy them at the Auction House."] = "",
 
-	-- Step 28: Briarthorn (Darkshore)
-	-- {item:2450} Briarthorn · {spell:3171} Elixir of Wisdom · {spell:3176} Lesser Troll's Blood Elixir · {skill:182} Herbalism · {zone:1439} Darkshore
-	["152 {item:2450} for {spell:3171} and {spell:3176} (24 of them for 150-225: pick them all now): {skill:182}: {item:2450} (skill 70); or the Auction House. The densest patch of {item:2450} in {zone:1439} is marked."] = "152 {item:2450} para {spell:3171} e {spell:3176} (24 deles para 150-225: colete todos agora): {skill:182}: {item:2450} (perícia 70); ou a Casa de Leilões. O maior aglomerado de {item:2450} em {zone:1439} está marcado.",
+	-- Step 28: Get Briarthorn (Darkshore)
+	-- {item:2450} Briarthorn · {zone:1439} Darkshore
+	["Get {item:2450} ({zone:1439})"] = "",
+	-- {item:2450} Briarthorn · {skill:171} Alchemy · {spell:3171} Elixir of Wisdom · {spell:3176} Lesser Troll's Blood Elixir · {skill:182} Herbalism · {zone:1439} Darkshore
+	["You need 152 {item:2450} for {skill:171} 75-150: {spell:3171} and {spell:3176} (24 of them for 150-225: get them all now). {skill:182}: {item:2450} (skill 70). The densest patch of {item:2450} in {zone:1439} is marked. Or buy them at the Auction House."] = "",
 
-	-- Step 29: Briarthorn (The Barrens)
-	-- {item:2450} Briarthorn · {spell:3171} Elixir of Wisdom · {spell:3176} Lesser Troll's Blood Elixir · {skill:182} Herbalism · {zone:1413} The Barrens
-	["152 {item:2450} for {spell:3171} and {spell:3176} (24 of them for 150-225: pick them all now): {skill:182}: {item:2450} (skill 70); or the Auction House. The densest patch of {item:2450} in {zone:1413} is marked."] = "152 {item:2450} para {spell:3171} e {spell:3176} (24 deles para 150-225: colete todos agora): {skill:182}: {item:2450} (perícia 70); ou a Casa de Leilões. O maior aglomerado de {item:2450} em {zone:1413} está marcado.",
+	-- Step 29: Get Briarthorn (The Barrens)
+	-- {item:2450} Briarthorn · {zone:1413} The Barrens
+	["Get {item:2450} ({zone:1413})"] = "",
+	-- {item:2450} Briarthorn · {skill:171} Alchemy · {spell:3171} Elixir of Wisdom · {spell:3176} Lesser Troll's Blood Elixir · {skill:182} Herbalism · {zone:1413} The Barrens
+	["You need 152 {item:2450} for {skill:171} 75-150: {spell:3171} and {spell:3176} (24 of them for 150-225: get them all now). {skill:182}: {item:2450} (skill 70). The densest patch of {item:2450} in {zone:1413} is marked. Or buy them at the Auction House."] = "",
 
-	-- Step 30: Briarthorn (Silverpine Forest)
-	-- {item:2450} Briarthorn · {spell:3171} Elixir of Wisdom · {spell:3176} Lesser Troll's Blood Elixir · {skill:182} Herbalism · {zone:1421} Silverpine Forest
-	["152 {item:2450} for {spell:3171} and {spell:3176} (24 of them for 150-225: pick them all now): {skill:182}: {item:2450} (skill 70); or the Auction House. The densest patch of {item:2450} in {zone:1421} is marked."] = "152 {item:2450} para {spell:3171} e {spell:3176} (24 deles para 150-225: colete todos agora): {skill:182}: {item:2450} (perícia 70); ou a Casa de Leilões. O maior aglomerado de {item:2450} em {zone:1421} está marcado.",
+	-- Step 30: Get Briarthorn (Silverpine Forest)
+	-- {item:2450} Briarthorn · {zone:1421} Silverpine Forest
+	["Get {item:2450} ({zone:1421})"] = "",
+	-- {item:2450} Briarthorn · {skill:171} Alchemy · {spell:3171} Elixir of Wisdom · {spell:3176} Lesser Troll's Blood Elixir · {skill:182} Herbalism · {zone:1421} Silverpine Forest
+	["You need 152 {item:2450} for {skill:171} 75-150: {spell:3171} and {spell:3176} (24 of them for 150-225: get them all now). {skill:182}: {item:2450} (skill 70). The densest patch of {item:2450} in {zone:1421} is marked. Or buy them at the Auction House."] = "",
 
-	-- Step 31: Bruiseweed (Westfall)
-	-- {item:2453} Bruiseweed · {spell:3176} Lesser Troll's Blood Elixir · {skill:182} Herbalism · {zone:1436} Westfall
-	["54 {item:2453} for {spell:3176} (24 of them for 150-225: pick them all now): {skill:182}: {item:2453} (skill 100); or the Auction House. The densest patch of {item:2453} in {zone:1436} is marked."] = "54 {item:2453} para {spell:3176} (24 deles para 150-225: colete todos agora): {skill:182}: {item:2453} (perícia 100); ou a Casa de Leilões. O maior aglomerado de {item:2453} em {zone:1436} está marcado.",
+	-- Step 31: Get Bruiseweed (Westfall)
+	-- {item:2453} Bruiseweed · {zone:1436} Westfall
+	["Get {item:2453} ({zone:1436})"] = "",
+	-- {item:2453} Bruiseweed · {skill:171} Alchemy · {spell:3176} Lesser Troll's Blood Elixir · {skill:182} Herbalism · {zone:1436} Westfall
+	["You need 54 {item:2453} for {skill:171} 75-150: {spell:3176} (24 of them for 150-225: get them all now). {skill:182}: {item:2453} (skill 100). The densest patch of {item:2453} in {zone:1436} is marked. Or buy them at the Auction House."] = "",
 
-	-- Step 32: Bruiseweed (Loch Modan)
-	-- {item:2453} Bruiseweed · {spell:3176} Lesser Troll's Blood Elixir · {skill:182} Herbalism · {zone:1432} Loch Modan
-	["54 {item:2453} for {spell:3176} (24 of them for 150-225: pick them all now): {skill:182}: {item:2453} (skill 100); or the Auction House. The densest patch of {item:2453} in {zone:1432} is marked."] = "54 {item:2453} para {spell:3176} (24 deles para 150-225: colete todos agora): {skill:182}: {item:2453} (perícia 100); ou a Casa de Leilões. O maior aglomerado de {item:2453} em {zone:1432} está marcado.",
+	-- Step 32: Get Bruiseweed (Loch Modan)
+	-- {item:2453} Bruiseweed · {zone:1432} Loch Modan
+	["Get {item:2453} ({zone:1432})"] = "",
+	-- {item:2453} Bruiseweed · {skill:171} Alchemy · {spell:3176} Lesser Troll's Blood Elixir · {skill:182} Herbalism · {zone:1432} Loch Modan
+	["You need 54 {item:2453} for {skill:171} 75-150: {spell:3176} (24 of them for 150-225: get them all now). {skill:182}: {item:2453} (skill 100). The densest patch of {item:2453} in {zone:1432} is marked. Or buy them at the Auction House."] = "",
 
-	-- Step 33: Bruiseweed (Darkshore)
-	-- {item:2453} Bruiseweed · {spell:3176} Lesser Troll's Blood Elixir · {skill:182} Herbalism · {zone:1439} Darkshore
-	["54 {item:2453} for {spell:3176} (24 of them for 150-225: pick them all now): {skill:182}: {item:2453} (skill 100); or the Auction House. The densest patch of {item:2453} in {zone:1439} is marked."] = "54 {item:2453} para {spell:3176} (24 deles para 150-225: colete todos agora): {skill:182}: {item:2453} (perícia 100); ou a Casa de Leilões. O maior aglomerado de {item:2453} em {zone:1439} está marcado.",
+	-- Step 33: Get Bruiseweed (Darkshore)
+	-- {item:2453} Bruiseweed · {zone:1439} Darkshore
+	["Get {item:2453} ({zone:1439})"] = "",
+	-- {item:2453} Bruiseweed · {skill:171} Alchemy · {spell:3176} Lesser Troll's Blood Elixir · {skill:182} Herbalism · {zone:1439} Darkshore
+	["You need 54 {item:2453} for {skill:171} 75-150: {spell:3176} (24 of them for 150-225: get them all now). {skill:182}: {item:2453} (skill 100). The densest patch of {item:2453} in {zone:1439} is marked. Or buy them at the Auction House."] = "",
 
-	-- Step 34: Bruiseweed (The Barrens)
-	-- {item:2453} Bruiseweed · {spell:3176} Lesser Troll's Blood Elixir · {skill:182} Herbalism · {zone:1413} The Barrens
-	["54 {item:2453} for {spell:3176} (24 of them for 150-225: pick them all now): {skill:182}: {item:2453} (skill 100); or the Auction House. The densest patch of {item:2453} in {zone:1413} is marked."] = "54 {item:2453} para {spell:3176} (24 deles para 150-225: colete todos agora): {skill:182}: {item:2453} (perícia 100); ou a Casa de Leilões. O maior aglomerado de {item:2453} em {zone:1413} está marcado.",
+	-- Step 34: Get Bruiseweed (The Barrens)
+	-- {item:2453} Bruiseweed · {zone:1413} The Barrens
+	["Get {item:2453} ({zone:1413})"] = "",
+	-- {item:2453} Bruiseweed · {skill:171} Alchemy · {spell:3176} Lesser Troll's Blood Elixir · {skill:182} Herbalism · {zone:1413} The Barrens
+	["You need 54 {item:2453} for {skill:171} 75-150: {spell:3176} (24 of them for 150-225: get them all now). {skill:182}: {item:2453} (skill 100). The densest patch of {item:2453} in {zone:1413} is marked. Or buy them at the Auction House."] = "",
 
-	-- Step 35: Bruiseweed (Silverpine Forest)
-	-- {item:2453} Bruiseweed · {spell:3176} Lesser Troll's Blood Elixir · {skill:182} Herbalism · {zone:1421} Silverpine Forest
-	["54 {item:2453} for {spell:3176} (24 of them for 150-225: pick them all now): {skill:182}: {item:2453} (skill 100); or the Auction House. The densest patch of {item:2453} in {zone:1421} is marked."] = "54 {item:2453} para {spell:3176} (24 deles para 150-225: colete todos agora): {skill:182}: {item:2453} (perícia 100); ou a Casa de Leilões. O maior aglomerado de {item:2453} em {zone:1421} está marcado.",
+	-- Step 35: Get Bruiseweed (Silverpine Forest)
+	-- {item:2453} Bruiseweed · {zone:1421} Silverpine Forest
+	["Get {item:2453} ({zone:1421})"] = "",
+	-- {item:2453} Bruiseweed · {skill:171} Alchemy · {spell:3176} Lesser Troll's Blood Elixir · {skill:182} Herbalism · {zone:1421} Silverpine Forest
+	["You need 54 {item:2453} for {skill:171} 75-150: {spell:3176} (24 of them for 150-225: get them all now). {skill:182}: {item:2453} (skill 100). The densest patch of {item:2453} in {zone:1421} is marked. Or buy them at the Auction House."] = "",
 
 	-- Step 36: Minor Mana Potion to 90
 	-- {spell:2331} Minor Mana Potion
@@ -190,56 +250,66 @@ return {
 	-- Step 41: Alchemy 150-225: vendor goods
 	-- {skill:171} Alchemy
 	["{skill:171} 150-225: vendor goods"] = "{skill:171} 150-225: itens de vendedor",
-	-- {item:3372} Leaded Vial · {zone:1453} Stormwind City · {npc:1286} Edna Mullby · {npc:1325} Jasper Fel · {zone:1454} Orgrimmar · {npc:3367} Felika · {npc:3348} Kor'geld · {npc:3334} Rekkul
-	["Buy the whole bracket's share in one go: 83 {item:3372} (33s 20c); about 33s 20c in all. The arrow picks the nearest seller of your faction ({zone:1453}: {npc:1286}, Eldraeith and {npc:1325}; {zone:1454}: {npc:3367}, {npc:3348} and {npc:3334})."] = "Compre a parte de toda a faixa de uma vez: 83 {item:3372} (33s 20c); cerca de 33s 20c no total. A seta escolhe o vendedor mais próximo da sua facção ({zone:1453}: {npc:1286}, Eldraeith e {npc:1325}; {zone:1454}: {npc:3367}, {npc:3348} e {npc:3334}).",
+	-- {item:3372} Leaded Vial · {zone:1453} Stormwind City · {npc:1286} Edna Mullby · {npc:5503} Eldraeith · {npc:1325} Jasper Fel · {zone:1454} Orgrimmar · {npc:3367} Felika · {npc:3348} Kor'geld · {npc:3334} Rekkul
+	["Buy the whole bracket's share in one go: 83 {item:3372} (33s 20c); about 33s 20c in all. The arrow picks the nearest seller of your faction ({zone:1453}: {npc:1286}, {npc:5503} and {npc:1325}; {zone:1454}: {npc:3367}, {npc:3348} and {npc:3334})."] = "Compre a parte de toda a faixa de uma vez: 83 {item:3372} (33s 20c); cerca de 33s 20c no total. A seta escolhe o vendedor mais próximo da sua facção ({zone:1453}: {npc:1286}, {npc:5503} e {npc:1325}; {zone:1454}: {npc:3367}, {npc:3348} e {npc:3334}).",
 
-	-- Step 42: Wild Steelbloom (Alliance)
+	-- Step 42: Get Wild Steelbloom (Alliance)
 	-- {object:1623} Wild Steelbloom
-	["{object:1623} (Alliance)"] = "{object:1623} (Aliança)",
-	-- {object:1623} Wild Steelbloom · {item:8951} Elixir of Defense · {skill:182} Herbalism · {zone:1442} Stonetalon Mountains · {zone:1417} Arathi Highlands · {zone:1434} Stranglethorn Vale
-	["40 {object:1623} for {item:8951} (8 of them for 225-300: pick them all now): {skill:182}: {object:1623} (skill 115) in {zone:1442} (15-27), {zone:1417} (30-40) and {zone:1434} (30-45); or the Auction House. The densest patch of {object:1623} in {zone:1434} is marked."] = "40 {object:1623} para {item:8951} (8 deles para 225-300: colete todos agora): {skill:182}: {object:1623} (perícia 115) em {zone:1442} (15-27), {zone:1417} (30-40) e {zone:1434} (30-45); ou a Casa de Leilões. O maior aglomerado de {object:1623} em {zone:1434} está marcado.",
+	-- was: ["{object:1623} (Alliance)"] = "{object:1623} (Aliança)"
+	["Get {object:1623} (Alliance)"] = "",
+	-- {object:1623} Wild Steelbloom · {skill:171} Alchemy · {item:8951} Elixir of Defense · {skill:182} Herbalism · {zone:1442} Stonetalon Mountains · {zone:1417} Arathi Highlands · {zone:1434} Stranglethorn Vale
+	-- was: ["40 {object:1623} for {item:8951} (8 of them for 225-300: pick them all now): {skill:182}: {object:1623} (skill 115) in {zone:1442} (15-27), {zone:1417} (30-40) and {zone:1434} (30-45). The densest patch of {object:1623} in {zone:1434} is marked."] = "40 {object:1623} para {item:8951} (8 deles para 225-300: colete todos agora): {skill:182}: {object:1623} (perícia 115) em {zone:1442} (15-27), {zone:1417} (30-40) e {zone:1434} (30-45). O maior aglomerado de {object:1623} em {zone:1434} está marcado."
+	["You need 40 {object:1623} for {skill:171} 150-225: {item:8951} (8 of them for 225-300: get them all now). {skill:182}: {object:1623} (skill 115) in {zone:1442} (15-27), {zone:1417} (30-40) and {zone:1434} (30-45). The densest patch of {object:1623} in {zone:1434} is marked. Or buy them at the Auction House."] = "",
 
-	-- Step 43: Wild Steelbloom (Horde)
+	-- Step 43: Get Wild Steelbloom (Horde)
 	-- {object:1623} Wild Steelbloom
-	["{object:1623} (Horde)"] = "{object:1623} (Horda)",
-	-- {object:1623} Wild Steelbloom · {item:8951} Elixir of Defense · {skill:182} Herbalism · {zone:1442} Stonetalon Mountains · {zone:1417} Arathi Highlands · {zone:1434} Stranglethorn Vale
-	["40 {object:1623} for {item:8951} (8 of them for 225-300: pick them all now): {skill:182}: {object:1623} (skill 115) in {zone:1442} (15-27), {zone:1417} (30-40) and {zone:1434} (30-45); or the Auction House. The densest patch of {object:1623} in {zone:1442} is marked."] = "40 {object:1623} para {item:8951} (8 deles para 225-300: colete todos agora): {skill:182}: {object:1623} (perícia 115) em {zone:1442} (15-27), {zone:1417} (30-40) e {zone:1434} (30-45); ou a Casa de Leilões. O maior aglomerado de {object:1623} em {zone:1442} está marcado.",
+	-- was: ["{object:1623} (Horde)"] = "{object:1623} (Horda)"
+	["Get {object:1623} (Horde)"] = "",
+	-- {object:1623} Wild Steelbloom · {skill:171} Alchemy · {item:8951} Elixir of Defense · {skill:182} Herbalism · {zone:1442} Stonetalon Mountains · {zone:1417} Arathi Highlands · {zone:1434} Stranglethorn Vale
+	-- was: ["40 {object:1623} for {item:8951} (8 of them for 225-300: pick them all now): {skill:182}: {object:1623} (skill 115) in {zone:1442} (15-27), {zone:1417} (30-40) and {zone:1434} (30-45). The densest patch of {object:1623} in {zone:1442} is marked."] = "40 {object:1623} para {item:8951} (8 deles para 225-300: colete todos agora): {skill:182}: {object:1623} (perícia 115) em {zone:1442} (15-27), {zone:1417} (30-40) e {zone:1434} (30-45). O maior aglomerado de {object:1623} em {zone:1442} está marcado."
+	["You need 40 {object:1623} for {skill:171} 150-225: {item:8951} (8 of them for 225-300: get them all now). {skill:182}: {object:1623} (skill 115) in {zone:1442} (15-27), {zone:1417} (30-40) and {zone:1434} (30-45). The densest patch of {object:1623} in {zone:1442} is marked. Or buy them at the Auction House."] = "",
 
-	-- Step 44: Kingsblood (Alliance)
+	-- Step 44: Get Kingsblood (Alliance)
 	-- {item:3356} Kingsblood
-	["{item:3356} (Alliance)"] = "{item:3356} (Aliança)",
-	-- {item:3356} Kingsblood · {spell:3452} Mana Potion · {skill:182} Herbalism · {zone:1440} Ashenvale · {zone:1437} Wetlands · {zone:1434} Stranglethorn Vale
-	["39 {item:3356} for {spell:3452}: {skill:182}: {item:3356} (skill 125) in {zone:1440} (18-30), {zone:1437} (20-30) and {zone:1434} (30-45); or the Auction House. The densest patch of {item:3356} in {zone:1434} is marked."] = "39 {item:3356} para {spell:3452}: {skill:182}: {item:3356} (perícia 125) em {zone:1440} (18-30), {zone:1437} (20-30) e {zone:1434} (30-45); ou a Casa de Leilões. O maior aglomerado de {item:3356} em {zone:1434} está marcado.",
+	["Get {item:3356} (Alliance)"] = "",
+	-- {item:3356} Kingsblood · {skill:171} Alchemy · {spell:3452} Mana Potion · {skill:182} Herbalism · {zone:1440} Ashenvale · {zone:1437} Wetlands · {zone:1434} Stranglethorn Vale
+	-- was: ["39 {item:3356} for {spell:3452}: {skill:182}: {item:3356} (skill 125) in {zone:1440} (18-30), {zone:1437} (20-30) and {zone:1434} (30-45). The densest patch of {item:3356} in {zone:1434} is marked."] = "39 {item:3356} para {spell:3452}: {skill:182}: {item:3356} (perícia 125) em {zone:1440} (18-30), {zone:1437} (20-30) e {zone:1434} (30-45). O maior aglomerado de {item:3356} em {zone:1434} está marcado."
+	["You need 39 {item:3356} for {skill:171} 150-225: {spell:3452}. {skill:182}: {item:3356} (skill 125) in {zone:1440} (18-30), {zone:1437} (20-30) and {zone:1434} (30-45). The densest patch of {item:3356} in {zone:1434} is marked. Or buy them at the Auction House."] = "",
 
-	-- Step 45: Kingsblood (Horde)
+	-- Step 45: Get Kingsblood (Horde)
 	-- {item:3356} Kingsblood
-	["{item:3356} (Horde)"] = "{item:3356} (Horda)",
-	-- {item:3356} Kingsblood · {spell:3452} Mana Potion · {skill:182} Herbalism · {zone:1413} The Barrens · {zone:1440} Ashenvale · {zone:1434} Stranglethorn Vale
-	["39 {item:3356} for {spell:3452}: {skill:182}: {item:3356} (skill 125) in {zone:1413} (10-25), {zone:1440} (18-30) and {zone:1434} (30-45); or the Auction House. The densest patch of {item:3356} in {zone:1413} is marked."] = "39 {item:3356} para {spell:3452}: {skill:182}: {item:3356} (perícia 125) em {zone:1413} (10-25), {zone:1440} (18-30) e {zone:1434} (30-45); ou a Casa de Leilões. O maior aglomerado de {item:3356} em {zone:1413} está marcado.",
+	["Get {item:3356} (Horde)"] = "",
+	-- {item:3356} Kingsblood · {skill:171} Alchemy · {spell:3452} Mana Potion · {skill:182} Herbalism · {zone:1413} The Barrens · {zone:1440} Ashenvale · {zone:1434} Stranglethorn Vale
+	-- was: ["39 {item:3356} for {spell:3452}: {skill:182}: {item:3356} (skill 125) in {zone:1413} (10-25), {zone:1440} (18-30) and {zone:1434} (30-45). The densest patch of {item:3356} in {zone:1413} is marked."] = "39 {item:3356} para {spell:3452}: {skill:182}: {item:3356} (perícia 125) em {zone:1413} (10-25), {zone:1440} (18-30) e {zone:1434} (30-45). O maior aglomerado de {item:3356} em {zone:1413} está marcado."
+	["You need 39 {item:3356} for {skill:171} 150-225: {spell:3452}. {skill:182}: {item:3356} (skill 125) in {zone:1413} (10-25), {zone:1440} (18-30) and {zone:1434} (30-45). The densest patch of {item:3356} in {zone:1413} is marked. Or buy them at the Auction House."] = "",
 
-	-- Step 46: Stranglekelp (Alliance)
+	-- Step 46: Get Stranglekelp (Alliance)
 	-- {object:2045} Stranglekelp
-	["{object:2045} (Alliance)"] = "{object:2045} (Aliança)",
-	-- {object:2045} Stranglekelp · {spell:3452} Mana Potion · {skill:182} Herbalism · {zone:1437} Wetlands · {zone:1434} Stranglethorn Vale · {zone:1425} The Hinterlands
-	["39 {object:2045} for {spell:3452}: {skill:182}: {object:2045} (skill 85) in {zone:1437} (20-30), {zone:1434} (30-45) and {zone:1425} (40-50); or the Auction House. The densest patch of {object:2045} in {zone:1434} is marked."] = "39 {object:2045} para {spell:3452}: {skill:182}: {object:2045} (perícia 85) em {zone:1437} (20-30), {zone:1434} (30-45) e {zone:1425} (40-50); ou a Casa de Leilões. O maior aglomerado de {object:2045} em {zone:1434} está marcado.",
+	["Get {object:2045} (Alliance)"] = "",
+	-- {object:2045} Stranglekelp · {skill:171} Alchemy · {spell:3452} Mana Potion · {skill:182} Herbalism · {zone:1437} Wetlands · {zone:1434} Stranglethorn Vale · {zone:1425} The Hinterlands
+	-- was: ["39 {object:2045} for {spell:3452}: {skill:182}: {object:2045} (skill 85) in {zone:1437} (20-30), {zone:1434} (30-45) and {zone:1425} (40-50). The densest patch of {object:2045} in {zone:1434} is marked."] = "39 {object:2045} para {spell:3452}: {skill:182}: {object:2045} (perícia 85) em {zone:1437} (20-30), {zone:1434} (30-45) e {zone:1425} (40-50). O maior aglomerado de {object:2045} em {zone:1434} está marcado."
+	["You need 39 {object:2045} for {skill:171} 150-225: {spell:3452}. {skill:182}: {object:2045} (skill 85) in {zone:1437} (20-30), {zone:1434} (30-45) and {zone:1425} (40-50). The densest patch of {object:2045} in {zone:1434} is marked. Or buy them at the Auction House."] = "",
 
-	-- Step 47: Stranglekelp (Horde)
+	-- Step 47: Get Stranglekelp (Horde)
 	-- {object:2045} Stranglekelp
-	["{object:2045} (Horde)"] = "{object:2045} (Horda)",
-	-- {object:2045} Stranglekelp · {spell:3452} Mana Potion · {skill:182} Herbalism · {zone:1413} The Barrens · {zone:1434} Stranglethorn Vale · {zone:1425} The Hinterlands
-	["39 {object:2045} for {spell:3452}: {skill:182}: {object:2045} (skill 85) in {zone:1413} (10-25), {zone:1434} (30-45) and {zone:1425} (40-50); or the Auction House. The densest patch of {object:2045} in {zone:1413} is marked."] = "39 {object:2045} para {spell:3452}: {skill:182}: {object:2045} (perícia 85) em {zone:1413} (10-25), {zone:1434} (30-45) e {zone:1425} (40-50); ou a Casa de Leilões. O maior aglomerado de {object:2045} em {zone:1413} está marcado.",
+	["Get {object:2045} (Horde)"] = "",
+	-- {object:2045} Stranglekelp · {skill:171} Alchemy · {spell:3452} Mana Potion · {skill:182} Herbalism · {zone:1413} The Barrens · {zone:1434} Stranglethorn Vale · {zone:1425} The Hinterlands
+	-- was: ["39 {object:2045} for {spell:3452}: {skill:182}: {object:2045} (skill 85) in {zone:1413} (10-25), {zone:1434} (30-45) and {zone:1425} (40-50). The densest patch of {object:2045} in {zone:1413} is marked."] = "39 {object:2045} para {spell:3452}: {skill:182}: {object:2045} (perícia 85) em {zone:1413} (10-25), {zone:1434} (30-45) e {zone:1425} (40-50). O maior aglomerado de {object:2045} em {zone:1413} está marcado."
+	["You need 39 {object:2045} for {skill:171} 150-225: {spell:3452}. {skill:182}: {object:2045} (skill 85) in {zone:1413} (10-25), {zone:1434} (30-45) and {zone:1425} (40-50). The densest patch of {object:2045} in {zone:1413} is marked. Or buy them at the Auction House."] = "",
 
-	-- Step 48: Goldthorn (Alliance)
+	-- Step 48: Get Goldthorn (Alliance)
 	-- {object:2046} Goldthorn
-	["{object:2046} (Alliance)"] = "{object:2046} (Aliança)",
-	-- {object:2046} Goldthorn · {item:8951} Elixir of Defense · {skill:182} Herbalism · {zone:1417} Arathi Highlands · {zone:1425} The Hinterlands · {zone:1444} Feralas
-	["40 {object:2046} for {item:8951} (8 of them for 225-300: pick them all now): {skill:182}: {object:2046} (skill 170) in {zone:1417} (30-40), {zone:1425} (40-50) and {zone:1444} (40-50); or the Auction House. The densest patch of {object:2046} in {zone:1417} is marked."] = "40 {object:2046} para {item:8951} (8 deles para 225-300: colete todos agora): {skill:182}: {object:2046} (perícia 170) em {zone:1417} (30-40), {zone:1425} (40-50) e {zone:1444} (40-50); ou a Casa de Leilões. O maior aglomerado de {object:2046} em {zone:1417} está marcado.",
+	["Get {object:2046} (Alliance)"] = "",
+	-- {object:2046} Goldthorn · {skill:171} Alchemy · {item:8951} Elixir of Defense · {skill:182} Herbalism · {zone:1417} Arathi Highlands · {zone:1425} The Hinterlands · {zone:1444} Feralas
+	-- was: ["40 {object:2046} for {item:8951} (8 of them for 225-300: pick them all now): {skill:182}: {object:2046} (skill 170) in {zone:1417} (30-40), {zone:1425} (40-50) and {zone:1444} (40-50). The densest patch of {object:2046} in {zone:1417} is marked."] = "40 {object:2046} para {item:8951} (8 deles para 225-300: colete todos agora): {skill:182}: {object:2046} (perícia 170) em {zone:1417} (30-40), {zone:1425} (40-50) e {zone:1444} (40-50). O maior aglomerado de {object:2046} em {zone:1417} está marcado."
+	["You need 40 {object:2046} for {skill:171} 150-225: {item:8951} (8 of them for 225-300: get them all now). {skill:182}: {object:2046} (skill 170) in {zone:1417} (30-40), {zone:1425} (40-50) and {zone:1444} (40-50). The densest patch of {object:2046} in {zone:1417} is marked. Or buy them at the Auction House."] = "",
 
-	-- Step 49: Goldthorn (Horde)
+	-- Step 49: Get Goldthorn (Horde)
 	-- {object:2046} Goldthorn
-	["{object:2046} (Horde)"] = "{object:2046} (Horda)",
-	-- {object:2046} Goldthorn · {item:8951} Elixir of Defense · {skill:182} Herbalism · {zone:1417} Arathi Highlands · {zone:1425} The Hinterlands · {zone:1444} Feralas
-	["40 {object:2046} for {item:8951} (8 of them for 225-300: pick them all now): {skill:182}: {object:2046} (skill 170) in {zone:1417} (30-40), {zone:1425} (40-50) and {zone:1444} (40-50); or the Auction House. The densest patch of {object:2046} in {zone:1444} is marked."] = "40 {object:2046} para {item:8951} (8 deles para 225-300: colete todos agora): {skill:182}: {object:2046} (perícia 170) em {zone:1417} (30-40), {zone:1425} (40-50) e {zone:1444} (40-50); ou a Casa de Leilões. O maior aglomerado de {object:2046} em {zone:1444} está marcado.",
+	["Get {object:2046} (Horde)"] = "",
+	-- {object:2046} Goldthorn · {skill:171} Alchemy · {item:8951} Elixir of Defense · {skill:182} Herbalism · {zone:1417} Arathi Highlands · {zone:1425} The Hinterlands · {zone:1444} Feralas
+	-- was: ["40 {object:2046} for {item:8951} (8 of them for 225-300: pick them all now): {skill:182}: {object:2046} (skill 170) in {zone:1417} (30-40), {zone:1425} (40-50) and {zone:1444} (40-50). The densest patch of {object:2046} in {zone:1444} is marked."] = "40 {object:2046} para {item:8951} (8 deles para 225-300: colete todos agora): {skill:182}: {object:2046} (perícia 170) em {zone:1417} (30-40), {zone:1425} (40-50) e {zone:1444} (40-50). O maior aglomerado de {object:2046} em {zone:1444} está marcado."
+	["You need 40 {object:2046} for {skill:171} 150-225: {item:8951} (8 of them for 225-300: get them all now). {skill:182}: {object:2046} (skill 170) in {zone:1417} (30-40), {zone:1425} (40-50) and {zone:1444} (40-50). The densest patch of {object:2046} in {zone:1444} is marked. Or buy them at the Auction House."] = "",
 
 	-- Step 50: Expert Alchemy
 	-- {skill:171} Alchemy
@@ -251,7 +321,7 @@ return {
 	-- {spell:3176} Lesser Troll's Blood Elixir
 	["{spell:3176} to 160"] = "{spell:3176} até 160",
 	-- {spell:3176} Lesser Troll's Blood Elixir · {item:2453} Bruiseweed · {item:2450} Briarthorn · {item:3372} Leaded Vial
-	["{spell:3176} is yellow at 150 (yellow 150, green 170, grey 190): about 12 crafts to 160. Each takes 2 {item:2453}, 2 {item:2450} and 1 {item:3372}. Two {item:2453} and two {item:2450} a craft; {item:2453} grows in the 15-30 zones."] = "{spell:3176} é amarela em 150 (amarelo 150, verde 170, cinza 190): cerca de 12 criações até 160. Cada uma usa 2 {item:2453}, 2 {item:2450} e 1 {item:3372}. Dois {item:2453} e dois {item:2450} por criação; {item:2453} cresce nas zonas de 15 a 30.",
+	["{spell:3176} is yellow at 150 (yellow 150, green 170, grey 190): about 12 crafts to 160. Each takes 2 {item:2453}, 2 {item:2450} and 1 {item:3372}. Two {item:2453} and two {item:2450} a craft; {item:2453} grows in the 15-30 zones. If you got here without learning {spell:3176}, learn it now: an earlier step teaches it."] = "{spell:3176} está amarelo em 150 (amarelo 150, verde 170, cinza 190): cerca de 12 produções até 160. Cada uma leva 2 {item:2453}, 2 {item:2450} e 1 {item:3372}. Dois {item:2453} e dois {item:2450} por produção; {item:2453} cresce nas zonas 15-30. Se chegou aqui sem aprender {spell:3176}, aprenda agora: uma etapa anterior ensina.",
 
 	-- Step 52: Alchemy recipes at 160
 	-- {skill:171} Alchemy
@@ -280,46 +350,54 @@ return {
 	-- Step 56: Alchemy 225-300: vendor goods
 	-- {skill:171} Alchemy
 	["{skill:171} 225-300: vendor goods"] = "{skill:171} 225-300: itens de vendedor",
-	-- {item:3372} Leaded Vial · {item:8925} Crystal Vial · {zone:1453} Stormwind City · {npc:1286} Edna Mullby · {npc:1325} Jasper Fel · {zone:1454} Orgrimmar · {npc:3367} Felika · {npc:3348} Kor'geld · {npc:3334} Rekkul
-	["Buy the whole bracket's share in one go: 51 {item:3372} (20s 40c) and 86 {item:8925} (4g 30s); about 4g 50s 40c in all. The arrow picks the nearest seller of your faction ({zone:1453}: {npc:1286}, Eldraeith and {npc:1325}; {zone:1454}: {npc:3367}, {npc:3348} and {npc:3334})."] = "Compre a parte de toda a faixa de uma vez: 51 {item:3372} (20s 40c) e 86 {item:8925} (4g 30s); cerca de 4g 50s 40c no total. A seta escolhe o vendedor mais próximo da sua facção ({zone:1453}: {npc:1286}, Eldraeith e {npc:1325}; {zone:1454}: {npc:3367}, {npc:3348} e {npc:3334}).",
+	-- {item:3372} Leaded Vial · {item:8925} Crystal Vial · {zone:1453} Stormwind City · {npc:1286} Edna Mullby · {npc:5503} Eldraeith · {npc:1325} Jasper Fel · {zone:1454} Orgrimmar · {npc:3367} Felika · {npc:3348} Kor'geld · {npc:3334} Rekkul
+	["Buy the whole bracket's share in one go: 51 {item:3372} (20s 40c) and 86 {item:8925} (4g 30s); about 4g 50s 40c in all. The arrow picks the nearest seller of your faction ({zone:1453}: {npc:1286}, {npc:5503} and {npc:1325}; {zone:1454}: {npc:3367}, {npc:3348} and {npc:3334})."] = "Compre a parte de toda a faixa de uma vez: 51 {item:3372} (20s 40c) e 86 {item:8925} (4g 30s); cerca de 4g 50s 40c no total. A seta escolhe o vendedor mais próximo da sua facção ({zone:1453}: {npc:1286}, {npc:5503} e {npc:1325}; {zone:1454}: {npc:3367}, {npc:3348} e {npc:3334}).",
 
 	-- Step 57: Recipe: Elixir of Superior Defense
 	-- {item:13478} Recipe: Elixir of Superior Defense · {item:13445} Elixir of Greater Defense · {skill:171} Alchemy · {npc:5178} Soolie Berryfizz · {zone:1455} Ironforge · {npc:3348} Kor'geld · {zone:1454} Orgrimmar
 	["{item:13478} teaches {item:13445} ({skill:171} 265) for 1g 30s. Sold by Alliance: {npc:5178} ({zone:1455}), limited stock; Horde: {npc:3348} ({zone:1454}), limited stock. Its sellers keep one or two in stock that come back some time after a sale; the Auction House often has it too."] = "{item:13478} ensina {item:13445} ({skill:171} 265) por 1g 30s. Vendido pela Aliança: {npc:5178} ({zone:1455}), estoque limitado; pela Horda: {npc:3348} ({zone:1454}), estoque limitado. Os vendedores mantêm uma ou duas em estoque, que voltam algum tempo depois de uma venda; a Casa de Leilões também costuma ter.",
 
-	-- Step 58: Arthas' Tears (Alliance)
+	-- Step 58: Get Arthas' Tears (Alliance)
 	-- {item:8836} Arthas' Tears
-	["{item:8836} (Alliance)"] = "{item:8836} (Aliança)",
-	-- {item:8836} Arthas' Tears · {item:9154} Draught of Detect Undead · {skill:182} Herbalism · {zone:1448} Felwood · {zone:1422} Western Plaguelands · {zone:1423} Eastern Plaguelands
-	["43 {item:8836} for {item:9154}: {skill:182}: {item:8836} (skill 220) in {zone:1448} (48-55), {zone:1422} (51-58) and {zone:1423} (53-60); or the Auction House. The densest patch of {item:8836} in {zone:1422} is marked."] = "43 {item:8836} para {item:9154}: {skill:182}: {item:8836} (perícia 220) em {zone:1448} (48-55), {zone:1422} (51-58) e {zone:1423} (53-60); ou a Casa de Leilões. O maior aglomerado de {item:8836} em {zone:1422} está marcado.",
+	-- was: ["{item:8836} (Alliance)"] = "{item:8836} (Aliança)"
+	["Get {item:8836} (Alliance)"] = "",
+	-- {item:8836} Arthas' Tears · {skill:171} Alchemy · {item:9154} Draught of Detect Undead · {skill:182} Herbalism · {zone:1448} Felwood · {zone:1422} Western Plaguelands · {zone:1423} Eastern Plaguelands
+	-- was: ["43 {item:8836} for {item:9154}: {skill:182}: {item:8836} (skill 220) in {zone:1448} (48-55), {zone:1422} (51-58) and {zone:1423} (53-60). The densest patch of {item:8836} in {zone:1422} is marked."] = "43 {item:8836} para {item:9154}: {skill:182}: {item:8836} (perícia 220) em {zone:1448} (48-55), {zone:1422} (51-58) e {zone:1423} (53-60). O maior aglomerado de {item:8836} em {zone:1422} está marcado."
+	["You need 43 {item:8836} for {skill:171} 225-300: {item:9154}. {skill:182}: {item:8836} (skill 220) in {zone:1448} (48-55), {zone:1422} (51-58) and {zone:1423} (53-60). The densest patch of {item:8836} in {zone:1422} is marked. Or buy them at the Auction House."] = "",
 
-	-- Step 59: Arthas' Tears (Horde)
+	-- Step 59: Get Arthas' Tears (Horde)
 	-- {item:8836} Arthas' Tears
-	["{item:8836} (Horde)"] = "{item:8836} (Horda)",
-	-- {item:8836} Arthas' Tears · {item:9154} Draught of Detect Undead · {skill:182} Herbalism · {zone:1448} Felwood · {zone:1422} Western Plaguelands · {zone:1423} Eastern Plaguelands
-	["43 {item:8836} for {item:9154}: {skill:182}: {item:8836} (skill 220) in {zone:1448} (48-55), {zone:1422} (51-58) and {zone:1423} (53-60); or the Auction House. The densest patch of {item:8836} in {zone:1448} is marked."] = "43 {item:8836} para {item:9154}: {skill:182}: {item:8836} (perícia 220) em {zone:1448} (48-55), {zone:1422} (51-58) e {zone:1423} (53-60); ou a Casa de Leilões. O maior aglomerado de {item:8836} em {zone:1448} está marcado.",
+	-- was: ["{item:8836} (Horde)"] = "{item:8836} (Horda)"
+	["Get {item:8836} (Horde)"] = "",
+	-- {item:8836} Arthas' Tears · {skill:171} Alchemy · {item:9154} Draught of Detect Undead · {skill:182} Herbalism · {zone:1448} Felwood · {zone:1422} Western Plaguelands · {zone:1423} Eastern Plaguelands
+	-- was: ["43 {item:8836} for {item:9154}: {skill:182}: {item:8836} (skill 220) in {zone:1448} (48-55), {zone:1422} (51-58) and {zone:1423} (53-60). The densest patch of {item:8836} in {zone:1448} is marked."] = "43 {item:8836} para {item:9154}: {skill:182}: {item:8836} (perícia 220) em {zone:1448} (48-55), {zone:1422} (51-58) e {zone:1423} (53-60). O maior aglomerado de {item:8836} em {zone:1448} está marcado."
+	["You need 43 {item:8836} for {skill:171} 225-300: {item:9154}. {skill:182}: {item:8836} (skill 220) in {zone:1448} (48-55), {zone:1422} (51-58) and {zone:1423} (53-60). The densest patch of {item:8836} in {zone:1448} is marked. Or buy them at the Auction House."] = "",
 
-	-- Step 60: Sungrass (Alliance)
+	-- Step 60: Get Sungrass (Alliance)
 	-- {item:8838} Sungrass
-	["{item:8838} (Alliance)"] = "{item:8838} (Aliança)",
-	-- {item:8838} Sungrass · {item:13445} Elixir of Greater Defense · {skill:182} Herbalism · {zone:1425} The Hinterlands · {zone:1444} Feralas · {zone:1447} Azshara
-	["43 {item:8838} for {item:13445}: {skill:182}: {item:8838} (skill 230) in {zone:1425} (40-50), {zone:1444} (40-50) and {zone:1447} (45-55); or the Auction House. The densest patch of {item:8838} in {zone:1425} is marked."] = "43 {item:8838} para {item:13445}: {skill:182}: {item:8838} (perícia 230) em {zone:1425} (40-50), {zone:1444} (40-50) e {zone:1447} (45-55); ou a Casa de Leilões. O maior aglomerado de {item:8838} em {zone:1425} está marcado.",
+	["Get {item:8838} (Alliance)"] = "",
+	-- {item:8838} Sungrass · {skill:171} Alchemy · {item:13445} Elixir of Greater Defense · {skill:182} Herbalism · {zone:1425} The Hinterlands · {zone:1444} Feralas · {zone:1447} Azshara
+	-- was: ["43 {item:8838} for {item:13445}: {skill:182}: {item:8838} (skill 230) in {zone:1425} (40-50), {zone:1444} (40-50) and {zone:1447} (45-55). The densest patch of {item:8838} in {zone:1425} is marked."] = "43 {item:8838} para {item:13445}: {skill:182}: {item:8838} (perícia 230) em {zone:1425} (40-50), {zone:1444} (40-50) e {zone:1447} (45-55). O maior aglomerado de {item:8838} em {zone:1425} está marcado."
+	["You need 43 {item:8838} for {skill:171} 225-300: {item:13445}. {skill:182}: {item:8838} (skill 230) in {zone:1425} (40-50), {zone:1444} (40-50) and {zone:1447} (45-55). The densest patch of {item:8838} in {zone:1425} is marked. Or buy them at the Auction House."] = "",
 
-	-- Step 61: Sungrass (Horde)
+	-- Step 61: Get Sungrass (Horde)
 	-- {item:8838} Sungrass
-	["{item:8838} (Horde)"] = "{item:8838} (Horda)",
-	-- {item:8838} Sungrass · {item:13445} Elixir of Greater Defense · {skill:182} Herbalism · {zone:1425} The Hinterlands · {zone:1444} Feralas · {zone:1447} Azshara
-	["43 {item:8838} for {item:13445}: {skill:182}: {item:8838} (skill 230) in {zone:1425} (40-50), {zone:1444} (40-50) and {zone:1447} (45-55); or the Auction House. The densest patch of {item:8838} in {zone:1444} is marked."] = "43 {item:8838} para {item:13445}: {skill:182}: {item:8838} (perícia 230) em {zone:1425} (40-50), {zone:1444} (40-50) e {zone:1447} (45-55); ou a Casa de Leilões. O maior aglomerado de {item:8838} em {zone:1444} está marcado.",
+	["Get {item:8838} (Horde)"] = "",
+	-- {item:8838} Sungrass · {skill:171} Alchemy · {item:13445} Elixir of Greater Defense · {skill:182} Herbalism · {zone:1425} The Hinterlands · {zone:1444} Feralas · {zone:1447} Azshara
+	-- was: ["43 {item:8838} for {item:13445}: {skill:182}: {item:8838} (skill 230) in {zone:1425} (40-50), {zone:1444} (40-50) and {zone:1447} (45-55). The densest patch of {item:8838} in {zone:1444} is marked."] = "43 {item:8838} para {item:13445}: {skill:182}: {item:8838} (perícia 230) em {zone:1425} (40-50), {zone:1444} (40-50) e {zone:1447} (45-55). O maior aglomerado de {item:8838} em {zone:1444} está marcado."
+	["You need 43 {item:8838} for {skill:171} 225-300: {item:13445}. {skill:182}: {item:8838} (skill 230) in {zone:1425} (40-50), {zone:1444} (40-50) and {zone:1447} (45-55). The densest patch of {item:8838} in {zone:1444} is marked. Or buy them at the Auction House."] = "",
 
-	-- Step 62: Stonescale Eel (Alliance)
+	-- Step 62: Get Stonescale Eel (Alliance)
 	-- {item:13422} Stonescale Eel
-	["{item:13422} (Alliance)"] = "{item:13422} (Aliança)",
-	-- {item:13422} Stonescale Eel · {item:13445} Elixir of Greater Defense · {skill:356} Fishing · {object:180712} Stonescale Eel Swarm
-	["43 {item:13422} for {item:13445}: {skill:356}; or the Auction House. Fish {object:180712} here."] = "43 {item:13422} para {item:13445}: {skill:356}; ou a Casa de Leilões. Pesque {object:180712} aqui.",
+	-- was: ["{item:13422} (Alliance)"] = "{item:13422} (Aliança)"
+	["Get {item:13422} (Alliance)"] = "",
+	-- {item:13422} Stonescale Eel · {skill:171} Alchemy · {item:13445} Elixir of Greater Defense · {object:180712} Stonescale Eel Swarm
+	["You need 43 {item:13422} for {skill:171} 225-300: {item:13445}. Fish them from the {object:180712} pools at the marked spot. Or buy them at the Auction House."] = "",
 
-	-- Step 63: Stonescale Eel (Horde)
+	-- Step 63: Get Stonescale Eel (Horde)
 	-- {item:13422} Stonescale Eel
-	["{item:13422} (Horde)"] = "{item:13422} (Horda)",
+	-- was: ["{item:13422} (Horde)"] = "{item:13422} (Horda)"
+	["Get {item:13422} (Horde)"] = "",
 
 	-- Step 64: Artisan Alchemy
 	-- {skill:171} Alchemy
@@ -331,7 +409,7 @@ return {
 	-- {item:8951} Elixir of Defense
 	["{item:8951} to 230"] = "{item:8951} até 230",
 	-- {item:8951} Elixir of Defense · {item:3355} Wild Steelbloom · {item:3821} Goldthorn · {item:3372} Leaded Vial · {zone:1418} Badlands
-	["{item:8951} is yellow at 225 (yellow 215, green 235, grey 255): about 8 crafts to 230. Each takes 1 {item:3355}, 1 {item:3821} and 1 {item:3372}. {item:3355} and {item:3821} are the herbs of the 30-45 zones (Stranglethorn, Arathi, the {zone:1418})."] = "{item:8951} é amarela em 225 (amarelo 215, verde 235, cinza 255): cerca de 8 criações até 230. Cada uma usa 1 {item:3355}, 1 {item:3821} e 1 {item:3372}. {item:3355} e {item:3821} são as ervas das zonas de 30 a 45 (Selva do Espinhaço, Arathi, as {zone:1418}).",
+	["{item:8951} is yellow at 225 (yellow 215, green 235, grey 255): about 8 crafts to 230. Each takes 1 {item:3355}, 1 {item:3821} and 1 {item:3372}. {item:3355} and {item:3821} are the herbs of the 30-45 zones (Stranglethorn, Arathi, the {zone:1418}). If you got here without learning {item:8951}, learn it now: an earlier step teaches it."] = "{item:8951} está amarelo em 225 (amarelo 215, verde 235, cinza 255): cerca de 8 produções até 230. Cada uma leva 1 {item:3355}, 1 {item:3821} e 1 {item:3372}. {item:3355} e {item:3821} são as ervas das zonas 30-45 (Selva do Espinhaço, Arathi, {zone:1418}). Se chegou aqui sem aprender {item:8951}, aprenda agora: uma etapa anterior ensina.",
 
 	-- Step 66: Alchemy recipes at 230
 	-- {skill:171} Alchemy
@@ -360,6 +438,49 @@ return {
 	["from the recipe in your bags"] = "da receita nas suas bolsas",
 
 	-- No longer in the guide (its English changed or it went away): reuse or delete.
+	-- ["110 {item:2447} for {item:5997} and {spell:2331} (28 of them for 75-150: pick them all now): {skill:182}: {item:2447} (skill 1). The densest patch of {item:2447} in {zone:1411} is marked."] = "110 {item:2447} para {item:5997} e {spell:2331} (28 deles para 75-150: colete todos agora): {skill:182}: {item:2447} (perícia 1). O maior aglomerado de {item:2447} em {zone:1411} está marcado.",
+	-- ["110 {item:2447} for {item:5997} and {spell:2331} (28 of them for 75-150: pick them all now): {skill:182}: {item:2447} (skill 1). The densest patch of {item:2447} in {zone:1412} is marked."] = "110 {item:2447} para {item:5997} e {spell:2331} (28 deles para 75-150: colete todos agora): {skill:182}: {item:2447} (perícia 1). O maior aglomerado de {item:2447} em {zone:1412} está marcado.",
+	-- ["110 {item:2447} for {item:5997} and {spell:2331} (28 of them for 75-150: pick them all now): {skill:182}: {item:2447} (skill 1). The densest patch of {item:2447} in {zone:1420} is marked."] = "110 {item:2447} para {item:5997} e {spell:2331} (28 deles para 75-150: colete todos agora): {skill:182}: {item:2447} (perícia 1). O maior aglomerado de {item:2447} em {zone:1420} está marcado.",
+	-- ["110 {item:2447} for {item:5997} and {spell:2331} (28 of them for 75-150: pick them all now): {skill:182}: {item:2447} (skill 1). The densest patch of {item:2447} in {zone:1426} is marked."] = "110 {item:2447} para {item:5997} e {spell:2331} (28 deles para 75-150: colete todos agora): {skill:182}: {item:2447} (perícia 1). O maior aglomerado de {item:2447} em {zone:1426} está marcado.",
+	-- ["110 {item:2447} for {item:5997} and {spell:2331} (28 of them for 75-150: pick them all now): {skill:182}: {item:2447} (skill 1). The densest patch of {item:2447} in {zone:1429} is marked."] = "110 {item:2447} para {item:5997} e {spell:2331} (28 deles para 75-150: colete todos agora): {skill:182}: {item:2447} (perícia 1). O maior aglomerado de {item:2447} em {zone:1429} está marcado.",
+	-- ["110 {item:2447} for {item:5997} and {spell:2331} (28 of them for 75-150: pick them all now): {skill:182}: {item:2447} (skill 1). The densest patch of {item:2447} in {zone:1438} is marked."] = "110 {item:2447} para {item:5997} e {spell:2331} (28 deles para 75-150: colete todos agora): {skill:182}: {item:2447} (perícia 1). O maior aglomerado de {item:2447} em {zone:1438} está marcado.",
+	-- ["110 {item:2447} for {item:5997} and {spell:2331} (28 of them for 75-150: pick them all now): {skill:182}: {item:2447} (skill 1). The densest patch of {item:2447} in {zone:2521} is marked."] = "110 {item:2447} para {item:5997} e {spell:2331} (28 deles para 75-150: colete todos agora): {skill:182}: {item:2447} (perícia 1). O maior aglomerado de {item:2447} em {zone:2521} está marcado.",
+	-- ["152 {item:2450} for {spell:3171} and {spell:3176} (24 of them for 150-225: pick them all now): {skill:182}: {item:2450} (skill 70). The densest patch of {item:2450} in {zone:1413} is marked."] = "152 {item:2450} para {spell:3171} e {spell:3176} (24 deles para 150-225: colete todos agora): {skill:182}: {item:2450} (perícia 70). O maior aglomerado de {item:2450} em {zone:1413} está marcado.",
+	-- ["152 {item:2450} for {spell:3171} and {spell:3176} (24 of them for 150-225: pick them all now): {skill:182}: {item:2450} (skill 70). The densest patch of {item:2450} in {zone:1421} is marked."] = "152 {item:2450} para {spell:3171} e {spell:3176} (24 deles para 150-225: colete todos agora): {skill:182}: {item:2450} (perícia 70). O maior aglomerado de {item:2450} em {zone:1421} está marcado.",
+	-- ["152 {item:2450} for {spell:3171} and {spell:3176} (24 of them for 150-225: pick them all now): {skill:182}: {item:2450} (skill 70). The densest patch of {item:2450} in {zone:1432} is marked."] = "152 {item:2450} para {spell:3171} e {spell:3176} (24 deles para 150-225: colete todos agora): {skill:182}: {item:2450} (perícia 70). O maior aglomerado de {item:2450} em {zone:1432} está marcado.",
+	-- ["152 {item:2450} for {spell:3171} and {spell:3176} (24 of them for 150-225: pick them all now): {skill:182}: {item:2450} (skill 70). The densest patch of {item:2450} in {zone:1436} is marked."] = "152 {item:2450} para {spell:3171} e {spell:3176} (24 deles para 150-225: colete todos agora): {skill:182}: {item:2450} (perícia 70). O maior aglomerado de {item:2450} em {zone:1436} está marcado.",
+	-- ["152 {item:2450} for {spell:3171} and {spell:3176} (24 of them for 150-225: pick them all now): {skill:182}: {item:2450} (skill 70). The densest patch of {item:2450} in {zone:1439} is marked."] = "152 {item:2450} para {spell:3171} e {spell:3176} (24 deles para 150-225: colete todos agora): {skill:182}: {item:2450} (perícia 70). O maior aglomerado de {item:2450} em {zone:1439} está marcado.",
+	-- ["39 {item:3356} for {spell:3452}: {skill:182}: {item:3356} (skill 125) in {zone:1413} (10-25), {zone:1440} (18-30) and {zone:1434} (30-45). The densest patch of {item:3356} in {zone:1413} is marked."] = "39 {item:3356} para {spell:3452}: {skill:182}: {item:3356} (perícia 125) em {zone:1413} (10-25), {zone:1440} (18-30) e {zone:1434} (30-45). O maior aglomerado de {item:3356} em {zone:1413} está marcado.",
+	-- ["39 {item:3356} for {spell:3452}: {skill:182}: {item:3356} (skill 125) in {zone:1440} (18-30), {zone:1437} (20-30) and {zone:1434} (30-45). The densest patch of {item:3356} in {zone:1434} is marked."] = "39 {item:3356} para {spell:3452}: {skill:182}: {item:3356} (perícia 125) em {zone:1440} (18-30), {zone:1437} (20-30) e {zone:1434} (30-45). O maior aglomerado de {item:3356} em {zone:1434} está marcado.",
+	-- ["39 {object:2045} for {spell:3452}: {skill:182}: {object:2045} (skill 85) in {zone:1413} (10-25), {zone:1434} (30-45) and {zone:1425} (40-50). The densest patch of {object:2045} in {zone:1413} is marked."] = "39 {object:2045} para {spell:3452}: {skill:182}: {object:2045} (perícia 85) em {zone:1413} (10-25), {zone:1434} (30-45) e {zone:1425} (40-50). O maior aglomerado de {object:2045} em {zone:1413} está marcado.",
+	-- ["39 {object:2045} for {spell:3452}: {skill:182}: {object:2045} (skill 85) in {zone:1437} (20-30), {zone:1434} (30-45) and {zone:1425} (40-50). The densest patch of {object:2045} in {zone:1434} is marked."] = "39 {object:2045} para {spell:3452}: {skill:182}: {object:2045} (perícia 85) em {zone:1437} (20-30), {zone:1434} (30-45) e {zone:1425} (40-50). O maior aglomerado de {object:2045} em {zone:1434} está marcado.",
+	-- ["40 {object:1623} for {item:8951} (8 of them for 225-300: pick them all now): {skill:182}: {object:1623} (skill 115) in {zone:1442} (15-27), {zone:1417} (30-40) and {zone:1434} (30-45). The densest patch of {object:1623} in {zone:1434} is marked."] = "40 {object:1623} para {item:8951} (8 deles para 225-300: colete todos agora): {skill:182}: {object:1623} (perícia 115) em {zone:1442} (15-27), {zone:1417} (30-40) e {zone:1434} (30-45). O maior aglomerado de {object:1623} em {zone:1434} está marcado.",
+	-- ["40 {object:1623} for {item:8951} (8 of them for 225-300: pick them all now): {skill:182}: {object:1623} (skill 115) in {zone:1442} (15-27), {zone:1417} (30-40) and {zone:1434} (30-45). The densest patch of {object:1623} in {zone:1442} is marked."] = "40 {object:1623} para {item:8951} (8 deles para 225-300: colete todos agora): {skill:182}: {object:1623} (perícia 115) em {zone:1442} (15-27), {zone:1417} (30-40) e {zone:1434} (30-45). O maior aglomerado de {object:1623} em {zone:1442} está marcado.",
+	-- ["40 {object:2046} for {item:8951} (8 of them for 225-300: pick them all now): {skill:182}: {object:2046} (skill 170) in {zone:1417} (30-40), {zone:1425} (40-50) and {zone:1444} (40-50). The densest patch of {object:2046} in {zone:1417} is marked."] = "40 {object:2046} para {item:8951} (8 deles para 225-300: colete todos agora): {skill:182}: {object:2046} (perícia 170) em {zone:1417} (30-40), {zone:1425} (40-50) e {zone:1444} (40-50). O maior aglomerado de {object:2046} em {zone:1417} está marcado.",
+	-- ["40 {object:2046} for {item:8951} (8 of them for 225-300: pick them all now): {skill:182}: {object:2046} (skill 170) in {zone:1417} (30-40), {zone:1425} (40-50) and {zone:1444} (40-50). The densest patch of {object:2046} in {zone:1444} is marked."] = "40 {object:2046} para {item:8951} (8 deles para 225-300: colete todos agora): {skill:182}: {object:2046} (perícia 170) em {zone:1417} (30-40), {zone:1425} (40-50) e {zone:1444} (40-50). O maior aglomerado de {object:2046} em {zone:1444} está marcado.",
+	-- ["43 {item:13422} for {item:13445}: {skill:356}. Fish {object:180712} here."] = "43 {item:13422} para {item:13445}: {skill:356}. Pesque {object:180712} aqui.",
+	-- ["43 {item:8836} for {item:9154}: {skill:182}: {item:8836} (skill 220) in {zone:1448} (48-55), {zone:1422} (51-58) and {zone:1423} (53-60). The densest patch of {item:8836} in {zone:1422} is marked."] = "43 {item:8836} para {item:9154}: {skill:182}: {item:8836} (perícia 220) em {zone:1448} (48-55), {zone:1422} (51-58) e {zone:1423} (53-60). O maior aglomerado de {item:8836} em {zone:1422} está marcado.",
+	-- ["43 {item:8836} for {item:9154}: {skill:182}: {item:8836} (skill 220) in {zone:1448} (48-55), {zone:1422} (51-58) and {zone:1423} (53-60). The densest patch of {item:8836} in {zone:1448} is marked."] = "43 {item:8836} para {item:9154}: {skill:182}: {item:8836} (perícia 220) em {zone:1448} (48-55), {zone:1422} (51-58) e {zone:1423} (53-60). O maior aglomerado de {item:8836} em {zone:1448} está marcado.",
+	-- ["43 {item:8838} for {item:13445}: {skill:182}: {item:8838} (skill 230) in {zone:1425} (40-50), {zone:1444} (40-50) and {zone:1447} (45-55). The densest patch of {item:8838} in {zone:1425} is marked."] = "43 {item:8838} para {item:13445}: {skill:182}: {item:8838} (perícia 230) em {zone:1425} (40-50), {zone:1444} (40-50) e {zone:1447} (45-55). O maior aglomerado de {item:8838} em {zone:1425} está marcado.",
+	-- ["43 {item:8838} for {item:13445}: {skill:182}: {item:8838} (skill 230) in {zone:1425} (40-50), {zone:1444} (40-50) and {zone:1447} (45-55). The densest patch of {item:8838} in {zone:1444} is marked."] = "43 {item:8838} para {item:13445}: {skill:182}: {item:8838} (perícia 230) em {zone:1425} (40-50), {zone:1444} (40-50) e {zone:1447} (45-55). O maior aglomerado de {item:8838} em {zone:1444} está marcado.",
+	-- ["54 {item:2453} for {spell:3176} (24 of them for 150-225: pick them all now): {skill:182}: {item:2453} (skill 100). The densest patch of {item:2453} in {zone:1413} is marked."] = "54 {item:2453} para {spell:3176} (24 deles para 150-225: colete todos agora): {skill:182}: {item:2453} (perícia 100). O maior aglomerado de {item:2453} em {zone:1413} está marcado.",
+	-- ["54 {item:2453} for {spell:3176} (24 of them for 150-225: pick them all now): {skill:182}: {item:2453} (skill 100). The densest patch of {item:2453} in {zone:1421} is marked."] = "54 {item:2453} para {spell:3176} (24 deles para 150-225: colete todos agora): {skill:182}: {item:2453} (perícia 100). O maior aglomerado de {item:2453} em {zone:1421} está marcado.",
+	-- ["54 {item:2453} for {spell:3176} (24 of them for 150-225: pick them all now): {skill:182}: {item:2453} (skill 100). The densest patch of {item:2453} in {zone:1432} is marked."] = "54 {item:2453} para {spell:3176} (24 deles para 150-225: colete todos agora): {skill:182}: {item:2453} (perícia 100). O maior aglomerado de {item:2453} em {zone:1432} está marcado.",
+	-- ["54 {item:2453} for {spell:3176} (24 of them for 150-225: pick them all now): {skill:182}: {item:2453} (skill 100). The densest patch of {item:2453} in {zone:1436} is marked."] = "54 {item:2453} para {spell:3176} (24 deles para 150-225: colete todos agora): {skill:182}: {item:2453} (perícia 100). O maior aglomerado de {item:2453} em {zone:1436} está marcado.",
+	-- ["54 {item:2453} for {spell:3176} (24 of them for 150-225: pick them all now): {skill:182}: {item:2453} (skill 100). The densest patch of {item:2453} in {zone:1439} is marked."] = "54 {item:2453} para {spell:3176} (24 deles para 150-225: colete todos agora): {skill:182}: {item:2453} (perícia 100). O maior aglomerado de {item:2453} em {zone:1439} está marcado.",
+	-- ["77 {item:785} for {spell:2331} and {spell:3171}: {skill:182}: {item:785} (skill 50). The densest patch of {item:785} in {zone:1413} is marked."] = "77 {item:785} para {spell:2331} e {spell:3171}: {skill:182}: {item:785} (perícia 50). O maior aglomerado de {item:785} em {zone:1413} está marcado.",
+	-- ["77 {item:785} for {spell:2331} and {spell:3171}: {skill:182}: {item:785} (skill 50). The densest patch of {item:785} in {zone:1421} is marked."] = "77 {item:785} para {spell:2331} e {spell:3171}: {skill:182}: {item:785} (perícia 50). O maior aglomerado de {item:785} em {zone:1421} está marcado.",
+	-- ["77 {item:785} for {spell:2331} and {spell:3171}: {skill:182}: {item:785} (skill 50). The densest patch of {item:785} in {zone:1432} is marked."] = "77 {item:785} para {spell:2331} e {spell:3171}: {skill:182}: {item:785} (perícia 50). O maior aglomerado de {item:785} em {zone:1432} está marcado.",
+	-- ["77 {item:785} for {spell:2331} and {spell:3171}: {skill:182}: {item:785} (skill 50). The densest patch of {item:785} in {zone:1436} is marked."] = "77 {item:785} para {spell:2331} e {spell:3171}: {skill:182}: {item:785} (perícia 50). O maior aglomerado de {item:785} em {zone:1436} está marcado.",
+	-- ["77 {item:785} for {spell:2331} and {spell:3171}: {skill:182}: {item:785} (skill 50). The densest patch of {item:785} in {zone:1438} is marked."] = "77 {item:785} para {spell:2331} e {spell:3171}: {skill:182}: {item:785} (perícia 50). O maior aglomerado de {item:785} em {zone:1438} está marcado.",
+	-- ["77 {item:785} for {spell:2331} and {spell:3171}: {skill:182}: {item:785} (skill 50). The densest patch of {item:785} in {zone:2521} is marked."] = "77 {item:785} para {spell:2331} e {spell:3171}: {skill:182}: {item:785} (perícia 50). O maior aglomerado de {item:785} em {zone:2521} está marcado.",
+	-- ["82 {item:765} for {item:5997}: {skill:182}: {item:765} (skill 1). The densest patch of {item:765} in {zone:1411} is marked."] = "82 {item:765} para {item:5997}: {skill:182}: {item:765} (perícia 1). O maior aglomerado de {item:765} em {zone:1411} está marcado.",
+	-- ["82 {item:765} for {item:5997}: {skill:182}: {item:765} (skill 1). The densest patch of {item:765} in {zone:1412} is marked."] = "82 {item:765} para {item:5997}: {skill:182}: {item:765} (perícia 1). O maior aglomerado de {item:765} em {zone:1412} está marcado.",
+	-- ["82 {item:765} for {item:5997}: {skill:182}: {item:765} (skill 1). The densest patch of {item:765} in {zone:1420} is marked."] = "82 {item:765} para {item:5997}: {skill:182}: {item:765} (perícia 1). O maior aglomerado de {item:765} em {zone:1420} está marcado.",
+	-- ["82 {item:765} for {item:5997}: {skill:182}: {item:765} (skill 1). The densest patch of {item:765} in {zone:1426} is marked."] = "82 {item:765} para {item:5997}: {skill:182}: {item:765} (perícia 1). O maior aglomerado de {item:765} em {zone:1426} está marcado.",
+	-- ["82 {item:765} for {item:5997}: {skill:182}: {item:765} (skill 1). The densest patch of {item:765} in {zone:1429} is marked."] = "82 {item:765} para {item:5997}: {skill:182}: {item:765} (perícia 1). O maior aglomerado de {item:765} em {zone:1429} está marcado.",
+	-- ["82 {item:765} for {item:5997}: {skill:182}: {item:765} (skill 1). The densest patch of {item:765} in {zone:1438} is marked."] = "82 {item:765} para {item:5997}: {skill:182}: {item:765} (perícia 1). O maior aglomerado de {item:765} em {zone:1438} está marcado.",
+	-- ["82 {item:765} for {item:5997}: {skill:182}: {item:765} (skill 1). The densest patch of {item:765} in {zone:2521} is marked."] = "82 {item:765} para {item:5997}: {skill:182}: {item:765} (perícia 1). O maior aglomerado de {item:765} em {zone:2521} está marcado.",
 	-- ["Apprentice {skill:171}"] = "{skill:171} (Aprendiz)",
 	-- ["Artisan needs character level 35 and {skill:171} 200; it raises the cap to 300. Materials for 225-300 are worth about 7g 80s in all."] = "Artífice exige personagem nível 35 e {skill:171} 200; eleva o limite para 300. Os materiais de 225-300 valem cerca de 7g 80s no total.",
 	-- ["Back to an {skill:171} trainer: {spell:11447} is taught from {skill:171} 190."] = "Volte a um instrutor de {skill:171}: {spell:11447} é ensinada a partir de {skill:171} 190.",
@@ -394,6 +515,10 @@ return {
 	-- ["Pick {object:2046} with {skill:182}; this is the densest patch in the data. The Auction House works too."] = "Pegue {object:2046} com {skill:182}; este é o local mais denso nos dados. A Casa de Leilões também serve.",
 	-- ["Teaches {item:6051} (needs {skill:171} 100). Vendors sell it in limited stock that restocks."] = "Ensina {item:6051} (exige {skill:171} 100). Vendedores têm estoque limitado que é reabastecido.",
 	-- ["Teaches {item:8951} (needs {skill:171} 265). Vendors sell it in limited stock that restocks; the Auction House often has it too."] = "Ensina {item:8951} (exige {skill:171} 265). Vendedores têm estoque limitado que é reabastecido; a Casa de Leilões também costuma ter.",
+	-- ["What 1-75 takes that the Auction House sells: 82 {item:765} and 110 {item:2447}. The counts drop by what your bags, bank and mail hold."] = "O que 1-75 exige e a Casa de Leilões vende: 82 {item:765} e 110 {item:2447}. As contagens diminuem conforme o que suas bolsas, seu banco e sua correspondência guardam.",
+	-- ["What 150-225 takes that the Auction House sells: 40 {item:3355}, 39 {item:3356}, 39 {item:3820} and 40 {item:3821}. The counts drop by what your bags, bank and mail hold."] = "O que 150-225 exige e a Casa de Leilões vende: 40 {item:3355}, 39 {item:3356}, 39 {item:3820} e 40 {item:3821}. As contagens diminuem conforme o que suas bolsas, seu banco e sua correspondência guardam.",
+	-- ["What 225-300 takes that the Auction House sells: 43 {item:8836}, 43 {item:8838} and 43 {item:13422}. The counts drop by what your bags, bank and mail hold."] = "O que 225-300 exige e a Casa de Leilões vende: 43 {item:8836}, 43 {item:8838} e 43 {item:13422}. As contagens diminuem conforme o que suas bolsas, seu banco e sua correspondência guardam.",
+	-- ["What 75-150 takes that the Auction House sells: 77 {item:785}, 152 {item:2450} and 54 {item:2453}. The counts drop by what your bags, bank and mail hold."] = "O que 75-150 exige e a Casa de Leilões vende: 77 {item:785}, 152 {item:2450} e 54 {item:2453}. As contagens diminuem conforme o que suas bolsas, seu banco e sua correspondência guardam.",
 	-- ["Yellow until 105, green until 125: not every craft gives a point."] = "Amarelo até 105, verde até 125: nem toda produção dá ponto.",
 	-- ["Yellow until 160, green until 170: not every craft gives a point."] = "Amarelo até 160, verde até 170: nem toda produção dá ponto.",
 	-- ["Yellow until 185, green until 205: not every craft gives a point."] = "Amarelo até 185, verde até 205: nem toda produção dá ponto.",
@@ -405,6 +530,8 @@ return {
 	-- ["Yellow until 255, green until 260: not every craft gives a point."] = "Amarelo até 255, verde até 260: nem toda produção dá ponto.",
 	-- ["Yellow until 265, green until 285: not every craft gives a point."] = "Amarelo até 265, verde até 285: nem toda produção dá ponto.",
 	-- ["Yellow until 85, green until 105: not every craft gives a point."] = "Amarelo até 85, verde até 105: nem toda produção dá ponto.",
+	-- ["{item:13422} (Alliance)"] = "{item:13422} (Aliança)",
+	-- ["{item:13422} (Horde)"] = "{item:13422} (Horda)",
 	-- ["{item:13423} to 259"] = "{item:13423} até 259",
 	-- ["{item:2447} (Alliance)"] = "{item:2447} (Aliança)",
 	-- ["{item:2447} (Horde)"] = "{item:2447} (Horda)",
@@ -418,6 +545,8 @@ return {
 	-- ["{item:247239} to 100"] = "{item:247239} até 100",
 	-- ["{item:247241} to 200"] = "{item:247241} até 200",
 	-- ["{item:247242} to 250"] = "{item:247242} até 250",
+	-- ["{item:3356} (Alliance)"] = "{item:3356} (Aliança)",
+	-- ["{item:3356} (Horde)"] = "{item:3356} (Horda)",
 	-- ["{item:3357} (Alliance)"] = "{item:3357} (Aliança)",
 	-- ["{item:3357} (Horde)"] = "{item:3357} (Horda)",
 	-- ["{item:6051} to 150"] = "{item:6051} até 150",
@@ -432,8 +561,23 @@ return {
 	-- ["{item:765} (Horde)"] = "{item:765} (Horda)",
 	-- ["{item:785} (Alliance)"] = "{item:785} (Aliança)",
 	-- ["{item:785} (Horde)"] = "{item:785} (Horda)",
+	-- ["{item:8836} (Alliance)"] = "{item:8836} (Aliança)",
+	-- ["{item:8836} (Horde)"] = "{item:8836} (Horda)",
+	-- ["{item:8838} (Alliance)"] = "{item:8838} (Aliança)",
+	-- ["{item:8838} (Horde)"] = "{item:8838} (Horda)",
+	-- ["{item:8951} is yellow at 225 (yellow 215, green 235, grey 255): about 8 crafts to 230. Each takes 1 {item:3355}, 1 {item:3821} and 1 {item:3372}. {item:3355} and {item:3821} are the herbs of the 30-45 zones (Stranglethorn, Arathi, the {zone:1418})."] = "{item:8951} é amarela em 225 (amarelo 215, verde 235, cinza 255): cerca de 8 criações até 230. Cada uma usa 1 {item:3355}, 1 {item:3821} e 1 {item:3372}. {item:3355} e {item:3821} são as ervas das zonas de 30 a 45 (Selva do Espinhaço, Arathi, as {zone:1418}).",
 	-- ["{npc:1958} (level 17-18) drop it here. The Auction House works too."] = "{npc:1958} (nível 17-18) deixam cair aqui. A Casa de Leilões também serve.",
 	-- ["{npc:513} (level 14-15) drop it here. The Auction House works too."] = "{npc:513} (nível 14-15) deixam cair aqui. A Casa de Leilões também serve.",
+	-- ["{object:1623} (Alliance)"] = "{object:1623} (Aliança)",
+	-- ["{object:1623} (Horde)"] = "{object:1623} (Horda)",
+	-- ["{object:2045} (Alliance)"] = "{object:2045} (Aliança)",
+	-- ["{object:2045} (Horde)"] = "{object:2045} (Horda)",
+	-- ["{object:2046} (Alliance)"] = "{object:2046} (Aliança)",
+	-- ["{object:2046} (Horde)"] = "{object:2046} (Horda)",
+	-- ["{skill:171} 1-75: Auction House"] = "{skill:171} 1-75: Casa de Leilões",
+	-- ["{skill:171} 150-225: Auction House"] = "{skill:171} 150-225: Casa de Leilões",
+	-- ["{skill:171} 225-300: Auction House"] = "{skill:171} 225-300: Casa de Leilões",
+	-- ["{skill:171} 75-150: Auction House"] = "{skill:171} 75-150: Casa de Leilões",
 	-- ["{skill:171} recipes at 165"] = "Receitas de {skill:171} no 165",
 	-- ["{skill:171} recipes at 175"] = "Receitas de {skill:171} no 175",
 	-- ["{skill:171} recipes at 200"] = "Receitas de {skill:171} no 200",
@@ -444,5 +588,6 @@ return {
 	-- ["{skill:171} runs alongside leveling. Forever's Legacy System rewards crafting professions at skill 150, 225 and 300 (the Journeyman, Expert and Artisan caps), so each of those checkpoints counts. Materials for 1-75 are worth about 68s in all."] = "{skill:171} acompanha a evolução do personagem. O Sistema de Legado do Forever recompensa profissões de produção nas perícias 150, 225 e 300 (os limites de Profissional, Perito e Artífice), então cada um desses marcos conta. Os materiais de 1-75 valem cerca de 68s no total.",
 	-- ["{spell:11447} to 215"] = "{spell:11447} até 215",
 	-- ["{spell:2331} to 85"] = "{spell:2331} até 85",
+	-- ["{spell:3176} is yellow at 150 (yellow 150, green 170, grey 190): about 12 crafts to 160. Each takes 2 {item:2453}, 2 {item:2450} and 1 {item:3372}. Two {item:2453} and two {item:2450} a craft; {item:2453} grows in the 15-30 zones."] = "{spell:3176} é amarela em 150 (amarelo 150, verde 170, cinza 190): cerca de 12 criações até 160. Cada uma usa 2 {item:2453}, 2 {item:2450} e 1 {item:3372}. Dois {item:2453} e dois {item:2450} por criação; {item:2453} cresce nas zonas de 15 a 30.",
 	-- ["{spell:7845} to 175"] = "{spell:7845} até 175",
 }

@@ -108,11 +108,16 @@ The data builders, one at a time (forge build's data stage runs the ones it need
   names         Names.lua in addon/Polestar_<locale>, the data's names per language  [<locale>... --offline --no-questie
                 --no-tables --build --sources --ding --pfquest --guides --questdb --codex --travel
                 --chokepoints --out --root --json]
+  subzones      Subzones.lua in addon/Polestar_<locale>, the walking maps' subzone names per language
+                [<locale>... --offline --sources --data --nav --out --root]
   talents       build|check addon/Polestar/Talents/Builds.lua  [--root --plans --out --sources --build --offline]
   maps          build: Maps/ZoneLevels.lua [--data --lua]; overlays: UI/ZoneArtOverlays.lua
                 [--build --sources --offline --lua]
   newquests     Quests/NewQuestIds.lua: the quests Forever added (the \"New in Forever\" mark)
                 [--root --data --sources --offline --check --lua]
+  diff          a data build against the live release's: per-NPC/object/quest changes and the
+                release invariants (friendly rares, leaders' spawns, spawn jumps, moved hand-ins)
+                [--old --new --root --corrections --out]
   check-corrections  check an edit of forever-db/corrections, mechanics-public.json or route-fixes.json
                 [--root --data --corrections --mechanics --route-fixes --json]
   trainers      trainers.json and Core/ClassTrainers.lua  [--data --guides --recordings --out --lua]
@@ -121,8 +126,10 @@ The data builders, one at a time (forge build's data stage runs the ones it need
   travel        travel.json, TravelData.lua, FlightPaths.lua  [--root --data --recordings --sources --grid <dir>|none
                 --crossings --build --forever-build --json --lua --flight-lua --travel-addon]
   codex         data/forever/codex and the Polestar_Codex pack  [--root --data --sources --addons --build --out --pack
-                --local-extras --recordings <dir> (rewrites data/codex/recorded.json first)]
-  gear          Forever.lua, SpecData.lua and gear/report.json  [--root --addons --wowsims --built-at]
+                --local-extras --recordings <dir> (rewrites data/codex/recorded.json first) --verdicts <verdict.json>]
+  gear          Forever.lua, SpecData.lua and gear/report.json, from the Forever client's tables (with the
+                hotfixes under <sources>/hotfix/<build>) and the Codex  [--root --sources --data --build --hotfixes
+                --offline --wowsims --built-at]
   professions   professions.json  [--root --data --sources --build --out]
   sim-inputs    the sources the simulator's world reads (Map, AreaTable, QuestXP, object facts...)  --out <dir>
                 [--root --sources --forever-tables client|wago --wow --product --defs]
@@ -137,13 +144,18 @@ const GUIDE_HELP: &str = "usage: forge guide compile [<dir>] [options]
        forge guide seed [--checkout <dir>] [--force]
        forge guide publish --from <out>/guides [--data <dir>] [--checkout <dir>]
        forge guide check-generated [--checkout <dir>]
+       forge guide rehash [--checkout <dir>]
+       forge guide legacy-steps --old <addon dir> [--old <addon dir> ...] [--data <dir>] [--out <file>]
+                                [--current <guides dir>] [--root <checkout>]
 
 compile: a pack's .guide files (docs/GUIDE_FORMAT.md) into its community addon folder, as its pack.json
 describes it (TOC, Pack.lua, MapFrames.lua, Guides.lua, LICENSE-DATA.txt, and LICENSE as LICENSE.txt).
 lint: every compile check without writing anything; with a cached simulator world also the solo policy.
 The pack is the one in <dir> (or --pack), else the nearest folder holding a pack.json (this one or a
 parent), else our guides/. Another pack is checked with our guides as context and written to
-<pack>/dist/<folder>/; ours to <checkout>/addon/<folder>/. Nothing is written when there are errors (unless
+<pack>/dist/<folder>/; ours to <checkout>/addon/<folder>/, and so is Polestar's own experimental pack
+(experimental/, checked with our guides as context, into addon/Polestar/Experimental/: inside Polestar,
+no TOC of its own, docs/PACK_FORMAT.md \"Polestar's own extra packs\"). Nothing is written when there are errors (unless
 --force), nor without reference data: the command then stops with one error, unless --no-data.
 
 options (compile and lint):
@@ -186,6 +198,15 @@ Barrens) merged into that guide as their opening steps, its id retired; one legs
 trees'. --data: the quests' races for the races' copies (default data/forever/).
 check-generated: fail (exit 1) when a generated guide or a seed file was edited by hand, and say
 where the fix goes instead.
+rehash: recompute guides/GENERATED.json (every leveling guide with the generated header, legs.json)
+and forge/seed/SEED.json (every seed guide) from the files on disk: after the maintainer's hand edit
+to a generated guide and its seed copy, or for a merge conflict in either (take either side, run it).
+legacy-steps: addon/Polestar/Core/LegacySteps.lua (--out): each leveling guide's steps the earlier
+releases shipped (each --old, a release's addon folder from its tag, in release order: the steps as its
+Polestar_Guides*/Guides.lua have them, never recompiled) that the current guides (--current, default
+guides/, compiled with --data, default data/forever/) no longer have, the quests a release offered in
+another guide, and the titles it gave them: an update mid-guide keeps the player's check-offs and skips
+(docs/RELEASING.md). Run at a release whose leveling guides changed.
 ";
 
 const SIM_HELP: &str = "usage: forge sim <command> [options]
@@ -207,6 +228,8 @@ const SIM_HELP: &str = "usage: forge sim <command> [options]
   calibrate [--root <checkout>] [--world-dir <dir>] [--fdj <dir>] [--recordings <dir>] [--out <file.json>]
           [--at ISO]: params.json (fitted quest-reward scales and kill times) from the worlds, the
           dungeon journal and recordings
+  fights  [--root <checkout>] [--recordings <dir>] [--out <file.json>] [--at ISO]: what the recordings
+          say about kill time by class, mob level and rank, beside the priors (a report, not params.json)
 
 --seed guides (default): the order of the guides in --guides (default <root>/guides), as forge build
 makes it; --seed <file>: a chain document. --guard: a kept change may not raise the seed's guard counts
@@ -246,13 +269,15 @@ fn help(name: &str) -> Option<String> {
        {}
        {}
        {}
+       {}
        {}",
 			judge::USAGE,
 			judge::REPORT_USAGE.lines().next().unwrap_or("").trim_start_matches("usage: "),
 			judge::CHECK_USAGE.lines().next().unwrap_or("").trim_start_matches("usage: "),
 			judge::SEED_USAGE.lines().next().unwrap_or("").trim_start_matches("usage: "),
 			judge::STATUS_USAGE.lines().next().unwrap_or("").trim_start_matches("usage: "),
-			judge::FEEDBACK_USAGE.lines().next().unwrap_or("").trim_start_matches("usage: ")
+			judge::FEEDBACK_USAGE.lines().next().unwrap_or("").trim_start_matches("usage: "),
+			judge::DOORS_USAGE.lines().next().unwrap_or("").trim_start_matches("usage: ")
 		),
 		"sim" => SIM_HELP.to_string(),
 		"walks" => WALKS_HELP.to_string(),

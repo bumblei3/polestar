@@ -36,8 +36,8 @@ return {
 	["{npc:6766}: one emblem each time, 100 reputation"] = "{npc:6766}: um emblema por vez, 100 de reputação",
 
 	-- Step 5: What's the Big Idea?
-	-- {npc:13085} Myrokos Silentform · {area:280} Strahnbrad · {zone:1416} Alterac Mountains · {spell:921} Pick Pocket
-	["In your mid 30s {npc:13085} has two more jobs; take both. Barton leads a Syndicate scouting party at {area:280}, in the east of the {zone:1416}, inside one of the houses with stealthed Syndicate around him. Pick his pocket for the report and do not kill him: he does not drop it. If you are lower than him he sees through stealth; Master of Deception helps, or Distract him, Vanish and come in from behind. {spell:921} can miss several times in a row."] = "Perto do nível 35, {npc:13085} tem mais dois trabalhos; pegue os dois. Barton lidera um grupo de reconhecimento da Camarilha em {area:280}, no leste de {zone:1416}, dentro de uma das casas, com a Camarilha em furtividade ao redor dele. Bata a carteira dele para pegar o relatório e não o mate: ele não solta. Se você tem nível menor que o dele, ele enxerga através da furtividade; Mestre da Enganação ajuda, ou use Distração, Sumir e entre por trás. {spell:921} pode errar várias vezes seguidas.",
+	-- {npc:13085} Myrokos Silentform · {npc:266357} Barton · {area:280} Strahnbrad · {zone:1416} Alterac Mountains · {spell:921} Pick Pocket
+	["In your mid 30s {npc:13085} has two more jobs; take both. {npc:266357} leads a Syndicate scouting party at {area:280}, in the east of the {zone:1416}, inside one of the houses with stealthed Syndicate around him. Pick his pocket for the report and do not kill him: he does not drop it. If you are lower than him he sees through stealth; Master of Deception helps, or Distract him, Vanish and come in from behind. {spell:921} can miss several times in a row."] = "Perto do nível 35, {npc:13085} tem mais dois trabalhos; pegue os dois. {npc:266357} lidera um grupo de reconhecimento da Camarilha em {area:280}, no leste de {zone:1416}, dentro de uma das casas, com a Camarilha em furtividade ao redor dele. Bata a carteira dele para pegar o relatório e não o mate: ele não solta. Se você tem nível menor que o dele, ele enxerga através da furtividade; Mestre da Enganação ajuda, ou use Distração, Sumir e entre por trás. {spell:921} pode errar várias vezes seguidas.",
 	-- {item:275482} Barton's Scouting Report
 	["Pick Pocket Barton for {item:275482}"] = "{item:275482}: bata a carteira de Barton",
 
@@ -63,8 +63,6 @@ return {
 	-- Step 9: Ain't No Telling
 	-- {item:275709} Stolen Funds
 	["She will not talk without something to bargain with. Her stash is upstairs in a house close to the keep: take the {item:275709}. If it is already open, wait for it to come back."] = "Ela não fala sem ter o que negociar. O esconderijo dela fica no andar de cima de uma casa perto da fortaleza: pegue {item:275709}. Se já estiver aberto, espere voltar.",
-	-- {item:275709} Stolen Funds
-	["{item:275709}: Anastasia's Stash"] = "{item:275709}: o esconderijo de Anastácia",
 
 	-- Step 10: The Syndicate Sting
 	-- {area:1057} Thoradin's Wall · {area:287} Hillsbrad · {item:275882} Intercepted Shipment · {item:275706} Syndicate Uniform · {npc:13085} Myrokos Silentform
@@ -83,6 +81,7 @@ return {
 	-- ["Opens {area:3486}, the hidden rogue house in the Alterac hills, and its first jobs."] = "Abre {area:3486}, a casa secreta dos ladinos nas colinas de Alterac, e seus primeiros trabalhos.",
 	-- ["Rite of Cunning"] = "Rito da Astúcia",
 	-- ["{item:275482}: pickpocket Barton"] = "{item:275482}: bata a carteira de Barton",
+	-- ["{item:275709}: Anastasia's Stash"] = "{item:275709}: o esconderijo de Anastácia",
 	-- ["{npc:266216} is inside {area:275}, the Syndicate fortress in eastern {area:287}, south of the manor. Quick and quiet, says {npc:13085}."] = "{npc:266216} está dentro de {area:275}, a fortaleza da Camarilha no leste de {area:287}, ao sul do solar. Rápido e silencioso, diz {npc:13085}.",
 	-- ["{npc:6766}: {quest:6701}, repeatable"] = "{npc:6766}: {quest:6701}, repetível",
 	-- ["{npc:6766}: {quest:6701}, repeatable; take it now, the emblems are quest items"] = "{npc:6766}: {quest:6701}, repetível; pegue agora, os emblemas são itens de missão",

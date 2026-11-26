@@ -2,23 +2,31 @@
 -- the character's class quests: the quest data limits the quest to a few
 -- classes, the character's among them (UI/ClassRewards.lua). A step or goal
 -- `only <Class>` is a route choice, not a class quest (Mulgore's Druid trip
--- to Thunder Bluff), and a Class guide carries open errands too.
+-- to Thunder Bluff), and a Class guide carries open errands too. An optional
+-- chain (items only, not on the worth-it list: Core/ClassQuestList.lua,
+-- #3925) has no card outside its own Class guide: its lines read as rows.
 -- In the class colour: a border, a 4 px stripe on the left and a soft glow
 -- from it; the chain's reward icon in a ring (the spell it teaches, else the
 -- item it gives, else the class icon); "<CLASS> · LEVEL <n>", the quest's
 -- name, "Learn <spell>" / "Earn <item>", a badge for what it brings (a new
 -- ability, pet, mount, weapon or armour), the trip (the zones the chain's
 -- remaining steps go through and how many steps) and "Only you see this ...
--- Part of your route: just follow the guide." The step's accept folds into
+-- Part of your route: just follow the guide." The ring and the reward line
+-- show the game's own tooltip of the spell or item that line names, beside
+-- the guide window, and Shift-click links it. The step's accept folds into
 -- the card with its tick box. Once that accept is done, the card shrinks to
 -- one slim line in the class colour ("Mage quest taken: hand it in to
 -- Marryk Nurribit"), so the step's person keeps the focus; it goes once the
--- quest is handed in or its reward known.
+-- quest is handed in or its reward known. A skin may keep it to the chain's
+-- first step in the guide (guideShows "classCardLater").
 -- The step's quest names take the class colour too (GuideFrame fillCard).
 --
 -- The first time a chain's card shows on a character it shines once (a soft
 -- flash under ui.reduceMotion) and, with ui.classCardSound on, plays a short
--- chime on the game's sound effects channel.
+-- chime on the game's sound effects channel. The glow's strength, the
+-- stripe's width, the shine, the "Only you see this" note and the type sizes
+-- are the player's (toasts.classcard.*, Settings > Alerts & toasts), and so
+-- is whether it shows full, compact or not at all (toasts.classcard.mode).
 --
 -- What each chain gives comes from UI/ClassRewards.lua (classrewards build).
 -- GuideFrame calls Fill on every render and Layout in its card layout; the
@@ -55,7 +63,21 @@ local function text(parent, role, color)
 	return W.Text(parent, role, color)
 end
 
-local function compact() return ns.Get("ui.compact") and true or false end
+-- The card's look (Settings > Alerts & toasts, UI/Looks/Toasts.lua): its
+-- glow, stripe, first-time shine, the "Only you see this" note and type sizes.
+local function look(prop, fallback)
+	local TS = UI.Toasts
+	local v = TS and TS.Get("classcard", prop)
+	if v == nil then return fallback end
+	return v
+end
+
+-- toasts.classcard.mode: "full" (compact with the window, ui.compact),
+-- "compact" (a smaller ring, no trip or note) or "off" (no card: the accept
+-- reads as a row like any other).
+local function mode() return look("mode", "full") end
+local function compact() return mode() == "compact" or (ns.Get("ui.compact") and true or false) end
+local function stripe() return tonumber(look("stripe", STRIPE)) or STRIPE end
 
 ---------------------------------------------------------------------------
 -- Which quests are class quests, and what their chain gives
@@ -111,6 +133,17 @@ local function rewardKnown(quest)
 	return reward ~= nil and CT ~= nil and CT.RewardKnown ~= nil and CT.RewardKnown(reward) or false
 end
 
+-- Whether class quest `quest` is of an optional chain (Core/ClassQuestList.lua,
+-- #3925: items only, not on the worth-it list): no card outside its own Class
+-- guide, its step's lines read as rows like any other (the step itself stays
+-- where the route has it). In the Class guide the player opened, the card
+-- heads its chain as ever.
+local function optionalChain(quest)
+	local list = ns.ClassQuestList
+	return list ~= nil and list.OptionalQuest ~= nil and list.OptionalQuest(quest)
+end
+CC.OptionalChain = optionalChain
+
 -- Whether the class quest of accept goal `goal` is handed in: the game says
 -- so, or the step's own turn-in of it is done.
 local function handedIn(step, view, goal)
@@ -131,15 +164,17 @@ end
 -- given once it is handed in): the card's open tick box for that accept
 -- read as though the quest in the log were not taken, every part of a chain
 -- like Call of Water bearing the same name (#1372). None for a chain whose
--- reward the character already knows or owns, nor once the accept is done
--- and its quest handed in: the card is gone then, and the accept reads as a
--- row like any other. -> goal index | nil
-local function cardGoal(step, view, p)
+-- reward the character already knows or owns, nor for an optional chain
+-- outside a Class guide (optionalChain; `inClass`: the guide is one), nor
+-- once the accept is done and its quest handed in: the card is gone then,
+-- and the accept reads as a row like any other. -> goal index | nil
+local function cardGoal(step, view, p, inClass)
 	local turnin, held, accept
 	local C = ns.Compat
 	for gi, goal in ipairs(step.goals) do
 		local v = view.goals[gi]
-		if (goal.t == "accept" or goal.t == "turnin") and v and v.status ~= "na" and matches(goal.only, p) and classQuest(goal, p.class) and not rewardKnown(goal.quest) then
+		if (goal.t == "accept" or goal.t == "turnin") and v and v.status ~= "na" and matches(goal.only, p) and classQuest(goal, p.class) and not rewardKnown(goal.quest)
+			and (inClass or not optionalChain(goal.quest)) then
 			if goal.t == "accept" then
 				accept = accept or gi
 			else
@@ -161,6 +196,24 @@ end
 local function chainOf(quest)
 	local e = entry(quest)
 	return e and e[2] or quest
+end
+
+-- Whether a step before `index` carries a quest of the chain, when the skin
+-- in use shows the card on the chain's first step in the guide only (Skin
+-- API 2, hooks.guideShows "classCardLater" false): not again on each step
+-- after. Polestar's own look shows it on every step of the chain.
+local function chainBefore(guide, index, chain, p)
+	local G = GF()
+	if not (G and G.Shows) or G.Shows("classCardLater", true) then return false end
+	for s = 1, index - 1 do
+		local step = guide.steps[s]
+		if step and matches(step.only, p) then
+			for _, goal in ipairs(step.goals) do
+				if goal.quest and matches(goal.only, p) and chainOf(goal.quest) == chain then return true end
+			end
+		end
+	end
+	return false
 end
 
 -- The steps from `index` on that carry a quest of the chain: their count and
@@ -233,11 +286,16 @@ local function spellName(id, fallback)
 	return (type(n) == "string" and n ~= "") and n or fallback
 end
 
+-- An item's name in the client's language; one the client has not cached
+-- yet is asked for (GET_ITEM_INFO_RECEIVED: the class card names it then,
+-- UI/ClassToast.lua, #3727) and reads `fallback` meanwhile.
 local function itemName(id, fallback)
 	local n
 	if C_Item and C_Item.GetItemNameByID then n = C_Item.GetItemNameByID(id) end
 	if not n and GetItemInfo then n = GetItemInfo(id) end
-	return (type(n) == "string" and n ~= "") and n or fallback
+	if type(n) == "string" and n ~= "" then return n end
+	if ns.Compat.RequestItem then ns.Compat.RequestItem(id) end
+	return fallback
 end
 
 local function spellIcon(id)
@@ -352,17 +410,68 @@ function CC.BadgeText(reward)
 	return reward and BADGE[reward.kind] or nil
 end
 
+-- What the reward's tooltip shows: what its line names (CC.RewardLine), the
+-- spell a totem quest teaches rather than the totem; a choice's first item,
+-- the ring's icon. -> "spell" | "item", id | nil
+function CC.TipOf(reward)
+	if not reward then return nil end
+	if reward.spell and (reward.show == "spell" or reward.kind == "ability") then return "spell", reward.spell end
+	if reward.items and reward.items[1] then return "item", reward.items[1] end
+	if reward.spell then return "spell", reward.spell end
+	return nil
+end
+
 ---------------------------------------------------------------------------
 -- The frame
 ---------------------------------------------------------------------------
 
-local function build()
-	local G = GF()
-	local card = G and G.parts and G.parts.card
-	if F or not card then return F end
-	F = CreateFrame("Frame", nil, card)
+local paint -- below
+
+-- The game's tooltip of the reward card c shows (c.psReward; a sandbox card
+-- has none), over `hit`: beside the guide window, never over the card's
+-- lines, as the class heads-up places its spell icons' (CT.PlaceTip).
+-- In the guide window it keeps the window's hover look (GF.HoverIn), as
+-- every part that takes the pointer does.
+local function rewardHit(c)
+	local b = CreateFrame("Button", nil, c)
+	b:Hide()
+	b:SetScript("OnEnter", function(self)
+		local G, CT = GF(), UI.ClassToast
+		if c == CC.frame and G and G.HoverIn then G.HoverIn() end
+		local kind, id = CC.TipOf(c.psReward)
+		if not kind then return end
+		local by = (G and G.frame) or c
+		local place = function(tip)
+			if CT and CT.PlaceTip then CT.PlaceTip(tip, by) else tip:SetPoint("TOPLEFT", by, "TOPRIGHT", 4, 0) end
+		end
+		if kind == "item" then W.ItemTip(self, id, nil, place) else W.SpellTip(self, id, nil, place) end
+	end)
+	b:SetScript("OnLeave", function(self) W.HideTooltip(self) end)
+	b:SetScript("OnClick", function()
+		local kind, id = CC.TipOf(c.psReward)
+		if kind == "item" then W.ItemClick(id) elseif kind == "spell" then W.SpellClick(id) end
+	end)
+	return b
+end
+
+-- Drop the reward's tooltip of card c when the card under a still cursor
+-- hides, folds to its slim line or changes reward: OnLeave never runs then.
+local function dropTip(c)
+	if c and c.RingHit then
+		W.HideTooltip(c.RingHit)
+		W.HideTooltip(c.LearnHit)
+	end
+end
+
+-- The card's parts, drawn into `parent`: the guide window's card (build) or
+-- a sandbox one for the options' preview (CC.NewCard).
+local function newCard(parent)
+	local F = CreateFrame("Frame", nil, parent)
 	F:Hide()
-	CC.frame = F
+	-- Its text keeps Polestar's general size (ui.textSize), not the guide
+	-- window's it sits in: the class quest heads-up it pairs with can sit
+	-- free of the window (toasts.headsup.place).
+	Theme.TextScope(F, false)
 	F.Glow = F:CreateTexture(nil, "BACKGROUND", nil, 1)
 	F.Glow:SetTexture(Theme.Media("white"))
 	F.Glow:SetAllPoints(F)
@@ -392,9 +501,14 @@ local function build()
 	F.Title:SetWordWrap(true)
 	F.Learn = text(F, "label", "text")
 	F.Learn:SetWordWrap(true)
+	-- The reward under the cursor: the ring and the reward line.
+	F.RingHit = rewardHit(F)
+	F.RingHit:SetAllPoints(F.Ring)
+	F.LearnHit = rewardHit(F)
+	F:HookScript("OnHide", function() dropTip(F) end)
 	F.Trip = text(F, "small", "textDim")
 	F.Trip:SetWordWrap(true)
-	F.Only = text(F, "small", "textMuted")
+	F.Only = text(F, "small", "textDim")
 	F.Only:SetWordWrap(true)
 	-- The guide carries the class quest: the player just follows it.
 	F.Only:SetText(L["Only you see this: it's your class's quest."] .. " " .. L["Part of your route: just follow the guide."])
@@ -429,30 +543,61 @@ local function build()
 	return F
 end
 
--- Colour every part in the class colour (raw for the fills, legible for text).
-local function paint(class)
+local function build()
+	local G = GF()
+	local card = G and G.parts and G.parts.card
+	if F or not card then return F end
+	F = newCard(card)
+	CC.frame = F
+	local TS = UI.Toasts
+	if TS then
+		-- In the guide window: its scale, ground and opacity are the window's.
+		TS.Attach("classcard", F, { titles = { F.Title }, bodies = { F.Head, F.Learn, F.Trip, F.Only, F.Accept.Text }, inline = true,
+			relayout = function()
+				if shown then paint(shown.class) end
+				if F:IsShown() and F.psCompact ~= nil then F.Only:SetShown(not (F.psCompact or F.psSlim or F.psOther) and look("note", true) ~= false) end
+				local G2 = GF()
+				if G2 and G2.Layout and G2.frame and G2.frame:IsShown() then G2.Layout() end
+			end })
+	end
+	return F
+end
+
+-- Colour every part of card c (the guide window's when nil) in the class
+-- colour (raw for the fills, legible for text).
+function paint(class, c)
+	local F = c or F
 	local r, g, b = Theme.ClassColor(class)
 	if not r then r, g, b = Theme.Accent() end
 	local tr, tg, tb = textColor(class)
 	Theme.Border(F, r, g, b, 0.75)
+	local sw = stripe()
+	F.Stripe:SetWidth(math.max(0.01, sw))
+	F.Stripe:SetShown(sw > 0)
 	F.Stripe:SetVertexColor(r, g, b, 1)
+	local glow = tonumber(look("glow", 1)) or 1
 	if F.Glow.SetGradient and CreateColor then
 		F.Glow:SetVertexColor(1, 1, 1, 1)
-		F.Glow:SetGradient("HORIZONTAL", CreateColor(r, g, b, 0.22), CreateColor(r, g, b, 0.03))
+		F.Glow:SetGradient("HORIZONTAL", CreateColor(r, g, b, math.min(1, 0.22 * glow)), CreateColor(r, g, b, math.min(1, 0.03 * glow)))
 	else
-		F.Glow:SetVertexColor(r, g, b, 0.12)
+		F.Glow:SetVertexColor(r, g, b, math.min(1, 0.12 * glow))
 	end
 	F.Disc:SetVertexColor(r * 0.2, g * 0.2, b * 0.2, 0.95)
 	F.Ring:SetVertexColor(r, g, b, 1)
 	F.Head:SetTextColor(tr, tg, tb, 1)
-	F.Badge.Fill:SetVertexColor(r, g, b, 0.18)
+	-- The badge's wash a little lighter than the ring's colour, so its text
+	-- in that colour keeps 4.5:1 on it (Hearth's warm wood put the druid's
+	-- orange under it).
+	F.Badge.Fill:SetVertexColor(r, g, b, 0.12)
 	Theme.Border(F.Badge, r, g, b, 1)
 	F.Badge.Text:SetTextColor(tr, tg, tb, 1)
 	F.Shine:SetVertexColor(r, g, b, 0.35)
 	W.Color(F.Title, "text")
 	W.Color(F.Learn, "text")
 	W.Color(F.Trip, "textDim")
-	W.Color(F.Only, "textMuted")
+	-- The note in the secondary colour: the card's glow lifts its ground past
+	-- what the muted colour reads on (Halo).
+	W.Color(F.Only, "textDim")
 	return hexOf(tr, tg, tb)
 end
 
@@ -467,9 +612,11 @@ function CC.Fill(guide, index, view)
 	CC.shown = nil
 	local step = guide and index and guide.steps and guide.steps[index]
 	local p = player()
-	local gi = step and view and p and p.class and cardGoal(step, view, p)
+	local gi = step and view and p and p.class and cardGoal(step, view, p, guide.category == "Class")
+	if mode() == "off" then gi = nil end
+	if gi and chainBefore(guide, index, chainOf(step.goals[gi].quest), p) then gi = nil end
 	if not gi then
-		if F then F:Hide() end
+		if F then dropTip(F); F:Hide() end
 		return nil
 	end
 	if not build() then return nil end
@@ -479,8 +626,11 @@ function CC.Fill(guide, index, view)
 	local reward = e and e[3] and e[3] > 0 and d.rewards[e[3]] or nil
 	local hex = paint(p.class)
 	local className = UI.ClassName(p.class)
-	local level = goal.minLevel or goal.qlvl
-	F.Head:SetText(level and format(L["%s · LEVEL %d"], className:upper(), level) or className:upper())
+	-- The quest's own level, else the level it opens at when above 1: a
+	-- quest any level may take read "LEVEL 1" (The Horn of Xelthos, 23).
+	local q, m = tonumber(goal.qlvl), tonumber(goal.minLevel)
+	local level = (q and q > 0 and q) or (m and m > 1 and m) or nil
+	F.Head:SetText(level and format(L["%s · LEVEL %d"], ns.Upper(className), level) or ns.Upper(className))
 	F.Title:SetText((gv and gv.subject) or goal.title or "")
 	local learn = CC.RewardLine(reward, hex)
 	F.Learn:SetText(learn or "")
@@ -506,8 +656,15 @@ function CC.Fill(guide, index, view)
 	if slim and F.psBorder then for i = 1, 4 do F.psBorder[i]:Hide() end end
 	for _, part in ipairs({ F.Ring, F.Disc, F.Icon, F.Head, F.Title }) do part:SetShown(not slim) end
 	if slim then F.Learn:Hide(); F.Badge:Hide() end
+	local tips = not slim and CC.TipOf(reward) ~= nil
+	if not tips or reward ~= F.psReward then dropTip(F) end
+	F.psReward = reward
+	F.RingHit:SetShown(tips)
+	F.LearnHit:SetShown(tips and learn ~= nil)
 	F.Trip:SetShown(not (F.psCompact or slim))
-	F.Only:SetShown(not (F.psCompact or slim))
+	-- Not in another faction's guide (#2462): its banner says Polestar won't guide it, so no "just follow the guide".
+	F.psOther = ns.Guides.OtherFaction ~= nil and ns.Guides.OtherFaction(guide, p) ~= nil
+	F.Only:SetShown(not (F.psCompact or slim or F.psOther) and look("note", true) ~= false)
 	F.Accept:SetShown(fold ~= nil)
 	if fold then
 		local line
@@ -555,15 +712,19 @@ function CC.Fill(guide, index, view)
 	return hex
 end
 
+-- The live card's frame (nil until the first card shows), for the tests.
+function CC.Frame() return F end
+
 -- The goal the card stands for, when it is an accept to fold into it (open,
 -- or done, not skipped or out of reach): its index in the step. nil when no
 -- card shows or the card is for a turn-in.
 function CC.Fold(guide, view)
 	local step = guide and view and guide.steps and guide.steps[view.index]
 	local p = step and player()
-	local gi = p and p.class and cardGoal(step, view, p)
+	local gi = p and p.class and cardGoal(step, view, p, guide.category == "Class")
 	local goal, gv = gi and step.goals[gi], gi and view.goals[gi]
-	if not (goal and goal.t == "accept" and gv) then return nil end
+	if not (goal and goal.t == "accept" and gv) or mode() == "off" then return nil end
+	if chainBefore(guide, view.index, chainOf(goal.quest), p) then return nil end
 	if gv.status == "skipped" or gv.unavailable or gv.folded then return nil end
 	return gi
 end
@@ -574,13 +735,17 @@ function CC.Colours(goal)
 	return classQuest(goal, shown.class)
 end
 
+-- The card's frame, once built (a skin places it: guidePlace "classCard").
+function CC.Frame() return F end
+
 -- Place the card at the top of the guide window's card, `width` wide. -> its height (0 hidden)
-function CC.Layout(width)
+function CC.Layout(width, c)
+	local F = c or F
 	if not (F and F:IsShown()) then return 0 end
 	local w = width - INSET * 2
 	if F.psSlim then
 		-- One line by the class stripe, no ring, no frame.
-		local x = STRIPE + 8
+		local x = stripe() + 8
 		local checkW = F.Accept.Check:IsShown() and 18 + 6 or 0
 		F.Accept.Text:SetWidth(max(30, w - x - 6 - checkW))
 		local ah = max(18, F.Accept.Text:GetStringHeight())
@@ -610,10 +775,15 @@ function CC.Layout(width)
 		badgeW = badgeW + 8
 	end
 	local tw = max(40, w - x - 10)
-	F.Head:SetWidth(max(30, tw - badgeW))
+	-- The class line beside the badge; one longer than the room there (a
+	-- long translation: "Друид · УРОВЕНЬ 20" beside "НОВАЯ ФОРМА") goes under
+	-- the badge in the text's full width instead of being cut.
+	local under = badgeW > 0 and W.TextWidth(F.Head) > tw - badgeW
+	F.Head:SetWidth(under and tw or max(30, tw - badgeW))
 	F.Title:SetWidth(tw)
 	F.Learn:SetWidth(tw)
 	local y = F.psCompact and 8 or 12
+	if under then y = 10 + 20 + 6 end
 	F.Head:ClearAllPoints()
 	F.Head:SetPoint("TOPLEFT", F, "TOPLEFT", x, -y)
 	y = y + F.Head:GetStringHeight() + 4
@@ -627,6 +797,10 @@ function CC.Layout(width)
 		y = y + 4
 		F.Learn:ClearAllPoints()
 		F.Learn:SetPoint("TOPLEFT", F, "TOPLEFT", x, -y)
+		-- Its hover area: the words, not the empty room after them.
+		F.LearnHit:ClearAllPoints()
+		F.LearnHit:SetPoint("TOPLEFT", F.Learn, "TOPLEFT", 0, 0)
+		F.LearnHit:SetSize(math.min(tw, W.TextWidth(F.Learn)), F.Learn:GetStringHeight())
 		y = y + F.Learn:GetStringHeight()
 	end
 	if F.Accept:IsShown() then
@@ -647,16 +821,44 @@ function CC.Layout(width)
 		F.Trip:ClearAllPoints()
 		F.Trip:SetPoint("TOPLEFT", F, "TOPLEFT", 14, -y)
 		y = y + F.Trip:GetStringHeight() + 6
-		F.Only:SetWidth(w - 28)
-		F.Only:ClearAllPoints()
-		F.Only:SetPoint("TOPLEFT", F, "TOPLEFT", 14, -y)
-		y = y + F.Only:GetStringHeight() + 10
+		if F.Only:IsShown() then
+			F.Only:SetWidth(w - 28)
+			F.Only:ClearAllPoints()
+			F.Only:SetPoint("TOPLEFT", F, "TOPLEFT", 14, -y)
+			y = y + F.Only:GetStringHeight() + 10
+		else
+			y = y + 4
+		end
 	end
 	local h = floor(y + 0.5)
 	F:SetSize(w, h)
 	F:ClearAllPoints()
 	F:SetPoint("TOPLEFT", F:GetParent(), "TOPLEFT", INSET, -INSET)
 	return h + INSET + 4
+end
+
+-- A sandbox card for the options' preview (Alerts & toasts), and its paint
+-- for a made-up quest: d = { class, head, title, learn, badge, icon, trip }.
+-- -> its height at `width` (CC.Layout's, with the inset)
+function CC.NewCard(parent) return newCard(parent) end
+function CC.FillDemo(c, d, width)
+	paint(d.class, c)
+	c.Head:SetText(d.head or "")
+	c.Title:SetText(d.title or "")
+	c.Learn:SetText(d.learn or "")
+	c.Learn:SetShown(d.learn ~= nil)
+	c.Badge.Text:SetText(d.badge or "")
+	c.Badge:SetShown(d.badge ~= nil)
+	c.Icon:SetTexture(d.icon)
+	c.Trip:SetText(d.trip or "")
+	c.psCompact, c.psSlim = mode() == "compact", false
+	c.Glow:Show()
+	for _, part in ipairs({ c.Ring, c.Disc, c.Icon, c.Head, c.Title }) do part:Show() end
+	c.Trip:SetShown(d.trip ~= nil and not c.psCompact)
+	c.Only:SetShown(d.trip ~= nil and not c.psCompact and look("note", true) ~= false)
+	c.Accept:Hide()
+	c:Show()
+	return CC.Layout(width, c)
 end
 
 -- Whether the game plays sound effects (Sound_EnableAllSound and
@@ -677,16 +879,24 @@ function CC.Celebrate()
 	if ns.Get("ui.classCardSound") and CC.GameSoundOn() then
 		pcall(ns.PlaySound, (SOUNDKIT and SOUNDKIT.IG_QUEST_LIST_COMPLETE) or 878, "SFX")
 	end
-	local w = F:GetWidth()
+	CC.Shine(F)
+	return true
+end
+
+-- The shine across card c once (a soft flash of its glow under
+-- ui.reduceMotion), unless the player keeps the card still (Alerts & toasts
+-- > Class quest card).
+function CC.Shine(c)
+	if look("shine", true) == false then return end
+	local w = c:GetWidth()
 	if Anim.Reduced() then
 		-- No movement: the glow brightens and settles.
-		Anim.To(F.Glow, "alpha", 0.4, 1, Anim.SLOW * 2, "out")
-		return true
+		Anim.To(c.Glow, "alpha", 0.4, 1, Anim.SLOW * 2, "out")
+		return
 	end
-	F.Shine:SetAlpha(1)
-	F.Shine:Show()
-	Anim.Anchor(F.Shine, "LEFT", F, "LEFT", -SHINE_W, 0)
-	F.Shine:SetHeight(F:GetHeight())
-	Anim.To(F.Shine, "offsetX", 0, w + SHINE_W, SHINE_SECONDS, "inout", function(t) t:Hide() end)
-	return true
+	c.Shine:SetAlpha(1)
+	c.Shine:Show()
+	Anim.Anchor(c.Shine, "LEFT", c, "LEFT", -SHINE_W, 0)
+	c.Shine:SetHeight(c:GetHeight())
+	Anim.To(c.Shine, "offsetX", 0, w + SHINE_W, SHINE_SECONDS, "inout", function(t) t:Hide() end)
 end

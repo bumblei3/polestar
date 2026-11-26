@@ -54,6 +54,15 @@ const TRAINS_FROM = {
 };
 const RANK_SKILL = { 1: 0, 2: 50, 3: 125, 4: 200 };
 
+// A side shelf (format 8) carries its shared candidates and steps as one Lua
+// string (`stepsSrc`): its source, unescaped and indented as an inline guide's.
+function shelfSource(block) {
+	const m = block.match(/^\t\t\tstepsSrc = "((?:[^"\\]|\\.)*)",$/m);
+	if (!m) return block;
+	const src = m[1].replace(/\\(\d{3}|.)/g, (_, c) => ({ n: '\n', r: '\r', t: '\t' })[c] ?? (/^\d{3}$/.test(c) ? String.fromCharCode(Number(c)) : c));
+	return `${src.split('\n').map((l) => `\t\t${l}`).join('\n')}\n`;
+}
+
 // Every `train` goal ({ skill, rank, npcs }) and `learn` goal ({ skill line,
 // spell, npcs }) of the forever/professions guides, npcs sorted.
 function goals() {
@@ -63,7 +72,7 @@ function goals() {
 	const parts = lua.split(/^(-- Source: .*)$/m);
 	for (let i = 1; i < parts.length; i += 2) {
 		if (!parts[i].includes('forever/professions/')) continue;
-		const block = parts[i + 1];
+		const block = shelfSource(parts[i + 1]);
 		const recs = block.match(/local candidateRecords = \{\n([\s\S]*?)\n\t\t\}\n/);
 		const records = recs ? [...recs[1].matchAll(/^\t\t\t\{ npc = (\d+)/gm)].map((m) => Number(m[1])) : [];
 		const ids = (text) => [...text.matchAll(/candidateRecords\[(\d+)\]|\{ npc = (\d+)/g)].map((m) => (m[1] ? records[Number(m[1]) - 1] : Number(m[2])));
@@ -126,4 +135,35 @@ test("Hotline's report (#1498) and #1708's learns: Linen Belt is not Josephine L
 	for (const g of of(8776)) assert.ok(!g.npcs.includes(4578), `Linen Belt: ${g.npcs}`);
 	assert.ok(of(2331).length, 'the alchemy guide learns Minor Mana Potion');
 	for (const g of of(2331)) assert.ok(!g.npcs.includes(4611), `Minor Mana Potion: ${g.npcs}`);
+});
+
+// Pyzx's report (#1956): at Blacksmithing 205 the guide sent him to Saru Steelfury for Heavy Mithril Breastplate,
+// and her trainer window had nothing to teach. Classic's trainer lists (the world DB above, VB 0) put the recipes
+// that asked 230-250 there (above Expert's 225) on the Artisan trainers only; Forever moved them 25 points down,
+// not off the Artisan list. The guide sources (the generators' output; Guides.lua is compiled from them at release)
+// pin each such learn to the Artisan trainers.
+test("Pyzx's report (#1956): recipes only the Artisan trainers teach are learned from them, not the Expert trainers", () => {
+	const dir = path.join(__dirname, '..', 'guides', 'forever', 'professions');
+	const learns = (file, spell) => fs.readFileSync(path.join(dir, file), 'utf8').split('\n').filter((l) => new RegExp(`^\\s*learn ${spell}\\b`).test(l));
+	for (const [file, spell, npcs, what] of [
+		['blacksmithing.guide', 9959, [2836], 'Heavy Mithril Breastplate: Brikk Keencraft'],
+		['leatherworking.guide', 10548, [11097, 11098], 'Nightscape Pants: Drakk Stonehand, Hahrana Ironhide'],
+		['tailoring.guide', 12072, [11052, 2399], 'Black Mageweave Headband: Timothy Worthington, Daryl Stack'],
+	]) {
+		const lines = learns(file, spell);
+		assert.ok(lines.length, `${what}: learned in ${file}`);
+		for (const l of lines) {
+			const m = l.match(/\bnpc (\d+)/);
+			assert.ok(m && npcs.includes(Number(m[1])), `${what}: ${l.trim()}`);
+		}
+	}
+});
+
+test('the Artisan Blacksmithing visit learns Brikk’s recipes from him for both factions (#3136)', () => {
+	const guide = fs.readFileSync(path.join(__dirname, '..', 'guides', 'forever', 'professions', 'blacksmithing.guide'), 'utf8');
+	const visit = guide.split('\nstep Artisan Blacksmithing\n')[1].split('\nstep ')[0];
+	for (const spell of [16639, 16640, 9968, 10001]) {
+		const learns = visit.split('\n').filter((line) => new RegExp(`^\\s*learn ${spell}\\b`).test(line));
+		assert.deepEqual(learns, ['Alliance', 'Horde'].map((side) => `  learn ${spell} npc 2836 only ${side}`));
+	}
 });

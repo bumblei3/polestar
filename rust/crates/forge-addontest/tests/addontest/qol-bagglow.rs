@@ -74,3 +74,83 @@ fn the_step_s_use_item_glows_in_the_bags_the_next_step_s_quest_item_takes_over_o
 	assert_eq!(out[1], json!([5]), "the fang the step collects");
 	assert!(is_empty(&out[2]), "nothing glows");
 }
+
+// #4207 in the game's bags: the glow rings the whole slot (centred, the border texture at 1.9 times the button, added
+// light), so a stack of the step's quest item keeps its count in the bottom-right corner, shown and unchanged.
+#[test]
+fn the_game_s_bags_ring_the_step_s_quest_item_and_leave_its_stack_count_alone() {
+	let out = run(r#"
+		Polestar.Engine.Goto(2); stub.advance(0.1)
+		local b = g.bagButton(0, 5)
+		b:SetSize(37, 37)
+		b.Count = b:CreateFontString(nil, "ARTWORK")
+		b.Count:SetPoint("BOTTOMRIGHT", -5, 2); b.Count:SetText("3"); b.Count:Show()
+		g.bag(0, 5, "item:5101"); g.openBag(0); stub.advance(0.1)
+		local ring
+		for _, r in ipairs(b.regions) do
+			if r.texture == "Interface\\Buttons\\UI-ActionButton-Border" then ring = r end
+		end
+		local point, host = ring:GetPoint(1)
+		emit({ shown = ring:IsShown(), point = point, onButton = host == b, blend = ring.blend,
+			width = math.floor(ring:GetWidth() * 10 + 0.5) / 10, count = b.Count:IsShown() and b.Count:GetText() })
+	"#);
+	assert_eq!(out[0], json!({ "shown": true, "point": "CENTER", "onButton": true, "blend": "ADD", "width": 70.3, "count": "3" }));
+}
+
+#[test]
+fn inactive_highlights_skip_guide_reads_and_resume_on_the_current_item() {
+	let out = run(r#"
+		local Q = Polestar.QoL
+		g.bag(0, 2, "item:10338"); g.bag(0, 5, "item:5101"); g.openBag(0)
+		Polestar.Set("qol.bagGlow", false); stub.advance(0.1)
+		local current, reads = Q.CurrentStep, 0
+		Q.CurrentStep = function(...) reads = reads + 1; return current(...) end
+		local function inactive()
+			reads = 0
+			Q.BagGlow.Refresh()
+			local n = reads
+			return { n, #glowing(0) }
+		end
+		emit(inactive())
+		Polestar.SetHidden(true)
+		Polestar.Set("qol.bagGlow", true)
+		Polestar.Engine.Goto(2); stub.advance(0.1)
+		emit(inactive())
+		Polestar.SetHidden(false); stub.advance(0.1)
+		emit(glowing(0))
+	"#);
+	assert_eq!(out[0], json!([0, 0]), "disabled");
+	assert_eq!(out[1], json!([0, 0]), "enabled but hidden");
+	assert_eq!(out[2], json!([5]), "show the new step's item, not the one visible before hiding");
+}
+
+// The client sends QUEST_LOG_UPDATE for much that leaves the log as it was (several per kill, some per loot). The
+// bag glow and the quest buttons each read the step's view on it (about half a millisecond each, #2537): now only
+// when what they read of the log (the step's quests, the While-here line's, how many quests the log holds) changed.
+// A count of the step's quest that moves still refreshes them on the next frame; so does an accept.
+#[test]
+fn a_quest_log_update_that_changes_nothing_the_step_reads_refreshes_no_step_item() {
+	let out = run(r#"
+		w.onQuest(882, { { required = 3 } }); w.onQuest(999, { { required = 5 } })
+		stub.fire("QUEST_LOG_UPDATE"); stub.advance(0.6)
+		local n = 0
+		local current = Polestar.QoL.CurrentStep
+		Polestar.QoL.CurrentStep = function(...) n = n + 1; return current(...) end
+		-- Each phase from rest (the Engine's evaluation of the phase before and its STEP_UPDATED behind it), counted
+		-- over the frame after it.
+		local function after(fn) stub.advance(0.6); n = 0; fn(); stub.advance(0.05); return n end
+		emit({
+			quiet = after(function() for _ = 1, 3 do stub.fire("QUEST_LOG_UPDATE") end end),
+			elsewhere = after(function() w.progress(999, 1, 2) end),
+			counted = after(function() w.progress(882, 1, 1) end),
+			again = after(function() stub.fire("QUEST_LOG_UPDATE") end),
+			accepted = after(function() w.onQuest(1000, { { required = 1 } }); stub.fire("QUEST_LOG_UPDATE") end),
+		})
+	"#);
+	let out = &out[0];
+	assert_eq!(out["quiet"], 0, "three updates that change nothing: no refresh");
+	assert_eq!(out["elsewhere"], 0, "a quest the step doesn't name: no refresh");
+	assert!(out["counted"].as_i64().unwrap() >= 1, "the step's count moved: refreshed next frame ({})", out["counted"]);
+	assert_eq!(out["again"], 0, "the same count once more: no refresh");
+	assert!(out["accepted"].as_i64().unwrap() >= 1, "a quest more in the log: refreshed ({})", out["accepted"]);
+}

@@ -2,9 +2,11 @@
 //! lint.js, with pack/locate.js and pack/build.js's packCommand). The pack is the folder argument (or
 //! `--pack`), else the nearest folder holding a pack.json (this one or a parent), else our guides/.
 //! Another pack is compiled with our guides as context and written to <pack>/dist/<folder>/; ours to
-//! <checkout>/addon/<folder>/. `--force` writes the files even with errors; lint's `--sim <dir>` (default
-//! <checkout>/data/sim with the default data) reads world-<faction>.json's `excluded` for the solo policy,
-//! skipping a world built from other data.
+//! <checkout>/addon/<folder>/, and so is one of Polestar's own extra packs (forge_guide::project::OWN_EXTRAS:
+//! experimental/ into addon/Polestar/Experimental/, inside Polestar with no TOC of its own, with our guides as
+//! context). `--force` writes the files
+//! even with errors; lint's `--sim <dir>` (default <checkout>/data/sim with the default data) reads
+//! world-<faction>.json's `excluded` for the solo policy, skipping a world built from other data.
 //!
 //! `forge guide bake --guides <dir>[,<dir>...] [--grid <dir>] [--leffe <dir>] [--root <repo>] [--data <dir>] [--threads N]`:
 //! the baked legs of written guide trees (forge::bake).
@@ -88,6 +90,13 @@ fn solo_exclusions(sim: &Path, root: &Path, data_dir: &Path) -> (Obj, Vec<&'stat
 	(excluded, stale)
 }
 
+/// data/route-fixes.json's `overrides.leftout` ($POLESTAR_ROUTE_FIXES names another file): the second-visit
+/// accepts the route leaves out on purpose (forge_guide::revisit). Nothing when the file is missing.
+fn route_leftout(root: &Path) -> V {
+	let path = std::env::var_os("POLESTAR_ROUTE_FIXES").map(PathBuf::from).unwrap_or_else(|| root.join("data/route-fixes.json"));
+	std::fs::read_to_string(path).ok().and_then(|t| parse_json(&t).ok()).map(|d| d.get("overrides").get("leftout")).unwrap_or(V::Undef)
+}
+
 /// The `dataHash` a world built now from `data_dir` would carry (forge_world::inputs; None when the
 /// inputs cannot be read).
 fn data_hash(root: &Path, data_dir: &Path) -> Option<String> {
@@ -102,7 +111,7 @@ fn data_hash(root: &Path, data_dir: &Path) -> Option<String> {
 	Some(forge_world::inputs::inputs_hash(&inputs))
 }
 
-/// `forge guide seed|publish|check-generated` (forge::generated).
+/// `forge guide seed|publish|check-generated|rehash` (forge::generated).
 fn generated(cmd: &str, args: &[String]) -> i32 {
 	use forge::generated;
 	let usage = |m: &str| {
@@ -162,6 +171,19 @@ fn generated(cmd: &str, args: &[String]) -> i32 {
 				Err(e) => fail(&e),
 			}
 		}
+		"rehash" => match generated::rehash(&checkout) {
+			Ok(done) if done.is_empty() => {
+				eprintln!("forge guide rehash: {} has no {} or {}: nothing to do", checkout.display(), generated::GENERATED, generated::SEED_MANIFEST);
+				0
+			}
+			Ok(done) => {
+				for (manifest, n) in &done {
+					eprintln!("forge guide rehash: {manifest}: {n} files, hashed from what is on disk");
+				}
+				0
+			}
+			Err(e) => fail(&e),
+		},
 		_ => match generated::check(&checkout) {
 			Ok(bad) if bad.is_empty() => {
 				eprintln!("forge guide check-generated: no generated guide or seed file is edited");
@@ -360,6 +382,61 @@ fn guidecheck(args: &[String]) -> i32 {
 	i32::from(!failures.is_empty())
 }
 
+/// `forge guide legacy-steps --old <addon dir> [--old <addon dir> ...] [--data <dir>] [--out <file>]
+/// [--current <dir>] [--root <checkout>]` (forge::legacy_steps).
+fn legacy_steps(args: &[String]) -> i32 {
+	let usage = |m: &str| {
+		eprintln!("forge guide legacy-steps: {m}\n(forge guide --help for the options)");
+		2
+	};
+	if let Err(e) = super::check_args(args, &["--old", "--data", "--out", "--current", "--root"], &[], 0) {
+		return usage(&e);
+	}
+	let cwd = std::env::current_dir().unwrap_or_default();
+	let mut olds: Vec<PathBuf> = Vec::new();
+	let mut opts: Vec<(String, String)> = Vec::new();
+	let mut it = args.iter();
+	while let Some(a) = it.next() {
+		let (k, v) = match a.split_once('=') {
+			Some((k, v)) => (k.to_string(), v.to_string()),
+			None => (a.clone(), it.next().cloned().unwrap_or_default()),
+		};
+		if k == "--old" {
+			olds.push(cwd.join(v));
+		} else {
+			opts.push((k, v));
+		}
+	}
+	let opt = |k: &str| opts.iter().find(|(o, _)| o == k).map(|(_, v)| cwd.join(v));
+	if olds.is_empty() {
+		return usage("at least one --old <addon dir>: an earlier release's addon folder as it shipped (git archive <tag> addon)");
+	}
+	let Some(root) = opt("--root").or_else(find_root) else {
+		return usage("no Polestar checkout (addon/Polestar/Polestar.toc and guides/pack.json) above here or the forge binary: pass --root <checkout>");
+	};
+	let data_dir = opt("--data").unwrap_or_else(|| root.join("data/forever"));
+	let out = opt("--out").unwrap_or_else(|| root.join("addon/Polestar/Core/LegacySteps.lua"));
+	let current = opt("--current").unwrap_or_else(|| root.join("guides"));
+	let data = match forge_guide::data::load_data(&data_dir) {
+		Ok(d) => d,
+		Err(e) => {
+			eprintln!("forge guide legacy-steps: {}: {e}", data_dir.display());
+			return 1;
+		}
+	};
+	let olds: Vec<&Path> = olds.iter().map(PathBuf::as_path).collect();
+	match forge::legacy_steps::build(&current, &olds, &data).and_then(|w| std::fs::write(&out, &w.lua).map(|_| w).map_err(|e| format!("{}: {e}", out.display()))) {
+		Ok(w) => {
+			eprintln!("forge guide legacy-steps: wrote {}: {} steps of {} guides; {} quests moved into {} guides", out.display(), w.steps, w.guides, w.moved, w.moved_guides);
+			0
+		}
+		Err(e) => {
+			eprintln!("forge guide legacy-steps: {e}");
+			1
+		}
+	}
+}
+
 const COMPILE_VALUES: [&str; 8] = ["--root", "--pack", "--guides", "--data", "--context", "--context-data", "--out", "--format"];
 const LINT_VALUES: [&str; 8] = ["--root", "--pack", "--guides", "--data", "--context", "--context-data", "--sim", "--format"];
 
@@ -373,14 +450,17 @@ fn run() -> i32 {
 	if cmd == "check" {
 		return guidecheck(&args[1..]);
 	}
-	if matches!(cmd.as_str(), "seed" | "publish" | "check-generated") {
+	if matches!(cmd.as_str(), "seed" | "publish" | "check-generated" | "rehash") {
 		return generated(&cmd, &args[1..]);
 	}
 	if cmd == "bake" {
 		return bake(&args[1..]);
 	}
+	if cmd == "legacy-steps" {
+		return legacy_steps(&args[1..]);
+	}
 	if cmd != "compile" && cmd != "lint" {
-		return usage(&format!("unknown command {cmd}: compile, lint, check, bake, seed, publish or check-generated"));
+		return usage(&format!("unknown command {cmd}: compile, lint, check, bake, seed, publish, check-generated, rehash or legacy-steps"));
 	}
 	let rest = &args[1..];
 	let values: &[&str] = if cmd == "compile" { &COMPILE_VALUES } else { &LINT_VALUES };
@@ -446,6 +526,9 @@ fn run() -> i32 {
 		eprintln!("forge guide {cmd}: {}: no such folder", pack_dir.display());
 		return 1;
 	}
+	// One of Polestar's own extra packs: checked as another pack is (its own reserved id allowed), built as
+	// Polestar's into addon/.
+	let own_extra = if official { None } else { forge_guide::project::own_extra_at(&root, &pack_dir) };
 	let (context_dir, context_data_dir) = if official {
 		(None, None)
 	} else {
@@ -455,8 +538,18 @@ fn run() -> i32 {
 	let summary = fmt != "json";
 	let t0 = Instant::now();
 
-	let (manifest, extra) = forge_guide::manifest::read_manifest(if official { &official_dir } else { &pack_dir }, official);
-	let Some(manifest) = manifest.filter(V::truthy) else {
+	let (manifest, mut extra) = match own_extra {
+		Some(e) => forge_guide::manifest::read_extra_manifest(&pack_dir, e.id),
+		None => forge_guide::manifest::read_manifest(if official { &official_dir } else { &pack_dir }, official),
+	};
+	let refused = match (&manifest, own_extra) {
+		(Some(m), Some(e)) if m.truthy() => forge_guide::project::own_extra_manifest(e, m).err(),
+		_ => None,
+	};
+	let Some(manifest) = manifest.filter(|m| m.truthy() && refused.is_none()) else {
+		if let Some(why) = refused {
+			extra.push(Diag { severity: "error", file: Some(forge_guide::project::shown(&pack_dir.join("pack.json"))), line: 1.0, message: why, hint: None, rule: None });
+		}
 		print_diagnostics(&extra, &fmt, quiet);
 		if summary {
 			eprintln!("{cmd} failed: {} in pack.json", plural(extra.iter().filter(|d| d.severity == "error").count(), "error"));
@@ -477,7 +570,10 @@ fn run() -> i32 {
 			}
 			return 1;
 		}
-		let load = |dir: &Path, diag: &mut Diagnostics| load_project_data(dir, diag).map_err(|e| eprintln!("forge guide {cmd}: {e}"));
+		// Data read from a client build compiles only with that build's tables beside it
+		// (tokens::check_pinned_tables): without them the texts would tokenise otherwise.
+		let load =
+			|dir: &Path, diag: &mut Diagnostics| load_project_data(dir, diag).and_then(|d| forge_guide::tokens::check_pinned_tables(&d).map(|()| d)).map_err(|e| eprintln!("forge guide {cmd}: {e}"));
 		let Ok(data) = load(&data_dir, &mut data_diag) else { return 1 };
 		let context_data = match &context_data_dir {
 			Some(c) if !same_path(c, &data_dir) => match load(c, &mut data_diag) {
@@ -501,6 +597,8 @@ fn run() -> i32 {
 	let mut diag = built.project.diag;
 	let mut stale = Vec::new();
 	if cmd == "lint" {
+		// The play checks are errors in a lint of our pack (warnings in a compile, so the tools that compile it go on).
+		diag.promote_play_checks();
 		// The default world was built from the default data; other data needs its own --sim.
 		let sim = if no_data { None } else { opt("--sim").map(at).or_else(|| opt("--data").is_none().then(|| root.join("data/sim"))) };
 		let excluded = match sim {
@@ -512,6 +610,10 @@ fn run() -> i32 {
 			None => Obj::new(),
 		};
 		forge_guide::validate::validate_solo_policy(&built.project.guides, &V::Obj(excluded), &mut diag);
+		// Second visits (revisit.rs): Polestar's own guides, with the route's `leftout` records.
+		if official {
+			forge_guide::revisit::check_second_visits(&built.project.guides, &route_leftout(&root), &mut diag);
+		}
 	}
 	let t_built = t0.elapsed();
 	let out = match opt("--out") {
@@ -522,7 +624,9 @@ fn run() -> i32 {
 				eprintln!("forge guide {cmd}: refusing the pack folder {folder:?}: not a plain folder name");
 				return 1;
 			}
-			if official {
+			if let Some(e) = own_extra {
+				root.join("addon").join(e.dir)
+			} else if official {
 				root.join("addon").join(folder)
 			} else {
 				pack_dir.join("dist").join(folder)

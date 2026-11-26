@@ -161,14 +161,10 @@ pub fn text_problems(english: &str, translation: &str, plurals: &[String], unnam
 /// The commented translations a file's retired block holds: { english: translation }.
 pub fn retired_entries(text: &str) -> V {
 	static RE: LazyLock<Regex> = LazyLock::new(|| Regex::new(r#"(?m)^\s*-- \[("(?:[^"\\]|\\.)*")\] = ("(?:[^"\\]|\\.)*"),\s*$"#).unwrap());
-	static DEC: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"\\([0-9]{1,3})").unwrap());
 	let out = Obj::new();
 	let Some(at) = text.find(RETIRED) else { return V::Obj(out) };
-	let unq = |s: &str| -> Result<V, String> {
-		let s = DEC.replace_all(s, |c: &regex::Captures| format!("\\u{:04x}", c[1].parse::<u32>().unwrap()));
-		let s = s.replace("\\'", "'");
-		crate::js::parse_json(&s)
-	};
+	// Decode Lua escapes once: a literal backslash must not start a second escape.
+	let unq = |s: &str| crate::i18n_files::unescape_lua_text(&s[1..s.len() - 1], "retired entry", 1).map(V::from);
 	let mut pos = at;
 	while let Some(m) = RE.captures_at(text, pos) {
 		let whole = m.get(0).unwrap();
@@ -218,6 +214,93 @@ fn successor(stale: &str, texts: &[Text], taken: &HashSet<String>) -> Option<Str
 		}
 	}
 	best
+}
+
+/// The English names of a file's tokens, `kind:id` -> name: those of its texts now, and those the
+/// file's own name comments gave when it was last written (`-- {npc:6} Kobold Vermin · …`), so a
+/// token a text lost still has its name.
+#[cfg(feature = "native")]
+fn token_names(file_text: &str, texts: &[Text]) -> std::collections::HashMap<String, String> {
+	static PART: LazyLock<Regex> =
+		LazyLock::new(|| Regex::new(r"^\{((?:npc|object|item|quest|zone|area|spell|faction|skill):[0-9]+)\} (.+?)(?: \(no name in this language: may be words\))?$").unwrap());
+	let mut names = std::collections::HashMap::new();
+	for line in file_text.lines() {
+		let Some(rest) = line.trim_start().strip_prefix("-- {") else { continue };
+		for part in format!("{{{rest}").split(" · ") {
+			if let Some(m) = PART.captures(part) {
+				if &m[2] != "?" {
+					names.insert(m[1].to_string(), m[2].to_string());
+				}
+			}
+		}
+	}
+	for t in texts {
+		for (tok, en) in &t.tokens {
+			if en != "?" {
+				names.insert(tok.clone(), en.clone());
+			}
+		}
+	}
+	names
+}
+
+/// Below this word-pair likeness (Dice) an old translation is no draft for a new text.
+#[cfg(feature = "native")]
+const DRAFT_LIKENESS: f64 = 0.8;
+
+/// The old translation to start from for each text a file leaves empty (#1315, an idea of Saulo
+/// (soulrocha)): { new English: [old English, old translation] }, for `forge i18n guides sync` to
+/// write above the empty line. The old ones are the file's stale and retired entries. The texts are
+/// compared with each token replaced by its English name, so a name that became words ("{area:379}"
+/// -> "Far Watch Post") or another NPC in the sentence still finds the translation it had: the
+/// closest old one whose word pairs match DRAFT_LIKENESS or more. Nothing for a file not read.
+#[cfg(feature = "native")]
+pub fn file_drafts(s: &FileState) -> V {
+	if !s.exists || s.error.is_some() || s.missing.is_empty() {
+		return V::obj();
+	}
+	let old: Vec<(String, String)> = s.stale.entries().into_iter().chain(s.retired.entries()).map(|(k, v)| (k.to_string(), v.to_js_string())).collect();
+	if old.is_empty() {
+		return V::obj();
+	}
+	let file_text = std::fs::read_to_string(&s.file).unwrap_or_default();
+	drafts(&s.missing, &old, &token_names(&file_text, &s.texts))
+}
+
+#[cfg(feature = "native")]
+fn drafts(missing: &[String], old: &[(String, String)], names: &std::collections::HashMap<String, String>) -> V {
+	static SPLIT: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"[^\p{L}\p{N}']+").unwrap());
+	let pairs = |s: &str| -> HashSet<String> {
+		let named = TOKEN_RE.replace_all(s, |m: &regex::Captures| names.get(&format!("{}:{}", &m[1], &m[2])).cloned().unwrap_or_default());
+		let lower = named.to_lowercase();
+		let words: Vec<&str> = SPLIT.split(&lower).filter(|w| !w.is_empty()).collect();
+		if words.len() < 2 {
+			return words.into_iter().map(String::from).collect();
+		}
+		words.windows(2).map(|w| format!("{} {}", w[0], w[1])).collect()
+	};
+	let old: Vec<(&String, &String, HashSet<String>)> = old.iter().map(|(en, tr)| (en, tr, pairs(en))).collect();
+	let out = Obj::new();
+	for text in missing {
+		let a = pairs(text);
+		if a.is_empty() {
+			continue;
+		}
+		let mut best: Option<(&String, &String)> = None;
+		let mut score = DRAFT_LIKENESS;
+		for (en, tr, b) in &old {
+			let both = a.iter().filter(|p| b.contains(*p)).count();
+			let s = 2.0 * both as f64 / (a.len() + b.len()) as f64;
+			if s >= score && best.is_none_or(|_| s > score) {
+				score = s;
+				best = Some((en, tr));
+			}
+		}
+		if let Some((en, tr)) = best {
+			out.set(text, V::from(vec![V::from(en.as_str()), V::from(tr.as_str())]));
+		}
+	}
+	V::Obj(out)
 }
 
 // ------------------------------------------------------------ files (native)
@@ -320,45 +403,36 @@ pub fn pack_locales(pack_dir: &str) -> Vec<String> {
 	out
 }
 
-/// The object ids Polestar's names addon of `locale`
+/// The object ids Polestar's names addon of `locale` in the checkout `root`
 /// (addon/Polestar_<locale>/Names.lua, `forge data names`) names, or None
-/// when it has none, cached. The addon folder is the repository's (as the
-/// JS finds it from its own file), located from this crate's source path.
+/// when it has none. `root` is the checkout the command works on (its
+/// `--root`), not the one forge was built in: the post-merge gates' runner
+/// runs a forge built on another machine, whose build folder it does not
+/// have, and with no names every object token was taken as named.
 #[cfg(feature = "native")]
-fn named_objects(locale: &str) -> Option<std::rc::Rc<HashSet<String>>> {
-	use std::cell::RefCell;
-	use std::collections::HashMap;
-	use std::rc::Rc;
-	thread_local! {
-		static NAMED: RefCell<HashMap<String, Option<Rc<HashSet<String>>>>> = RefCell::new(HashMap::new());
-	}
+pub fn named_objects(root: &std::path::Path, locale: &str) -> Option<HashSet<String>> {
 	// R("object", lo, hi, [[ then one "<id>\t<name>" line per name, up to the chunk's ]].
 	static ADD: LazyLock<Regex> = LazyLock::new(|| Regex::new(r#"(?s)R\("object", [0-9-]+, [0-9-]+, \[(=*)\[(.*?)\n\]"#).unwrap());
 	static ID: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"\n([0-9]+)\t").unwrap());
-	if let Some(hit) = NAMED.with(|n| n.borrow().get(locale).cloned()) {
-		return hit;
-	}
-	let root = concat!(env!("CARGO_MANIFEST_DIR"), "/../../../addon");
-	let file = join(&[root, &crate::toc::language_addon(locale), "Names.lua"]);
-	let ids = std::fs::read_to_string(&file).ok().map(|text| {
+	let file = root.join("addon").join(crate::toc::language_addon(locale)).join("Names.lua");
+	std::fs::read_to_string(file).ok().map(|text| {
 		let mut ids = HashSet::new();
 		for m in ADD.captures_iter(&text) {
 			for e in ID.captures_iter(&m[2]) {
 				ids.insert(format!("object:{}", &e[1]));
 			}
 		}
-		Rc::new(ids)
-	});
-	NAMED.with(|n| n.borrow_mut().insert(locale.to_string(), ids.clone()));
-	ids
+		ids
+	})
 }
 
-/// The tokens of `english` a translation into `locale` may write as words: the
-/// objects no source names in that language (a district's sign, a tavern),
-/// which the game would show in English.
+/// The tokens of `english` a translation may write as words: the objects no
+/// source names in its language (a district's sign, a tavern), which the game
+/// would show in English. `named`: the language's named objects
+/// (named_objects); None, no names addon: none.
 #[cfg(feature = "native")]
-pub fn unnamed_tokens(english: &str, locale: &str) -> Vec<String> {
-	let Some(named) = named_objects(locale) else { return Vec::new() };
+pub fn unnamed_tokens(english: &str, named: Option<&HashSet<String>>) -> Vec<String> {
+	let Some(named) = named else { return Vec::new() };
 	let mut out: Vec<String> = Vec::new();
 	for t in tokens_of(english) {
 		if !out.contains(&t) && t.starts_with("object:") && !named.contains(&t) {
@@ -389,6 +463,8 @@ pub struct FileState {
 	pub problems: Vec<(String, String)>,
 	/// { stale English: new English }.
 	pub successors: V,
+	/// A guide's file: the objects its language's names addon names (named_objects), for unnamed_tokens.
+	pub named: Option<std::sync::Arc<HashSet<String>>>,
 }
 
 pub struct LocaleState {
@@ -397,11 +473,12 @@ pub struct LocaleState {
 }
 
 /// guides: the pack's compiled guides with `_ast.source`. -> per locale (in
-/// `locales` order) its files and orphan files.
+/// `locales` order) its files and orphan files. `root`: the Polestar checkout
+/// whose names addons say which objects have a name (named_objects).
 #[cfg(feature = "native")]
-pub fn guide_state(pack_dir: &str, manifest: &V, guides: &[V], locales: &[String]) -> Result<Vec<(String, LocaleState)>, String> {
+pub fn guide_state(root: &std::path::Path, pack_dir: &str, manifest: &V, guides: &[V], locales: &[String]) -> Result<Vec<(String, LocaleState)>, String> {
 	let mut planned: Vec<FileState> = Vec::new();
-	let blank = |locale: &str, kind: &'static str, id: Option<String>, source: Option<String>, file: String, texts: Vec<Text>| FileState {
+	let blank = |locale: &str, kind: &'static str, id: Option<String>, source: Option<String>, file: String, texts: Vec<Text>, named: Option<std::sync::Arc<HashSet<String>>>| FileState {
 		locale: locale.to_string(),
 		kind,
 		id,
@@ -416,12 +493,14 @@ pub fn guide_state(pack_dir: &str, manifest: &V, guides: &[V], locales: &[String
 		retired: V::obj(),
 		problems: Vec::new(),
 		successors: V::obj(),
+		named,
 	};
 	for locale in locales {
-		planned.push(blank(locale, "pack", None, None, join(&[&locale_dir(pack_dir, locale), PACK_FILE]), pack_texts(manifest, guides)));
+		planned.push(blank(locale, "pack", None, None, join(&[&locale_dir(pack_dir, locale), PACK_FILE]), pack_texts(manifest, guides), None));
+		let named = named_objects(root, locale).map(std::sync::Arc::new);
 		for g in guides {
 			let source = g.hidden("_ast").get("source").to_js_string();
-			planned.push(blank(locale, "guide", Some(g.get("id").to_js_string()), Some(source.clone()), guide_file(pack_dir, locale, &source), guide_texts(g)));
+			planned.push(blank(locale, "guide", Some(g.get("id").to_js_string()), Some(source.clone()), guide_file(pack_dir, locale, &source), guide_texts(g), named.clone()));
 		}
 	}
 	let existing: Vec<(String, String)> = planned.iter().filter(|p| std::path::Path::new(&p.file).exists()).map(|p| (p.file.clone(), p.locale.clone())).collect();
@@ -452,7 +531,7 @@ pub fn guide_state(pack_dir: &str, manifest: &V, guides: &[V], locales: &[String
 					}
 					s.translated.set(&k, v.clone());
 					let plurals: Vec<String> = s.texts.iter().rev().find(|t| t.text == *k).map(|t| t.plurals.iter().map(|p| p.0.clone()).collect()).unwrap_or_default();
-					let unnamed = if s.kind == "guide" { unnamed_tokens(&k, &s.locale) } else { Vec::new() };
+					let unnamed = if s.kind == "guide" { unnamed_tokens(&k, s.named.as_deref()) } else { Vec::new() };
 					for problem in text_problems(&k, &v, &plurals, &unnamed) {
 						s.problems.push((k.to_string(), problem));
 					}
@@ -494,8 +573,9 @@ fn json_str(s: &str) -> String {
 /// guides: { [id]: {} } } }, warnings: [{ file, message }] } with only
 /// well-formed translations of texts the pack has, and a warning for every
 /// problem, stale entry and orphan file. Err: Lua could not run (the JS throws).
+/// `root`: the Polestar checkout (guide_state).
 #[cfg(feature = "native")]
-pub fn pack_translations(pack_dir: &std::path::Path, manifest: &V, guides: &[V]) -> Result<V, String> {
+pub fn pack_translations(root: &std::path::Path, pack_dir: &std::path::Path, manifest: &V, guides: &[V]) -> Result<V, String> {
 	let pack_dir = &pack_dir.to_string_lossy().into_owned();
 	let locales = pack_locales(pack_dir);
 	if locales.is_empty() {
@@ -509,7 +589,7 @@ pub fn pack_translations(pack_dir: &std::path::Path, manifest: &V, guides: &[V])
 		})
 		.cloned()
 		.collect();
-	let state = guide_state(pack_dir, manifest, &with_source, &locales)?;
+	let state = guide_state(root, pack_dir, manifest, &with_source, &locales)?;
 	let translations = Obj::new();
 	let mut warnings: Vec<(String, String)> = Vec::new();
 	for (locale, st) in &state {

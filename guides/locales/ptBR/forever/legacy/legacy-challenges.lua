@@ -90,29 +90,34 @@ return {
 	-- Step 15: Adventure: Lord Valthalak
 	-- {npc:16042} Lord Valthalak
 	["Adventure: {npc:16042}"] = "Aventura: {npc:16042}",
-	-- {npc:16042} Lord Valthalak · {quest:8999} Saving the Best for Last · {npc:16013} Deliana · {zone:1455} Ironforge · {npc:16012} Mokvar · {zone:1454} Orgrimmar · {npc:16033} Bodley · {area:254} Blackrock Mountain · {quest:8995} Mea Culpa, Lord Valthalak · {quest:8996} Return to Bodley · {quest:8997} Back to the Beginning
-	["The {npc:16042} questline is a point. It is the level 60 dungeon-set chain, from An Earnest Proposition to your class's {quest:8999}: {npc:16013} ({zone:1455}) or {npc:16012} ({zone:1454}) send you through In Search of Anthion and Anthion's Parting Words to {npc:16033} at {area:254}, whose Three Kings of Flame, the Left and Right Pieces of Lord Valthalak's Amulet, Final Preparations and {quest:8995} end with {quest:8996}. {quest:8997} then leads to {quest:8999}."] = "A linha de missões de {npc:16042} vale um ponto. É a cadeia do conjunto de masmorra de nível 60, de Uma proposta honesta até {quest:8999} da sua classe: {npc:16013} ({zone:1455}) ou {npc:16012} ({zone:1454}) mandam você por À procura de Anthion e As últimas palavras de Anthion até {npc:16033}, em {area:254}, cujas Três reis das chamas, Peça Esquerda e Direita do Amuleto do Lorde Valthalak, Preparativos finais e {quest:8995} terminam com {quest:8996}. {quest:8997} leva então a {quest:8999}.",
+	-- {npc:16042} Lord Valthalak · {quest:9001} Saving the Best for Last · {npc:16013} Deliana · {zone:1455} Ironforge · {npc:16012} Mokvar · {zone:1454} Orgrimmar · {npc:16033} Bodley · {area:254} Blackrock Mountain · {quest:8995} Mea Culpa, Lord Valthalak · {quest:8996} Return to Bodley · {quest:8997} Back to the Beginning
+	-- was: ["The {npc:16042} questline is a point. It is the level 60 dungeon-set chain, from An Earnest Proposition to your class's {quest:8999}: {npc:16013} ({zone:1455}) or {npc:16012} ({zone:1454}) send you through In Search of Anthion and Anthion's Parting Words to {npc:16033} at {area:254}, whose Three Kings of Flame, the Left and Right Pieces of Lord Valthalak's Amulet, Final Preparations and {quest:8995} end with {quest:8996}. {quest:8997} then leads to {quest:8999}."] = "A linha de missões de {npc:16042} vale um ponto. É a cadeia do conjunto de masmorra de nível 60, de Uma proposta honesta até {quest:8999} da sua classe: {npc:16013} ({zone:1455}) ou {npc:16012} ({zone:1454}) mandam você por À procura de Anthion e As últimas palavras de Anthion até {npc:16033}, em {area:254}, cujas Três reis das chamas, Peça Esquerda e Direita do Amuleto do Lorde Valthalak, Preparativos finais e {quest:8995} terminam com {quest:8996}. {quest:8997} leva então a {quest:8999}."
+	["The {npc:16042} questline is a point. It is the level 60 dungeon-set chain, from An Earnest Proposition to your class's {quest:9001}: {npc:16013} ({zone:1455}) or {npc:16012} ({zone:1454}) send you through In Search of Anthion and Anthion's Parting Words to {npc:16033} at {area:254}, whose Three Kings of Flame, the Left and Right Pieces of Lord Valthalak's Amulet, Final Preparations and {quest:8995} end with {quest:8996}. {quest:8997} then leads to {quest:9001}."] = "",
 	-- {npc:16073} Spirit of Lord Valthalak · {npc:16033} Bodley · {area:254} Blackrock Mountain
 	["{npc:16073}, inside Upper Blackrock Spire after Mea Culpa (no spawn in the data: the arrow leads to {npc:16033}'s {area:254})"] = "{npc:16073}, no Pico da Rocha Negra Superior, depois de Mea Culpa (sem ponto de surgimento nos dados: a seta leva a {npc:16033}, em {area:254})",
 	-- {npc:16033} Bodley · {quest:8996} Return to Bodley
 	["{npc:16033} offers it once {quest:8996} is turned in"] = "{npc:16033} a oferece depois que {quest:8996} for entregue",
 
 	-- Step 16: Adventure: Saving the Best for Last (Alliance)
-	-- {quest:8999} Saving the Best for Last
-	["Adventure: {quest:8999} (Alliance)"] = "Aventura: {quest:8999} (Aliança)",
-	-- {npc:16013} Deliana · {quest:8999} Saving the Best for Last
-	["{npc:16013} then offers your class's {quest:8999}, the last quest of the challenge: it takes your class's dungeon-set helm and chest and upgrades them."] = "{npc:16013} oferece então {quest:8999} da sua classe, a última missão do desafio: ela pega o elmo e o peitoral do conjunto de masmorra da sua classe e os melhora.",
+	-- {quest:9001} Saving the Best for Last
+	-- was: ["Adventure: {quest:8999} (Alliance)"] = "Aventura: {quest:8999} (Aliança)"
+	["Adventure: {quest:9001} (Alliance)"] = "",
+	-- {npc:16013} Deliana · {quest:9001} Saving the Best for Last
+	-- was: ["{npc:16013} then offers your class's {quest:8999}, the last quest of the challenge: it takes your class's dungeon-set helm and chest and upgrades them."] = "{npc:16013} oferece então {quest:8999} da sua classe, a última missão do desafio: ela pega o elmo e o peitoral do conjunto de masmorra da sua classe e os melhora."
+	["{npc:16013} then offers your class's {quest:9001}, the last quest of the challenge: it takes your class's dungeon-set helm and chest and upgrades them."] = "",
 
 	-- Step 17: Adventure: Saving the Best for Last (Horde)
-	-- {quest:9007} Saving the Best for Last
-	["Adventure: {quest:9007} (Horde)"] = "Aventura: {quest:9007} (Horda)",
-	-- {npc:16012} Mokvar · {quest:9007} Saving the Best for Last
-	["{npc:16012} then offers your class's {quest:9007}, the last quest of the challenge: it takes your class's dungeon-set helm and chest and upgrades them."] = "{npc:16012} oferece então {quest:9007} da sua classe, a última missão do desafio: ela pega o elmo e o peitoral do conjunto de masmorra da sua classe e os melhora.",
+	-- {quest:9008} Saving the Best for Last
+	-- was: ["Adventure: {quest:9007} (Horde)"] = "Aventura: {quest:9007} (Horda)"
+	["Adventure: {quest:9008} (Horde)"] = "",
+	-- {npc:16012} Mokvar · {quest:9008} Saving the Best for Last
+	-- was: ["{npc:16012} then offers your class's {quest:9007}, the last quest of the challenge: it takes your class's dungeon-set helm and chest and upgrades them."] = "{npc:16012} oferece então {quest:9007} da sua classe, a última missão do desafio: ela pega o elmo e o peitoral do conjunto de masmorra da sua classe e os melhora."
+	["{npc:16012} then offers your class's {quest:9008}, the last quest of the challenge: it takes your class's dungeon-set helm and chest and upgrades them."] = "",
 
 	-- Step 18: Dungeons: level 15-25
 	["Dungeons: level 15-25"] = "Masmorras: nível 15-25",
-	-- {area:2437} Ragefire Chasm · {area:16919} Hall of Thanes · {zone:1455} Ironforge
-	["The final boss of every level 15-25 dungeon earns one point together. {area:2437} and Forever's {area:16919} (in {zone:1455}) count as one: either final boss does. Tick each boss off when you kill it, and check the in-game Legacy panel for the list."] = "O chefe final de toda masmorra de nível 15-25 rende um ponto, em conjunto. {area:2437} e {area:16919} do Forever (em {zone:1455}) contam como um só: qualquer um dos chefes finais serve. Marque cada chefe quando matar, e confira o painel de Legado no jogo para ver a lista.",
+	-- {area:2437} Ragefire Chasm · {area:16919} Hall of Thanes · {zone:1455} Ironforge · {area:153} Ruins of Lordaeron · {zone:1458} Undercity · {zone:1454} Orgrimmar
+	["The final boss of every level 15-25 dungeon earns one point together. {area:2437} and Forever's {area:16919} (in {zone:1455}) count as one: either final boss does. Tick each boss off when you kill it, and check the in-game Legacy panel for the list.\nAlliance: the {area:153}'s entrance is in the ruins beside the {zone:1458}, among Horde guards: go with a group. {area:2437} is inside {zone:1454}: the {area:16919} counts for it. Horde: the {area:16919} is inside {zone:1455}: {area:2437} counts for it."] = "O chefe final de toda masmorra de nível 15-25 rende um ponto, em conjunto. {area:2437} e {area:16919} do Forever (em {zone:1455}) contam como um só: qualquer um dos chefes finais serve. Marque cada chefe quando matar, e confira o painel de Legado no jogo para ver a lista.\nAliança: a entrada de {area:153} fica nas ruínas ao lado de {zone:1458}, entre guardas da Horda: vá com um grupo. {area:2437} fica dentro de {zone:1454}: {area:16919} conta por ela. Horda: {area:16919} fica dentro de {zone:1455}: {area:2437} conta por ela.",
 	-- {area:2437} Ragefire Chasm · {npc:11519} Bazzalan · {area:16919} Hall of Thanes
 	["{area:2437}: {npc:11519} (or {area:16919})"] = "{area:2437}: {npc:11519} (ou {area:16919})",
 	-- {area:16919} Hall of Thanes · {npc:261319} Durgen Dirgehammer · {area:2437} Ragefire Chasm
@@ -126,11 +131,12 @@ return {
 
 	-- Step 19: Dungeons: level 26-45
 	["Dungeons: level 26-45"] = "Masmorras: nível 26-45",
-	-- {area:17780} Krol'dok Stronghold · {zone:2548} Riverglades
-	["The final boss of every level 26-45 dungeon earns one point together. The Drowned City and {area:17780} (in the {zone:2548}) are new in Forever and not in our data: tick them off yourself."] = "O chefe final de toda masmorra de nível 26-45 rende um ponto, em conjunto. A Cidade Submersa e {area:17780} (em {zone:2548}) são novas no Forever e não estão nos nossos dados: marque você mesmo.",
+	-- {area:16550} The Drowned City · {area:17780} Krol'dok Stronghold · {zone:2548} Riverglades
+	["The final boss of every level 26-45 dungeon earns one point together. {area:16550} and {area:17780} (in the {zone:2548}) are new in Forever and not in our data: tick them off yourself."] = "O chefe final de toda masmorra de nível 26-45 rende um ponto, em conjunto. {area:16550} e {area:17780} (em {zone:2548}) são novas no Forever e não estão nos nossos dados: marque você mesmo.",
 	-- {zone:1416} Alterac Mountains · {npc:246020} Shade of the Archmage
 	["City of Dalaran (Forever's, {zone:1416}): {npc:246020}"] = "Cidade de Dalaran (do Forever, {zone:1416}): {npc:246020}",
-	["the final boss of the Drowned City"] = "o chefe final da Cidade Submersa",
+	-- {area:16550} The Drowned City
+	["the final boss of the {area:16550}"] = "o chefe final de {area:16550}",
 	-- {area:796} Scarlet Monastery
 	["{area:796}: Graveyard"] = "{area:796}: Cemitério",
 	-- {area:796} Scarlet Monastery
@@ -144,9 +150,10 @@ return {
 
 	-- Step 20: Dungeons: level 46-60
 	["Dungeons: level 46-60"] = "Masmorras: nível 46-60",
-	-- {area:1216} Blackmaw Hold · {area:16985} Shaper's Terrace
-	["The final boss of every level 46-60 dungeon earns one point together. Alcaz Prison, {area:1216} and the {area:16985} are new in Forever and not in our data: tick them off yourself."] = "O chefe final de toda masmorra de nível 46-60 rende um ponto, em conjunto. A Prisão de Alcaz, {area:1216} e {area:16985} são novas no Forever e não estão nos nossos dados: marque você mesmo.",
-	["the final boss of Alcaz Prison"] = "o chefe final da Prisão de Alcaz",
+	-- {area:16620} Alcaz Prison · {area:1216} Blackmaw Hold · {area:16985} Shaper's Terrace
+	["The final boss of every level 46-60 dungeon earns one point together. {area:16620}, {area:1216} and the {area:16985} are new in Forever and not in our data: tick them off yourself."] = "O chefe final de toda masmorra de nível 46-60 rende um ponto, em conjunto. {area:16620}, {area:1216} e {area:16985} são novas no Forever e não estão nos nossos dados: marque você mesmo.",
+	-- {area:16620} Alcaz Prison
+	["the final boss of {area:16620}"] = "o chefe final de {area:16620}",
 	-- {area:1216} Blackmaw Hold
 	["the final boss of {area:1216}"] = "o chefe final de {area:1216}",
 	-- {area:1583} Blackrock Spire
@@ -184,6 +191,8 @@ return {
 	-- No longer in the guide (its English changed or it went away): reuse or delete.
 	-- ["Adventure: {quest:8997} (Alliance)"] = "Aventura: {quest:8997} (Aliança)",
 	-- ["Adventure: {quest:8998} (Horde)"] = "Aventura: {quest:8998} (Horda)",
+	-- ["Adventure: {quest:8999} (Alliance)"] = "Aventura: {quest:8999} (Aliança)",
+	-- ["Adventure: {quest:9007} (Horde)"] = "Aventura: {quest:9007} (Horda)",
 	-- ["All 13 Hyjal Summit bosses are a point. Hyjal Summit is a new Forever raid; its bosses are not in our data, so tick it off once all 13 are down."] = "Os 13 chefes de Hyjal Summit, juntos, valem um ponto. Hyjal Summit é uma raide nova do Forever; seus chefes não estão nos nossos dados, então marque-a quando os 13 caírem.",
 	-- ["All 8 Barrow Deeps bosses are a point. Barrow Deeps is a new Forever raid; its bosses are not in our data, so tick it off once all 8 are down."] = "Os 8 chefes de Barrow Deeps, juntos, valem um ponto. Barrow Deeps é uma raide nova do Forever; seus chefes não estão nos nossos dados, então marque-a quando os 8 caírem.",
 	-- ["Blizzard counts four battleground reputations, but our faction data has three per side ({zone:1460}, {zone:1461}, {zone:1459}). The fourth is likely tied to Forever's new PvP content; check the in-game Legacy panel."] = "A Blizzard conta quatro reputações de campo de batalha, mas nossos dados de facção têm três por lado ({zone:1460}, {zone:1461}, {zone:1459}). A quarta provavelmente está ligada ao novo conteúdo JxJ do Forever; confira o painel de Legado no jogo.",
@@ -196,6 +205,7 @@ return {
 	-- ["The final boss of every level 15-25 dungeon earns one point together. Tick each boss off when you kill it; the grouping follows the usual Classic level ranges, so check the in-game Legacy panel for the exact list."] = "O chefe final de todas as masmorras de nível 15-25, juntos, vale um ponto. Marque cada chefe ao matá-lo; o agrupamento segue as faixas de nível usuais do Classic, então confira a lista exata no painel de Legado no jogo.",
 	-- ["The final boss of every level 26-45 dungeon earns one point together."] = "O chefe final de todas as masmorras de nível 26-45, juntos, vale um ponto.",
 	-- ["The final boss of every level 46-60 dungeon earns one point together."] = "O chefe final de todas as masmorras de nível 46-60, juntos, vale um ponto.",
+	-- ["The {npc:16042} questline is a point. It is the level 60 dungeon-set chain, from An Earnest Proposition to your class's {quest:8999}: {npc:16013} ({zone:1455}) or {npc:16012} ({zone:1454}) send you through In Search of Anthion and Anthion's Parting Words to {npc:16033} at {area:254}, whose Three Kings of Flame, the Left and Right Pieces of Lord Valthalak's Amulet, Final Preparations and {quest:8995} end with {quest:8996}. {quest:8997} then leads to {quest:8999}."] = "A linha de missões de {npc:16042} vale um ponto. É a cadeia do conjunto de masmorra de nível 60, de Uma proposta honesta até {quest:8999} da sua classe: {npc:16013} ({zone:1455}) ou {npc:16012} ({zone:1454}) mandam você por À procura de Anthion e As últimas palavras de Anthion até {npc:16033}, em {area:254}, cujas Três reis das chamas, Peça Esquerda e Direita do Amuleto do Lorde Valthalak, Preparativos finais e {quest:8995} terminam com {quest:8996}. {quest:8997} leva então a {quest:8999}.",
 	-- ["The {npc:16042} questline is a point. It is the level 60 dungeon-set chain: {npc:16013} ({zone:1455}) or {npc:16012} ({zone:1454}) send you through In Search of Anthion and Anthion's Parting Words to {npc:16033} at {area:254}, whose Three Kings of Flame, the Left and Right Pieces of Lord Valthalak's Amulet, Final Preparations and Mea Culpa, {npc:16042} end with {quest:8996}. {quest:8997} then leads to the class Saving the Best for Last quests."] = "A série de missões de {npc:16042} vale um ponto. É a cadeia do conjunto de masmorra de nível 60: {npc:16013} ({zone:1455}) ou {npc:16012} ({zone:1454}) mandam você, por À procura de Anthion e As últimas palavras de Anthion, até {npc:16033} em {area:254}, cujas Três reis das chamas, as partes esquerda e direita de Amuleto do Lorde Valthalak, Preparativos finais e Mea Culpa, {npc:16042} terminam com {quest:8996}. {quest:8997} então leva às missões de classe Deixando o melhor para o final.",
 	-- ["The {npc:16042} questline is a point. It is the level 60 dungeon-set chain: {npc:16013} ({zone:1455}) or {npc:16012} ({zone:1454}) send you through In Search of Anthion and Anthion's Parting Words to {npc:16033} at {area:254}, whose Three Kings of Flame, the Left and Right Pieces of Lord Valthalak's Amulet, Final Preparations and {quest:8995} end with {quest:8996}. {quest:8997} then leads to the class Saving the Best for Last quests."] = "A série de missões de {npc:16042} vale um ponto. É a cadeia do conjunto de masmorra de nível 60: {npc:16013} ({zone:1455}) ou {npc:16012} ({zone:1454}) mandam você, por À procura de Anthion e As últimas palavras de Anthion, até {npc:16033} em {area:254}, cujas Três reis das chamas, as partes esquerda e direita do Amuleto do Lorde Valthalak, Preparativos finais e {quest:8995} terminam com {quest:8996}. {quest:8997} então leva às missões de classe Deixando o melhor para o final.",
 	-- ["Which quest Blizzard counts as the end of the questline ({quest:8996} or your class's Saving the Best for Last) is unconfirmed until the Legacy data is recorded."] = "Qual missão a Blizzard conta como o fim da série ({quest:8996} ou Deixando o melhor para o final da sua classe) não está confirmado até os dados de Legado serem registrados.",
@@ -205,5 +215,7 @@ return {
 	-- ["{area:16919} and {area:153} are new in Forever. Their bosses, levels and Legacy bracket are not in our data, so tick them off yourself."] = "{area:16919} e {area:153} são novas no Forever. Seus chefes, níveis e faixa de Legado não estão nos nossos dados, então marque-as você mesmo.",
 	-- ["{area:717}: the usual last kill; the {area:717} has no fixed final boss"] = "{area:717}: a última morte usual; {area:717} não tem chefe final fixo",
 	-- ["{npc:16012} then offers your class's Saving the Best for Last, the final upgrade of the dungeon set."] = "{npc:16012} então oferece Deixando o melhor para o final da sua classe, a melhoria final do conjunto de masmorra.",
+	-- ["{npc:16012} then offers your class's {quest:9007}, the last quest of the challenge: it takes your class's dungeon-set helm and chest and upgrades them."] = "{npc:16012} oferece então {quest:9007} da sua classe, a última missão do desafio: ela pega o elmo e o peitoral do conjunto de masmorra da sua classe e os melhora.",
 	-- ["{npc:16013} then offers your class's Saving the Best for Last, the final upgrade of the dungeon set."] = "{npc:16013} então oferece Deixando o melhor para o final da sua classe, a melhoria final do conjunto de masmorra.",
+	-- ["{npc:16013} then offers your class's {quest:8999}, the last quest of the challenge: it takes your class's dungeon-set helm and chest and upgrades them."] = "{npc:16013} oferece então {quest:8999} da sua classe, a última missão do desafio: ela pega o elmo e o peitoral do conjunto de masmorra da sua classe e os melhora.",
 }

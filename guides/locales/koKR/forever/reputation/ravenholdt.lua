@@ -30,12 +30,10 @@ return {
 	["{npc:266216} is inside {area:275}, the Syndicate fortress east of {area:271}. Stealth past the guards in the courtyard."] = "",
 
 	-- Step 4: Strahnbrad: Barton
-	-- {area:280} Strahnbrad
-	["{area:280}: Barton"] = "",
-	-- {area:280} Strahnbrad
-	["Barton hides in a house in {area:280}, among stealthed Syndicate. Pick his pocket for the report; Distract turns him around if you are under his level."] = "",
-	-- {item:275482} Barton's Scouting Report
-	["{item:275482}: pickpocket Barton"] = "{item:275482}: 바턴 소매치기",
+	-- {npc:266357} Barton · {area:280} Strahnbrad
+	["{npc:266357} hides in a house in {area:280}, among stealthed Syndicate. Pick his pocket for the report; Distract turns him around if you are under his level."] = "",
+	-- {item:275482} Barton's Scouting Report · {npc:266357} Barton
+	["{item:275482}: pickpocket {npc:266357}"] = "{item:275482}: {npc:266357} 소매치기",
 
 	-- Step 5: Northfold Manor: a uniform
 	-- {area:313} Northfold Manor
@@ -48,8 +46,8 @@ return {
 	["Stromgarde: {npc:266847}"] = "",
 	-- {item:275706} Syndicate Uniform · {npc:266847} Anastasia Miller
 	["Put on the {item:275706} and go into Stromgarde. {npc:266847} waits on a ledge just outside the castle; players reach her by jumping from the roof of the house beside the ledge. Her stash is upstairs in a house near the keep."] = "",
-	-- {item:275709} Stolen Funds
-	["{item:275709}, in Anastasia's Stash upstairs"] = "",
+	-- {item:275709} Stolen Funds · {object:656405} Anastasia's Stash (no name in this language: may be words)
+	["{item:275709}, in {object:656405} upstairs"] = "{item:275709}, 위층 {object:656405} 안",
 
 	-- Step 7: Thoradin's Wall: the shipment
 	-- {area:1057} Thoradin's Wall

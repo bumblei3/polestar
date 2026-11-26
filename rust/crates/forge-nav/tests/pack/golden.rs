@@ -24,6 +24,10 @@ fn pack_golden(cells: usize, out: &Path, generator: &str) {
 		generator,
 		leffe: None,
 		zlib_literals: false,
+		places: None,
+		ground_cities: false,
+		ledges: false,
+		spawns: None,
 		log: &log,
 	})
 	.unwrap();
@@ -82,6 +86,10 @@ fn real_pack(date: &str, name: &str) -> PathBuf {
 		generator: JS,
 		leffe: None,
 		zlib_literals: false,
+		places: None,
+		ground_cities: false,
+		ledges: false,
+		spawns: None,
 		log: &log,
 	})
 	.unwrap();

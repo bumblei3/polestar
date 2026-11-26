@@ -102,6 +102,156 @@ fn guides_sync_writes_every_text_with_its_names_and_check_fails_on_a_lost_token_
 	let _ = std::fs::remove_dir_all(&dir);
 }
 
+/// Which objects have a name in a language comes from the names addon of the checkout `--root` names
+/// (addon/Polestar_<locale>/Names.lua), not of the checkout forge was built in: the post-merge gates'
+/// runner runs a forge built elsewhere, found no names, and failed every translation that writes an
+/// unnamed object as words. Here the checkout's frFR names only the Kobold Crate, where the repository's
+/// names the Battered Chest too: the chest may be words, the crate keeps its token.
+#[test]
+fn guides_check_takes_the_named_objects_from_the_checkout_it_is_given() {
+	let dir = Path::new(env!("CARGO_TARGET_TMPDIR")).join(format!("i18n-named-{}", std::process::id()));
+	let _ = std::fs::remove_dir_all(&dir);
+	let (checkout, pack) = (dir.join("checkout"), dir.join("pack"));
+	std::fs::create_dir_all(checkout.join("addon/Polestar_frFR")).unwrap();
+	std::fs::write(checkout.join("addon/Polestar_frFR/Names.lua"), "R(\"object\", 1617, 1617, [[\n1617\tCaisse kobolde\n]])\n").unwrap();
+	std::fs::create_dir_all(pack.join("guides")).unwrap();
+	std::fs::write(pack.join("pack.json"), r#"{"id":"texts","title":"Texts Pack","author":"Ann","version":"1.0.0","license":"CC0-1.0","folder":"PolestarPack_Texts"}"#).unwrap();
+	let tip = "  tip Marshal McBride stands at the abbey door; Brother Danil sells food inside. Kobold Vermin crowd the camp to the north.\n";
+	std::fs::write(pack.join("guides/main.guide"), GUIDE.replace(tip, "  tip The Battered Chest stands by the Kobold Crate.\n")).unwrap();
+	let data = root().join("tests/fixtures/dsl/data");
+	let i18n = |cmd: &str| {
+		let r = Command::new(env!("CARGO_BIN_EXE_forge")).args(["i18n", "guides", cmd, "frFR", "--pack"]).arg(&pack).arg("--data").arg(&data).arg("--root").arg(&checkout).output().unwrap();
+		(r.status.code().unwrap_or(-1), String::from_utf8_lossy(&r.stderr).into_owned())
+	};
+	assert_eq!(i18n("sync").0, 0);
+	let file = pack.join("locales/frFR/guides/main.lua");
+	let text = std::fs::read_to_string(&file).unwrap();
+	let key = "[\"The {object:2843} stands by the {object:1617}.\"] = \"\",";
+	assert!(text.contains("{object:2843} Battered Chest (no name in this language: may be words)"), "{text}");
+	assert!(text.contains(key), "{text}");
+	std::fs::write(&file, text.replace(key, "[\"The {object:2843} stands by the {object:1617}.\"] = \"Le coffre cabossé est près de la {object:1617}.\",")).unwrap();
+	let (code, err) = i18n("check");
+	assert_eq!(code, 0, "the unnamed chest is words: {err}");
+	std::fs::write(&file, std::fs::read_to_string(&file).unwrap().replace("près de la {object:1617}", "près de la caisse kobolde")).unwrap();
+	let (code, err) = i18n("check");
+	assert_eq!(code, 1);
+	assert!(err.contains("leaves out {object:1617}"), "the named crate keeps its token: {err}");
+	let _ = std::fs::remove_dir_all(&dir);
+}
+
+/// #1315 (Saulo's idea): a text whose English changed starts from its old translation. The tip's
+/// name {npc:6} became words ("The kobolds"), so its tokens differ and the old translation would only
+/// sit in the retired block; sync writes it as a `-- was:` comment right above the new, empty line,
+/// matching the texts through the names. The line itself stays "" (the English shows) until a
+/// translator fills it, a text unlike every old one gets no draft, and a second sync writes the same.
+#[test]
+fn guides_sync_writes_a_changed_texts_old_translation_above_its_new_line_matching_through_names() {
+	let dir = Path::new(env!("CARGO_TARGET_TMPDIR")).join(format!("i18n-drafts-{}", std::process::id()));
+	let _ = std::fs::remove_dir_all(&dir);
+	std::fs::create_dir_all(dir.join("guides")).unwrap();
+	std::fs::write(dir.join("pack.json"), r#"{"id":"texts","title":"Texts Pack","author":"Ann","version":"1.0.0","license":"CC0-1.0","folder":"PolestarPack_Texts"}"#).unwrap();
+	std::fs::write(dir.join("guides/main.guide"), GUIDE).unwrap();
+	let data = root().join("tests/fixtures/dsl/data");
+	let (d, p) = (data.to_string_lossy().into_owned(), dir.to_string_lossy().into_owned());
+	let i18n = |cmd: &str| forge(&["guides", cmd, "frFR", "--pack", &p, "--data", &d]);
+	assert_eq!(i18n("sync").status, 0);
+	let file = dir.join("locales/frFR/guides/main.lua");
+	let old_en = "{npc:197} stands at the abbey door; {npc:152} sells food inside. {npc:6} crowd the camp to the north.";
+	let old_fr = "{npc:197} se tient à la porte de l'abbaye ; {npc:152} vend à manger à l'intérieur. Les {npc:6} envahissent le camp au nord.";
+	let text = std::fs::read_to_string(&file).unwrap();
+	assert!(text.contains(&format!("[\"{old_en}\"] = \"\",")), "{text}");
+	std::fs::write(&file, text.replace(&format!("[\"{old_en}\"] = \"\","), &format!("[\"{old_en}\"] = \"{old_fr}\","))).unwrap();
+	let changed = GUIDE
+		.replace("Kobold Vermin crowd the camp to the north.", "The kobolds crowd the camp to the north.")
+		.replace("-- Marshal McBride; he also trains you", "-- Marshal McBride, who also sells nothing at all today");
+	std::fs::write(dir.join("guides/main.guide"), changed).unwrap();
+	let sync = i18n("sync");
+	assert_eq!(sync.status, 0, "{}", sync.stderr);
+	let text = std::fs::read_to_string(&file).unwrap();
+	let new_en = "{npc:197} stands at the abbey door; {npc:152} sells food inside. The kobolds crowd the camp to the north.";
+	assert!(text.contains(&format!("\t-- was: [\"{old_en}\"] = \"{old_fr}\"\n\t[\"{new_en}\"] = \"\",\n")), "the old translation is a draft right above the new line, which stays empty: {text}");
+	assert_eq!(text.matches("-- was:").count(), 1, "a text unlike every old one gets no draft: {text}");
+	assert!(text.contains(&format!("\t-- [\"{old_en}\"] = \"{old_fr}\",")), "and the old line stays in the retired block");
+	assert_eq!(i18n("check").status, 0, "a draft is a comment: the file checks clean");
+	assert_eq!(i18n("sync").status, 0);
+	assert_eq!(std::fs::read_to_string(&file).unwrap(), text, "a second sync writes the same file");
+	let _ = std::fs::remove_dir_all(&dir);
+}
+
+/// `guides sync` on reference data read from a Forever client build whose tables are not in the sources
+/// beside it: the texts would name spells as words and places without their area, and every good
+/// translation of them would move out as stale. It stops with one error and writes nothing.
+#[test]
+fn guides_sync_refuses_data_whose_client_build_tables_are_not_beside_it() {
+	let dir = Path::new(env!("CARGO_TARGET_TMPDIR")).join(format!("i18n-pinned-{}", std::process::id()));
+	let _ = std::fs::remove_dir_all(&dir);
+	let pack = dir.join("pack");
+	std::fs::create_dir_all(pack.join("guides")).unwrap();
+	std::fs::write(pack.join("pack.json"), r#"{"id":"texts","title":"Texts Pack","author":"Ann","version":"1.0.0","license":"CC0-1.0","folder":"PolestarPack_Texts"}"#).unwrap();
+	std::fs::write(pack.join("guides/main.guide"), GUIDE).unwrap();
+	let data = dir.join("forever");
+	std::fs::create_dir_all(&data).unwrap();
+	for e in std::fs::read_dir(root().join("tests/fixtures/dsl/data")).unwrap().flatten() {
+		std::fs::copy(e.path(), data.join(e.file_name())).unwrap();
+	}
+	let mut meta: serde_json::Value = serde_json::from_str(&std::fs::read_to_string(data.join("meta.json")).unwrap()).unwrap();
+	meta["sources"].as_array_mut().unwrap().push(serde_json::json!({
+		"name": "World of Warcraft: Forever client tables (UiMap, UiMapAssignment, AreaTable, SpellName) read from the installed client",
+		"revision": "wowf 1.60.1.7",
+	}));
+	std::fs::write(data.join("meta.json"), meta.to_string()).unwrap();
+	let (d, p) = (data.to_string_lossy().into_owned(), pack.to_string_lossy().into_owned());
+	let sync = forge(&["guides", "sync", "frFR", "--pack", &p, "--data", &d]);
+	assert_eq!(sync.status, 1, "{}", sync.stdout);
+	assert!(sync.stderr.contains("forge i18n: the reference data was built from Forever client build 1.60.1.7, but "), "{}", sync.stderr);
+	assert!(sync.stderr.contains("sources/wago/1.60.1.7 lacks SpellName.csv, SkillLineAbility.csv, AreaTable.csv"), "{}", sync.stderr);
+	assert!(!pack.join("locales").exists(), "nothing written");
+	let _ = std::fs::remove_dir_all(&dir);
+}
+
+#[test]
+fn guides_sync_preserves_retired_lua_escapes_across_repeated_runs() {
+	let dir = Path::new(env!("CARGO_TARGET_TMPDIR")).join(format!("i18n-retired-escapes-{}", std::process::id()));
+	let _ = std::fs::remove_dir_all(&dir);
+	std::fs::create_dir_all(dir.join("guides")).unwrap();
+	std::fs::create_dir_all(dir.join("locales/frFR/guides")).unwrap();
+	std::fs::write(dir.join("pack.json"), r#"{"id":"texts","title":"Texts Pack","author":"Ann","version":"1.0.0","license":"CC0-1.0","folder":"PolestarPack_Texts"}"#).unwrap();
+	std::fs::write(dir.join("guides/main.guide"), GUIDE).unwrap();
+	let file = dir.join("locales/frFR/guides/main.lua");
+	std::fs::write(
+		&file,
+		r#"return {
+	["a few {npc:6} at a time"] = "quelques {npc:6} à la fois",
+	["Old path C:\\123"] = "Copier C:\\123\\notes",
+	["Old slash apostrophe \\'"] = "Antislash \\' suivi",
+	["Old Unicode"] = "é 中文",
+	["Old escaped bytes"] = "\195\169 \228\184\173\230\150\135",
+	["Old literal escape"] = "Copier \\u007b",
+}
+"#,
+	)
+	.unwrap();
+	let data = root().join("tests/fixtures/dsl/data");
+	let (d, p) = (data.to_string_lossy().into_owned(), dir.to_string_lossy().into_owned());
+	let sync = || forge(&["guides", "sync", "frFR", "--pack", &p, "--data", &d]);
+	let first = sync();
+	assert_eq!(first.status, 0, "{}", first.stderr);
+	let canonical = std::fs::read_to_string(&file).unwrap();
+	assert!(canonical.contains(r#"["a few {npc:6} at a time"] = "quelques {npc:6} à la fois","#));
+	assert!(canonical.contains(r#"-- ["Old path C:\\123"] = "Copier C:\\123\\notes","#));
+	assert!(canonical.contains(r#"-- ["Old slash apostrophe \\'"] = "Antislash \\' suivi","#));
+	assert!(canonical.contains(r#"-- ["Old escaped bytes"] = "é 中文","#));
+	// A translator may spell UTF-8 as Lua decimal bytes in a retired entry too.
+	// Sync normalises that spelling while keeping the same text.
+	std::fs::write(&file, canonical.replace(r#"-- ["Old escaped bytes"] = "é 中文","#, r#"-- ["Old escaped bytes"] = "\195\169 \228\184\173\230\150\135","#)).unwrap();
+	for run in 2..=3 {
+		let result = sync();
+		assert_eq!(result.status, 0, "sync {run}: {}", result.stderr);
+		assert_eq!(std::fs::read_to_string(&file).unwrap(), canonical, "sync {run} changed or lost a translation");
+	}
+	let _ = std::fs::remove_dir_all(&dir);
+}
+
 /// `i18n audit` (tests/i18n-audit.test.js, the command): no finding is exit 0 with a JSON document;
 /// no client tables is exit 1 with the reason.
 #[test]

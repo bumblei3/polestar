@@ -34,6 +34,7 @@ local function enter(b)
 		local mark = ns.QoL.On("markTarget")
 		local hint = mark and L["Click to target and mark %s (out of combat)."] or L["Click to target %s (out of combat)."]
 		GameTooltip:AddLine(string.format(hint, b.psName or ""), r, g, blue, true)
+		if ns.Theme then ns.Theme.TipDots(GameTooltip) end
 		GameTooltip:Show()
 	end
 end
@@ -84,6 +85,8 @@ local function createButton(i)
 		-- kind whose macro just ran, after the ordinary click has finished.
 		if ran then ns.QoL.Buttons.AdvanceMark(kind) end
 	end)
+	-- A click on a living one of the name takes the next one (QoL Buttons.WireCycle).
+	ns.QoL.Buttons.WireCycle(b, "macrotext1")
 	NameTargets.buttons[i] = b
 	return b
 end
@@ -151,6 +154,7 @@ function NameTargets.Refresh()
 			if changed then
 				b:SetAttribute("macrotext1", macro)
 				b.psMacro = macro
+				buttons.SetPress(b, { name }, kind, macro, false)
 			end
 			place(b)
 			-- A shared mark cycle changes the macro under a stationary cursor.
@@ -162,6 +166,7 @@ function NameTargets.Refresh()
 		local b = NameTargets.buttons[i]
 		b:Hide()
 		b:SetAttribute("macrotext1", nil)
+		buttons.SetPress(b)
 		b.psOwner, b.psRegion, b.psName, b.psMacro = nil, nil, nil, nil
 		b.psKind = nil
 		b.psControls = nil

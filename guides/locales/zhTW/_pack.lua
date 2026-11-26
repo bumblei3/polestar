@@ -21,9 +21,12 @@ return {
 	["Mounts · Level 60"] = "坐騎 · 60級",
 	["Mounts · PvP"] = "坐騎 · PvP",
 	["Mounts · Reputation"] = "坐騎 · 聲望",
-	["Raid"] = "",
-	["Reputation · Battlegrounds"] = "",
-	["Reputation · Cities"] = "",
-	["Reputation · Raids and dungeons"] = "",
-	["Reputation · World"] = "",
+	["Raid"] = "團隊",
+	["Reputation · Battlegrounds"] = "聲望 · 戰場",
+	["Reputation · Cities"] = "聲望 · 主城",
+	["Reputation · Raids and dungeons"] = "聲望 · 團隊與地城",
+	["Reputation · World"] = "聲望 · 世界",
+
+	-- No longer in the guide (its English changed or it went away): reuse or delete.
+	-- ["The Drowned City"] = "沉沒之城",
 }

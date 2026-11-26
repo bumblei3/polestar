@@ -8,7 +8,7 @@ const { parseArgs } = require('node:util');
 const { ROOT, DATA } = require('../lib/paths');
 
 const usage = `usage: node tools/polestar.js profession draft <Profession> [options]
-       node tools/polestar.js profession gathering build|check|abundance [options]
+       node tools/polestar.js profession gathering build|check|abundance|spots [options]
 
 (profession build was retired: forge data professions [--data DIR] [--sources DIR] [--build V] [--out FILE])
 
@@ -31,20 +31,18 @@ differs (writes nothing).
 gathering abundance: rewrites tools/lib/professions/gathering/node-abundance.json,
 the nodes of each kind a zone holds at once, from the spawn pools of the
 Forever TrinityCore world database (data/local/forever-tdb/world.sqlite).
+gathering spots: rewrites addon/Polestar/Core/GatherData.lua, where each herb,
+ore and fishing pool can spawn and the skill it asks, for While you're here's
+gathering spots (--check: exit 1 when it differs, writes nothing).
 
   --data <dir>         reference data (default data/forever)
   --tdb <file>         world database (abundance only)
-  --stdout             print the guides instead of writing them (build only)`;
+  --stdout             print the guides instead of writing them (build only)
+  --check              compare instead of writing (spots only)`;
 
 function fail(msg) {
 	console.error(`${msg}\n\n${usage}`);
 	return 2;
-}
-
-function loadJson(dir, name) {
-	const file = path.join(dir, `${name}.json`);
-	if (!fs.existsSync(file)) throw new Error(`${path.relative(process.cwd(), file)} missing (${name === 'professions' ? 'forge data professions' : 'forge data build'})`);
-	return JSON.parse(fs.readFileSync(file, 'utf8'));
 }
 
 async function runDraft(rest) {
@@ -69,32 +67,8 @@ async function runDraft(rest) {
 		return fail(err.message);
 	}
 	if (positionals.length !== 1) return fail('draft needs one profession name');
-	const { draftGuide } = require('../lib/professions/guide');
-	const dataDir = path.resolve(values.data || DATA);
-	const data = {
-		professions: loadJson(dataDir, 'professions'),
-		npcs: loadJson(dataDir, 'npcs'),
-		objects: loadJson(dataDir, 'objects'),
-		zones: loadJson(dataDir, 'zones'),
-		items: loadJson(dataDir, 'items'),
-		quests: loadJson(dataDir, 'quests'),
-		mapFrames: loadJson(dataDir, 'map-frames'),
-	};
-	// Where the compiler can place `collect <item> nearest`: the same farm spots
-	// it compiles (tools/lib/dsl/farmspots.js), so a drafted step never fails
-	// lint for want of a qualifying dropper. -> { Alliance, Horde }: the lowest
-	// mob level among the spots that side may use, or null when there is none.
-	const { loadData } = require('../lib/dsl/data');
-	const { farmSpots } = require('../lib/dsl/farmspots');
-	const compiled = loadData(dataDir);
-	const lowest = (list) => (list.length ? Math.min(...list.map((s) => s.lvl.min)) : null);
-	data.farmable = (item) => {
-		const spots = farmSpots(compiled, item);
-		return {
-			Alliance: lowest(spots.filter((s) => s.faction === 'A' || s.faction === 'AH')),
-			Horde: lowest(spots.filter((s) => s.faction === 'H' || s.faction === 'AH')),
-		};
-	};
+	const { draftGuide, draftData } = require('../lib/professions/guide');
+	const data = draftData(path.resolve(values.data || DATA));
 	const { text, plan } = draftGuide(positionals[0], data);
 	if (!values.quiet) {
 		console.error(`${plan.profession.name}: ${plan.segments.length} segments, about ${(plan.total / 10000).toFixed(1)}g of materials (heuristic)`);
@@ -115,25 +89,30 @@ function runGathering(rest) {
 	let values;
 	let positionals;
 	try {
-		({ values, positionals } = parseArgs({ args: rest, options: { data: { type: 'string' }, stdout: { type: 'boolean' }, tdb: { type: 'string' } }, allowPositionals: true, strict: true }));
+		({ values, positionals } = parseArgs({ args: rest, options: { data: { type: 'string' }, stdout: { type: 'boolean' }, tdb: { type: 'string' }, check: { type: 'boolean' } }, allowPositionals: true, strict: true }));
 	} catch (err) {
 		return fail(err.message);
 	}
 	const [mode, ...extra] = positionals;
-	if (mode !== 'build' && mode !== 'check' && mode !== 'abundance') return fail(mode ? `unknown gathering subcommand "${mode}"` : 'gathering needs build, check or abundance');
+	if (mode !== 'build' && mode !== 'check' && mode !== 'abundance' && mode !== 'spots') return fail(mode ? `unknown gathering subcommand "${mode}"` : 'gathering needs build, check, abundance or spots');
 	if (extra.length) return fail(`unexpected argument "${extra[0]}"`);
 	if (values.stdout && mode !== 'build') return fail('--stdout goes with gathering build');
 	if (values.tdb && mode !== 'abundance') return fail('--tdb goes with gathering abundance');
+	if (values.check && mode !== 'spots') return fail('--check goes with gathering spots');
 	const { context } = require('../lib/professions/gathering/common');
 	const ctx = context(values.data ? path.resolve(values.data) : undefined);
 	if (mode === 'abundance') return writeAbundance(ctx, values.tdb ? path.resolve(values.tdb) : path.join(ROOT, 'data', 'local', 'forever-tdb', 'world.sqlite'));
+	const { reportSync } = require('../lib/generated');
+	if (mode === 'spots') {
+		const S = require('../lib/professions/gathering/spots');
+		return reportSync({ [S.OUT_FILE]: S.render(ctx) }, S.OUT_DIR, { check: values.check === true, command: 'profession gathering spots' });
+	}
 	const { buildAll, OUT_DIR } = require('../lib/professions/gathering/build');
 	const files = buildAll(ctx);
 	if (values.stdout) {
 		for (const [name, text] of Object.entries(files)) process.stdout.write(`==> ${name}\n${text}\n`);
 		return 0;
 	}
-	const { reportSync } = require('../lib/generated');
 	return reportSync(files, OUT_DIR, { check: mode === 'check', command: 'profession gathering build' });
 }
 
